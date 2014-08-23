@@ -1,0 +1,10 @@
+Z:\Testing\HtmlElements\HtmlElements\obj\Debug\HtmlElements.csprojResolveAssemblyReference.cache
+Z:\Testing\HtmlElements\HtmlElements\bin\Debug\HtmlElements.dll
+Z:\Testing\HtmlElements\HtmlElements\bin\Debug\HtmlElements.pdb
+Z:\Testing\HtmlElements\HtmlElements\obj\Debug\HtmlElements.dll
+Z:\Testing\HtmlElements\HtmlElements\obj\Debug\HtmlElements.pdb
+C:\Users\Casey\Google Drive\Testing\HtmlElements\HtmlElements\obj\Debug\HtmlElements.csprojResolveAssemblyReference.cache
+C:\Users\Casey\Google Drive\Testing\HtmlElements\HtmlElements\obj\Debug\HtmlElements.dll
+C:\Users\Casey\Google Drive\Testing\HtmlElements\HtmlElements\obj\Debug\HtmlElements.pdb
+C:\Users\Casey\Google Drive\Testing\HtmlElements\HtmlElements\bin\Debug\HtmlElements.dll
+C:\Users\Casey\Google Drive\Testing\HtmlElements\HtmlElements\bin\Debug\HtmlElements.pdb

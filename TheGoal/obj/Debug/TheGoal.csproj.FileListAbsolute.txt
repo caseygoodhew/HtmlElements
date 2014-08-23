@@ -1,0 +1,5 @@
+C:\Users\Casey\Google Drive\Testing\HtmlElements\TheGoal\bin\Debug\TheGoal.dll
+C:\Users\Casey\Google Drive\Testing\HtmlElements\TheGoal\bin\Debug\TheGoal.pdb
+C:\Users\Casey\Google Drive\Testing\HtmlElements\TheGoal\obj\Debug\TheGoal.csprojResolveAssemblyReference.cache
+C:\Users\Casey\Google Drive\Testing\HtmlElements\TheGoal\obj\Debug\TheGoal.dll
+C:\Users\Casey\Google Drive\Testing\HtmlElements\TheGoal\obj\Debug\TheGoal.pdb
