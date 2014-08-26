@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 
+using HtmlElements.Attributes;
+using HtmlElements.Elements;
+
 namespace HtmlElements
 {
     public interface IAttributeValidator
@@ -51,7 +54,7 @@ namespace HtmlElements
 
             if (!genericArgs.Any())
             {
-                // this implementation does not validate (possibly a typed placeholder for future implementation)
+                // this implementation does not implement a validation method (possibly a typed placeholder for future implementation)
                 validationMethodInfo = null;
                 return;
             }

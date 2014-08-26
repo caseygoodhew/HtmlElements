@@ -1,4 +1,4 @@
-﻿namespace HtmlElements
+﻿namespace HtmlElements.Elements
 {
 	internal interface IRootElement { }
 

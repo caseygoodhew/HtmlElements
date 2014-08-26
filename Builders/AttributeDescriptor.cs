@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HtmlElements.Builder
+namespace Builders
 {
     public class AttributeDescriptor
     {

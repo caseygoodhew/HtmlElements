@@ -2,6 +2,9 @@
 using System.Security.Policy;
 using System.Xml.Schema;
 
+using HtmlElements.Elements;
+using HtmlElements.Meta;
+
 namespace HtmlElements
 {
 	public enum AttributeValue

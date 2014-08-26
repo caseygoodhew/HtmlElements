@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HtmlElements.Builder
+using HtmlElements.Elements;
+using HtmlElements.Meta;
+
+namespace Builders
 {
 	public class ElementDescriptor
 	{

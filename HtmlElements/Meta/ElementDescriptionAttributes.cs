@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq.Expressions;
 
-namespace HtmlElements
+namespace HtmlElements.Meta
 {
     [AttributeUsage(AttributeTargets.Class)]
     internal class DoNotNest : Attribute { }

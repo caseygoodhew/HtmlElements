@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 
-namespace HtmlElements.Builder
+namespace Builders
 {
 	public class ExtensionBuilder
 	{
