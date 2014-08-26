@@ -1,8 +1,0 @@
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\bin\Debug\TestingTheGoal.exe.config
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\bin\Debug\TestingTheGoal.exe
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\bin\Debug\TestingTheGoal.pdb
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\bin\Debug\TheGoal.dll
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\bin\Debug\TheGoal.pdb
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\obj\Debug\TestingTheGoal.csprojResolveAssemblyReference.cache
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\obj\Debug\TestingTheGoal.exe
-C:\Users\Casey\Google Drive\Testing\HtmlElements\TestingTheGoal\obj\Debug\TestingTheGoal.pdb
