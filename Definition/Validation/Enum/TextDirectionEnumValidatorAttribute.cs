@@ -1,11 +1,18 @@
 ﻿using System;
 
+using Definition.Enums;
+
 namespace Definition.Validation.Enum
 {
 	[AttributeUsage(AttributeTargets.Class)]
-	internal class TextDirectionEnumValidatorAttribute : EnumValidatorAttribute<TextDirection>
+	internal class TextDirectionEnumValidatorAttribute : EnumValidatorAttribute
 	{
-		internal TextDirectionEnumValidatorAttribute()
+        internal override Type EnumType
+        {
+            get { return Enum.EnumType.Get<TextDirection>(); }
+        }
+        
+        internal TextDirectionEnumValidatorAttribute()
 		{
 		}
 

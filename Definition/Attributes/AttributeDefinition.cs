@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+
 using Definition.Elements;
 using Definition.Validation;
 using Definition.Validation.Enum;
@@ -267,12 +269,14 @@ namespace Definition.Attributes
 	}
 
 	[CoordsValidator(typeof(Tuple<int, int, int>), typeof(ShapeAttribute), Shape.Circle)]
+    [CoordsValidator(typeof(Tuple<Point, int>), typeof(ShapeAttribute), Shape.Circle)]
 	[CoordsValidator(typeof(Tuple<int, int, int, int>), typeof(ShapeAttribute), Shape.Rectangle)]
-	[CoordsValidator(typeof(Tuple<int, int>[]), typeof(ShapeAttribute), Shape.Polygon)]
+    [CoordsValidator(typeof(Tuple<Point, Point>), typeof(ShapeAttribute), Shape.Rectangle)]
+	[CoordsValidator(typeof(Point[]), typeof(ShapeAttribute), Shape.Polygon)]
 	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_coords.asp")]
 	internal class CoordsAttribute : AttributeDefinition
 	{
-		internal CoordsAttribute() : base("coords", AttributeValidation.Coords)
+		internal CoordsAttribute() : base("coords")
 		{
 		}
 	}
@@ -723,10 +727,11 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_pattern.asp")]
+	[PatternValidator]
+    [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_pattern.asp")]
 	internal class PatternAttribute : AttributeDefinition
 	{
-		internal PatternAttribute() : base("pattern", AttributeValidation.Regex)
+		internal PatternAttribute() : base("pattern")
 		{
 		}
 	}
@@ -763,21 +768,23 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_size.asp")]
+	[PositiveIntegerBaseOneValidator]
+    [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_size.asp")]
 	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_size.asp")]
 	internal class SizeAttribute : AttributeDefinition
 	{
-		internal SizeAttribute() : base("size", AttributeValidation.PositiveIntegerBaseOne)
+		internal SizeAttribute() : base("size")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_step.asp")]
+	[PositiveIntegerBaseOneValidator]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_step.asp")]
 	[AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
 	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
 	internal class StepAttribute : AttributeDefinition
 	{
-		internal StepAttribute() : base("step", AttributeValidation.PositiveIntegerBaseOne)
+		internal StepAttribute() : base("step")
 		{
 		}
 	}
@@ -798,20 +805,22 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+	[DateTimeValidator]
+    [AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
 	[AttributeName("Value")]
 	internal class DateValueAttribute : AttributeDefinition
 	{
-		internal DateValueAttribute() : base("value", AttributeValidation.DateTime)
+		internal DateValueAttribute() : base("value")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(ColorInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+	[ColorValidator]
+    [AppliesToElement(typeof(ColorInput), "http://www.w3schools.com/tags/att_input_value.asp")]
 	[AttributeName("Value")]
 	internal class ColorValueAttribute : AttributeDefinition
 	{
-		internal ColorValueAttribute() : base("value", AttributeValidation.Color)
+		internal ColorValueAttribute() : base("value")
 		{
 		}
 	}
@@ -831,36 +840,40 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_keytype.asp")]
+	[KeyTypeEnumValidator]
+    [AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_keytype.asp")]
 	internal class KeyTypeAttribute : AttributeDefinition
 	{
-		internal KeyTypeAttribute() : base("keytype", AttributeValidation.KeyType)
+		internal KeyTypeAttribute() : base("keytype")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(Label), "http://www.w3schools.com/tags/att_label_for.asp")]
+	[IdValidator]
+    [AppliesToElement(typeof(Label), "http://www.w3schools.com/tags/att_label_for.asp")]
 	[AttributeName("For")]
 	internal class ForOneAttribute : AttributeDefinition
 	{
-		internal ForOneAttribute() : base("for", AttributeValidation.Id)
+		internal ForOneAttribute() : base("for")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(Output), "http://www.w3schools.com/tags/att_label_for.asp")]
+    [IdListValidatorAttribute]
+    [AppliesToElement(typeof(Output), "http://www.w3schools.com/tags/att_label_for.asp")]
 	[AttributeName("For")]
 	internal class ForManyAttribute : AttributeDefinition
 	{
-		internal ForManyAttribute() : base("for", AttributeValidation.IdList)
+		internal ForManyAttribute() : base("for")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_charset.asp")]
+	[CharSetValidator]
+    [AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_charset.asp")]
 	internal class CharSetAttribute : AttributeDefinition
 	{
-		internal CharSetAttribute() : base("charset", AttributeValidation.CharSet)
+		internal CharSetAttribute() : base("charset")
 		{
 		}
 	}
@@ -873,10 +886,11 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_http_equiv.asp")]
+	[HttpEquivEnumValidator]
+    [AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_http_equiv.asp")]
 	internal class HttpEquivAttribute : AttributeDefinition
 	{
-		internal HttpEquivAttribute() : base("http-equiv", AttributeValidation.HttpEquiv)
+		internal HttpEquivAttribute() : base("http-equiv")
 		{
 		}
 	}
@@ -963,53 +977,59 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_colspan.asp")]
+	[PositiveIntegerBaseZeroValidator]
+    [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_colspan.asp")]
 	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_colspan.asp")]
 	internal class ColSpanAttribute : AttributeDefinition
 	{
-		internal ColSpanAttribute() : base("colspan", AttributeValidation.PositiveIntegerBaseZero)
+		internal ColSpanAttribute() : base("colspan")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_headers.asp")]
+	[IdListValidator]
+    [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_headers.asp")]
 	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_headers.asp")]
 	internal class HeadersAttribute : AttributeDefinition
 	{
-		internal HeadersAttribute() : base("headers", AttributeValidation.IdList)
+		internal HeadersAttribute() : base("headers")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_rowspan.asp")]
+	[PositiveIntegerBaseZeroValidator]
+    [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_rowspan.asp")]
 	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_rowspan.asp")]
 	internal class RowSpanAttribute : AttributeDefinition
 	{
-		internal RowSpanAttribute() : base("rowspan", AttributeValidation.PositiveIntegerBaseZero)
+		internal RowSpanAttribute() : base("rowspan")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_cols.asp")]
+	[PositiveIntegerBaseOneValidator]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_cols.asp")]
 	internal class ColsAttribute : AttributeDefinition
 	{
-		internal ColsAttribute() : base("cols", AttributeValidation.PositiveIntegerBaseOne)
+		internal ColsAttribute() : base("cols")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_rows.asp")]
+	[PositiveIntegerBaseOneValidator]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_rows.asp")]
 	internal class RowsAttribute : AttributeDefinition
 	{
-		internal RowsAttribute() : base("rows", AttributeValidation.PositiveIntegerBaseOne)
+		internal RowsAttribute() : base("rows")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_wrap.asp")]
+	[SoftHardEnumValidator]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_wrap.asp")]
 	internal class WrapAttribute : AttributeDefinition
 	{
-		internal WrapAttribute() : base("wrap", AttributeValidation.SoftHard)
+		internal WrapAttribute() : base("wrap")
 		{
 		}
 	}
@@ -1022,10 +1042,11 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_scope.asp")]
+	[ScopeEnumValidator]
+    [AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_scope.asp")]
 	internal class ScopeAttribute : AttributeDefinition
 	{
-		internal ScopeAttribute() : base("scope", AttributeValidation.HeaderScope)
+		internal ScopeAttribute() : base("scope")
 		{
 		}
 	}
@@ -1038,26 +1059,29 @@ namespace Definition.Attributes
 		}
 	}
 
-	[AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_kind.asp")]
+	[TrackKindEnumValidator]
+    [AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_kind.asp")]
 	internal class KindAttribute : AttributeDefinition
 	{
-		internal KindAttribute() : base("kind", AttributeValidation.TrackKind)
+		internal KindAttribute() : base("kind")
 		{
 		}
 	}
 
-	[AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_srclang.asp")]
+	[LanguageCodeValidator]
+    [AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_srclang.asp")]
 	internal class SrcLangAttribute : AttributeDefinition
 	{
-		internal SrcLangAttribute() : base("srclang", AttributeValidation.LanguageCode)
+		internal SrcLangAttribute() : base("srclang")
 		{
 		}
 	}
 
+    [UrlValidator]
 	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_poster.asp")]
 	internal class PosterAttribute : AttributeDefinition
 	{
-		internal PosterAttribute() : base("poster", AttributeValidation.Url)
+		internal PosterAttribute() : base("poster")
 		{
 		}
 	}

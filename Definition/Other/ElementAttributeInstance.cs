@@ -3,9 +3,9 @@ using Definition.Attributes;
 
 namespace Definition.Other
 {
-    public abstract class ElementAttributeInstance<TElementAttribute> where TElementAttribute : AttributeDefinition
+    internal abstract class ElementAttributeInstance<TElementAttribute> where TElementAttribute : AttributeDefinition
     {
-        public readonly TElementAttribute ElementAttribute;
+        internal readonly TElementAttribute ElementAttribute;
 
         protected ElementAttributeInstance(TElementAttribute elementAttribute)
         {

@@ -1,4 +1,6 @@
 ﻿
+using Definition.Enums;
+
 namespace Definition.Elements
 {
 	internal abstract class ElementDefinition

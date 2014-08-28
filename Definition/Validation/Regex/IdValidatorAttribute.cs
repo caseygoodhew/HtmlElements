@@ -2,24 +2,41 @@ using System;
 
 namespace Definition.Validation.Regex
 {
-	[AttributeUsage(AttributeTargets.Class)]
-	internal class IdValidatorAttribute : RegexValidatorAttribute
-	{
-		private static readonly string regex = "^[A-Za-z][-A-Za-z0-9_:.]*$";
+    [AttributeUsage(AttributeTargets.Class)]
+    internal class IdValidatorAttribute : RegexValidatorAttribute
+    {
+        protected static readonly string baseRegex = "[A-Za-z][-A-Za-z0-9_:.]*";
 
-		internal IdValidatorAttribute()
-			: base(regex)
-		{
-		}
+        private static readonly string regex = "^"+baseRegex+"$";
 
-		internal IdValidatorAttribute(Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(regex, requiredAttributeType, requiredAttributeValue)
-		{
-		}
+        internal IdValidatorAttribute()
+            : base(regex)
+        {
+        }
 
-		internal IdValidatorAttribute(object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(regex, whenValueIs, requiredAttributeType, requiredAttributeValue)
-		{
-		}
-	}
+        internal IdValidatorAttribute(Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(regex, requiredAttributeType, requiredAttributeValue)
+        {
+        }
+
+        internal IdValidatorAttribute(object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(regex, whenValueIs, requiredAttributeType, requiredAttributeValue)
+        {
+        }
+
+        protected IdValidatorAttribute(string overrideRegex)
+            : base(overrideRegex)
+        {
+        }
+
+        protected IdValidatorAttribute(string overrideRegex, Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(overrideRegex, requiredAttributeType, requiredAttributeValue)
+        {
+        }
+
+        protected IdValidatorAttribute(string overrideRegex, object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(overrideRegex, whenValueIs, requiredAttributeType, requiredAttributeValue)
+        {
+        }
+    }
 }

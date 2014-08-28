@@ -1,22 +1,29 @@
 ﻿using System;
 
+using Definition.Enums;
+
 namespace Definition.Validation.Enum
 {
-	[AttributeUsage(AttributeTargets.Class)]
-	internal class ResourceRelEnumValidatorAttribute : EnumValidatorAttribute<ResourceRel>
-	{
-		internal ResourceRelEnumValidatorAttribute()
-		{
-		}
+    [AttributeUsage(AttributeTargets.Class)]
+    internal class ResourceRelEnumValidatorAttribute : EnumValidatorAttribute
+    {
+        internal override Type EnumType
+        {
+            get { return Enum.EnumType.Get<ResourceRel>(); }
+        }
 
-		internal ResourceRelEnumValidatorAttribute(Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(requiredAttributeType, requiredAttributeValue)
-		{
-		}
+        internal ResourceRelEnumValidatorAttribute()
+        {
+        }
 
-		internal ResourceRelEnumValidatorAttribute(object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(whenValueIs, requiredAttributeType, requiredAttributeValue)
-		{
-		}
-	}
+        internal ResourceRelEnumValidatorAttribute(Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(requiredAttributeType, requiredAttributeValue)
+        {
+        }
+
+        internal ResourceRelEnumValidatorAttribute(object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(whenValueIs, requiredAttributeType, requiredAttributeValue)
+        {
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace Definition
+﻿namespace Definition.Enums
 {
 	internal enum Structure
 	{

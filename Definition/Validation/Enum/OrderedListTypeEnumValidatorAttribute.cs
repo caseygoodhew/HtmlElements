@@ -1,22 +1,29 @@
 ﻿using System;
 
+using Definition.Enums;
+
 namespace Definition.Validation.Enum
 {
-	[AttributeUsage(AttributeTargets.Class)]
-	internal class OrderedListTypeEnumValidatorAttribute : EnumValidatorAttribute<OrderedListType>
-	{
-		internal OrderedListTypeEnumValidatorAttribute()
-		{
-		}
+    [AttributeUsage(AttributeTargets.Class)]
+    internal class OrderedListTypeEnumValidatorAttribute : EnumValidatorAttribute
+    {
+        internal override Type EnumType
+        {
+            get { return Enum.EnumType.Get<OrderedListType>(); }
+        }
 
-		internal OrderedListTypeEnumValidatorAttribute(Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(requiredAttributeType, requiredAttributeValue)
-		{
-		}
+        internal OrderedListTypeEnumValidatorAttribute()
+        {
+        }
 
-		internal OrderedListTypeEnumValidatorAttribute(object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(whenValueIs, requiredAttributeType, requiredAttributeValue)
-		{
-		}
-	}
+        internal OrderedListTypeEnumValidatorAttribute(Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(requiredAttributeType, requiredAttributeValue)
+        {
+        }
+
+        internal OrderedListTypeEnumValidatorAttribute(object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
+            : base(whenValueIs, requiredAttributeType, requiredAttributeValue)
+        {
+        }
+    }
 }
