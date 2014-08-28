@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using HtmlElements;
 using HtmlElements.Builder;
+using HtmlElements.Validators;
 
 namespace ConsoleApplication1
 {

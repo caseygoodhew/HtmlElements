@@ -1,4 +1,5 @@
 ﻿using System;
+using HtmlElements.Validators;
 
 namespace HtmlElements.Meta
 {

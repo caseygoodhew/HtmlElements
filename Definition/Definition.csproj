@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C72905ED-0D11-4535-A7E6-57254B8BE8A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Definition</RootNamespace>
+    <AssemblyName>Definition</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppliesToElementAttribute.cs" />
+    <Compile Include="AppliesToElementWithoutAttachAttribute.cs" />
+    <Compile Include="AttributeNameAttribute.cs" />
+    <Compile Include="Attributes\AttributeDefinition.cs" />
+    <Compile Include="Attributes\Class1.cs" />
+    <Compile Include="Structure.cs" />
+    <Compile Include="ElementType.cs" />
+    <Compile Include="ElementTypeAttribute.cs" />
+    <Compile Include="DoNotNestAttribute.cs" />
+    <Compile Include="Elements\ElementDefinition.cs" />
+    <Compile Include="Validation\Enum\AcceptTypesEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\SandboxEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\XmlNsEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\GetPostEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\EncodeTypeEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\OnOffEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\PreloadEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\ShapeEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\OrderedListTypeEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\ResourceRelEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\LinkedRelEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\DraggableEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\TextDirectionEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\EditableEnumValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\CoordsValidatorAttribute.cs" />
+    <Compile Include="Validation\Number\IntegerValidator.cs" />
+    <Compile Include="Validation\Number\DecimalValidator.cs" />
+    <Compile Include="Validation\Regex\ClassValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\CharSetValidatorAttribute.cs" />
+    <Compile Include="Validation\Regex\HashIdValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\HtmlValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\NameValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\DateTimeValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\MediaTypeValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\TargetValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\MediaExpressionValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\UrlValidatorAttribute.cs" />
+    <Compile Include="Validation\Number\NumberValidatorAttribute.cs" />
+    <Compile Include="Validation\Regex\IdValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\LanguageCodeValidatorAttribute.cs" />
+    <Compile Include="Validation\Regex\OneCharacterValidatorAttribute.cs" />
+    <Compile Include="Validation\Enum\EnumValidatorAttribute.cs" />
+    <Compile Include="Validation\NotImplemented\NotImplementedValidatorAttribute.cs" />
+    <Compile Include="Validation\Number\PositiveIntegerBaseOneValidator.cs" />
+    <Compile Include="Validation\Number\PositiveIntegerBaseZeroValidator.cs" />
+    <Compile Include="Validation\Regex\RegexValidatorAttribute.cs" />
+    <Compile Include="Validation\RequiresAttributeValidatorAttribute.cs" />
+    <Compile Include="Validation\xxxValidatorForEnumAttribute.cs" />
+    <Compile Include="Other\ElementAttributeInstance.cs" />
+    <Compile Include="Other\SomethingStrangeException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceAttribute.cs" />
+    <Compile Include="RestrictToChildAttribute.cs" />
+    <Compile Include="RestrictToParentAttribute.cs" />
+    <Compile Include="Validation\ValidatorAttribute.cs" />
+    <Compile Include="Validation\xxxValidatorOptionAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

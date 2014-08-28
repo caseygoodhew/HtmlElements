@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-
-using HtmlElements.Attributes;
 using HtmlElements.Elements;
+using HtmlElements.Meta;
 
-namespace HtmlElements
+namespace HtmlElements.Validators
 {
     public interface IAttributeValidator
     {
@@ -118,7 +113,6 @@ namespace HtmlElements
 
     public abstract class NotImplementedValidator : AttributeValidator
     {
-        
     }
 
     public abstract class NotImplementedValidator<T> : AttributeValidator<T>
@@ -195,14 +189,14 @@ namespace HtmlElements
 
     public class ClassValidator : RegexValidator
     {
-        public ClassValidator() : base("-?[_a-zA-Z]+[_a-zA-Z0-9-]*", "{0} is an invalid class name")
+        public ClassValidator() : base("^-?[_a-zA-Z]+[_a-zA-Z0-9-]*$", "{0} is an invalid class name")
         {
         }
     }
 
     public class IdValidator : RegexValidator
     {
-        public IdValidator() : base("[A-Za-z][-A-Za-z0-9_:.]*", "{0} is an invalid id value")
+        public IdValidator() : base("^[A-Za-z][-A-Za-z0-9_:.]*$", "{0} is an invalid id value")
         {
         }
     }
