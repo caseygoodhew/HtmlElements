@@ -1,4 +1,5 @@
 ﻿using System;
+using Definition.Enums;
 
 namespace Definition.Validation.Enum
 {

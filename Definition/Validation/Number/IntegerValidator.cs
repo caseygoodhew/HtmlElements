@@ -3,23 +3,19 @@ using System;
 namespace Definition.Validation.Number
 {
 	[AttributeUsage(AttributeTargets.Class)]
-	internal class IntegerValidator : NumberValidatorAttribute<int>
+	internal class IntegerValidator : ValidatorAttribute
 	{
-		private static readonly int? minimum = null;
-
-		private static readonly int? maximum = null;
-
-		internal IntegerValidator() : base(minimum, maximum)
+		internal IntegerValidator()
 		{
 		}
 
 		internal IntegerValidator(Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(minimum, maximum, requiredAttributeType, requiredAttributeValue)
+			: base(requiredAttributeType, requiredAttributeValue)
 		{
 		}
 
 		internal IntegerValidator(object whenValueIs, Type requiredAttributeType, object requiredAttributeValue = null)
-			: base(minimum, maximum, whenValueIs, requiredAttributeType, requiredAttributeValue)
+			: base(whenValueIs, requiredAttributeType, requiredAttributeValue)
 		{
 		}
 	}

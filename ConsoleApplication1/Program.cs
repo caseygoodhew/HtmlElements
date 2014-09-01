@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using HtmlElements;
-using HtmlElements.Builder;
-using HtmlElements.Validators;
 
 namespace ConsoleApplication1
 {
@@ -14,9 +11,36 @@ namespace ConsoleApplication1
 	{
 		static void Main(string[] args)
 		{
-			//new ExtensionBuilder().Go();
+			var module =
+				new ModuleWriter()
+				    .Using("System.Web")
+					.Namespace(
+						new NamespaceWriter("Casey.Goodhew")
+							.Enum(
+								new EnumWriter("Anything")
+									.Item("Something")
+									.Item("Cool")
+									.Item("Happens"))
+							.Enum(
+								new EnumWriter("Anything")
+									.Item("Something")
+									.Item("Cool")
+									.Item("Happens")));
 
-		    new OneCharacterValidator();
+			var module2 = new ModuleWriter()
+				.Namespace("Maria.Sanchez", n =>
+					n.Enum("Testing", e => e.Item("ItemOne").Item("ItemTwo"))
+					 .Enum("Testing", e => e.Item("ItemOne").Item("ItemTwo")));
+			
+			Console.WriteLine(module.Write());
+
+			Console.WriteLine();
+
+			Console.WriteLine(module2.Write());
+
+			Console.Read();
 		}
 	}
+
+	
 }

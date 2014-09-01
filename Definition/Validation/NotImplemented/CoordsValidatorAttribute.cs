@@ -2,7 +2,7 @@
 
 namespace Definition.Validation.NotImplemented
 {
-	[AttributeUsage(AttributeTargets.Class)]
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	internal class CoordsValidatorAttribute : NotImplementedValidatorAttribute
 	{
 		internal readonly Type TupleType;

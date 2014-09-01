@@ -104,14 +104,14 @@
     <Compile Include="Validation\NotImplemented\TargetValidatorAttribute.cs" />
     <Compile Include="Validation\NotImplemented\MediaExpressionValidatorAttribute.cs" />
     <Compile Include="Validation\NotImplemented\UrlValidatorAttribute.cs" />
-    <Compile Include="Validation\Number\NumberValidatorAttribute.cs" />
+    <Compile Include="Validation\Number\MinimumIntegerValidator.cs" />
     <Compile Include="Validation\Regex\IdValidatorAttribute.cs" />
     <Compile Include="Validation\NotImplemented\LanguageCodeValidatorAttribute.cs" />
     <Compile Include="Validation\Regex\OneCharacterValidatorAttribute.cs" />
     <Compile Include="Validation\Enum\EnumValidatorAttribute.cs" />
     <Compile Include="Validation\NotImplemented\NotImplementedValidatorAttribute.cs" />
-    <Compile Include="Validation\Number\PositiveIntegerBaseOneValidator.cs" />
-    <Compile Include="Validation\Number\PositiveIntegerBaseZeroValidator.cs" />
+    <Compile Include="Validation\Number\MimimumOneIntegerValidator.cs" />
+    <Compile Include="Validation\Number\MimimumZeroIntegerValidator.cs" />
     <Compile Include="Validation\Regex\RegexValidatorAttribute.cs" />
     <Compile Include="Validation\RequiresAttributeValidatorAttribute.cs" />
     <Compile Include="Validation\xxxValidatorForEnumAttribute.cs" />

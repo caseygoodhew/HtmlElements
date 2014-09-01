@@ -2,6 +2,7 @@
 using System.Drawing;
 
 using Definition.Elements;
+using Definition.Enums;
 using Definition.Validation;
 using Definition.Validation.Enum;
 using Definition.Validation.NotImplemented;
@@ -136,7 +137,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseOneValidator]
+	[MimimumOneIntegerValidator]
 	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_tabindex.asp")]
 	internal class TabIndexAttribute : AttributeDefinition
 	{
@@ -384,7 +385,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseZeroValidator]
+	[MimimumZeroIntegerValidator]
 	[AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_height.asp")]
 	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_height.asp")]
 	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_height.asp")]
@@ -398,7 +399,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseZeroValidator]
+	[MimimumZeroIntegerValidator]
 	[AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_width.asp")]
 	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_width.asp")]
 	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_width.asp")]
@@ -768,7 +769,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseOneValidator]
+	[MimimumOneIntegerValidator]
     [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_size.asp")]
 	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_size.asp")]
 	internal class SizeAttribute : AttributeDefinition
@@ -778,7 +779,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseOneValidator]
+	[MimimumOneIntegerValidator]
     [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_step.asp")]
 	[AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
 	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
@@ -977,7 +978,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseZeroValidator]
+	[MimimumZeroIntegerValidator]
     [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_colspan.asp")]
 	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_colspan.asp")]
 	internal class ColSpanAttribute : AttributeDefinition
@@ -997,7 +998,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseZeroValidator]
+	[MimimumZeroIntegerValidator]
     [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_rowspan.asp")]
 	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_rowspan.asp")]
 	internal class RowSpanAttribute : AttributeDefinition
@@ -1007,7 +1008,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseOneValidator]
+	[MimimumOneIntegerValidator]
     [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_cols.asp")]
 	internal class ColsAttribute : AttributeDefinition
 	{
@@ -1016,7 +1017,7 @@ namespace Definition.Attributes
 		}
 	}
 
-	[PositiveIntegerBaseOneValidator]
+	[MimimumOneIntegerValidator]
     [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_rows.asp")]
 	internal class RowsAttribute : AttributeDefinition
 	{
