@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{690F9A35-2298-4CE0-8CDB-1B8F6C649E77}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Coding</RootNamespace>
+    <AssemblyName>Coding</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractToken.cs" />
+    <Compile Include="CaseToken.cs" />
+    <Compile Include="ClassToken.cs" />
+    <Compile Include="CloseAngleToken.cs" />
+    <Compile Include="CloseBracketToken.cs" />
+    <Compile Include="CloseCurlyToken.cs" />
+    <Compile Include="ColonToken.cs" />
+    <Compile Include="CommaToken.cs" />
+    <Compile Include="BaseToken.cs" />
+    <Compile Include="GenericNewToken.cs" />
+    <Compile Include="WhereToken.cs" />
+    <Compile Include="InterfaceToken.cs" />
+    <Compile Include="ThisToken.cs" />
+    <Compile Include="StructToken.cs" />
+    <Compile Include="DefaultToken.cs" />
+    <Compile Include="DotToken.cs" />
+    <Compile Include="ElseIfToken.cs" />
+    <Compile Include="ElseToken.cs" />
+    <Compile Include="EmptyToken.cs" />
+    <Compile Include="EnumToken.cs" />
+    <Compile Include="EqualsToken.cs" />
+    <Compile Include="FalseToken.cs" />
+    <Compile Include="GetToken.cs" />
+    <Compile Include="GreaterThanOrEqualToken.cs" />
+    <Compile Include="GreaterThanToken.cs" />
+    <Compile Include="IfToken.cs" />
+    <Compile Include="InternalToken.cs" />
+    <Compile Include="LessThanOrEqualToken.cs" />
+    <Compile Include="LessThanToken.cs" />
+    <Compile Include="NamespaceToken.cs" />
+    <Compile Include="NewLineToken.cs" />
+    <Compile Include="NewToken.cs" />
+    <Compile Include="NotEqualsToken.cs" />
+    <Compile Include="NullableToken.cs" />
+    <Compile Include="NullToken.cs" />
+    <Compile Include="OpenAngleToken.cs" />
+    <Compile Include="OpenBracketToken.cs" />
+    <Compile Include="OpenCurlyToken.cs" />
+    <Compile Include="OverrideToken.cs" />
+    <Compile Include="PrimaryAccessModifiers.cs" />
+    <Compile Include="PrivateToken.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtectedToken.cs" />
+    <Compile Include="PublicToken.cs" />
+    <Compile Include="QuestionMarkToken.cs" />
+    <Compile Include="ReadonlyToken.cs" />
+    <Compile Include="ReturnToken.cs" />
+    <Compile Include="SecondaryAccessModifiers.cs" />
+    <Compile Include="StaticReadonlyToken.cs" />
+    <Compile Include="SemiColonToken.cs" />
+    <Compile Include="SetToken.cs" />
+    <Compile Include="SpaceToken.cs" />
+    <Compile Include="StaticToken.cs" />
+    <Compile Include="SwitchToken.cs" />
+    <Compile Include="TabToken.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="TokenBuilder.cs" />
+    <Compile Include="TokenContext.cs" />
+    <Compile Include="TokenGenerator.cs" />
+    <Compile Include="Tokens.cs" />
+    <Compile Include="TrueToken.cs" />
+    <Compile Include="UsingToken.cs" />
+    <Compile Include="VarToken.cs" />
+    <Compile Include="WordToken.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

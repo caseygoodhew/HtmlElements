@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CSharp;
+using CSharp.Binding;
 
 namespace ConsoleApplication1
 {
@@ -14,6 +15,7 @@ namespace ConsoleApplication1
 			var module =
 				new ModuleWriter()
 				    .Using("System.Web")
+					.Using("System.Casey")
 					.Namespace(
 						new NamespaceWriter("Casey.Goodhew")
 							.Enum(
@@ -30,7 +32,7 @@ namespace ConsoleApplication1
 			var module2 = new ModuleWriter()
 				.Namespace("Maria.Sanchez", n =>
 					n.Enum("Testing", e => e.Item("ItemOne").Item("ItemTwo"))
-					 .Enum("Testing", e => e.Item("ItemOne").Item("ItemTwo")));
+					 .Class("MyFristClass", x => x.Generic(g => g.Add("TSomething", p => p.WhereIsStruct()).Add("TElse", p => p.WhereIsNew().WhereIsType<ValueTypeParameter<int>>()))));
 			
 			Console.WriteLine(module.Write());
 
