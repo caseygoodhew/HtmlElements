@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CSharp;
 using CSharp.Binding;
+using CSharp.Writers;
 
 namespace ConsoleApplication1
 {
@@ -29,10 +30,19 @@ namespace ConsoleApplication1
 									.Item("Cool")
 									.Item("Happens")));
 
-			var module2 = new ModuleWriter()
-				.Namespace("Maria.Sanchez", n =>
-					n.Enum("Testing", e => e.Item("ItemOne").Item("ItemTwo"))
-					 .Class("MyFristClass", x => x.Generic(g => g.Add("TSomething", p => p.WhereIsStruct()).Add("TElse", p => p.WhereIsNew().WhereIsType<ValueTypeParameter<int>>()))));
+		    var module2 = new ModuleWriter().Namespace(
+		        "Maria.Sanchez",
+		        n =>
+		        n.Enum("Testing", e => e.Item("ItemOne").Item("ItemTwo"))
+		            .Class(
+		                "MyFristClass",
+		                x =>
+		                x.Generic(
+		                    g =>
+		                    g.Add("TSomething", p => p.WhereIsStruct())
+		                        .Add("TElse", p => p.WhereIsNew().WhereIsType(new TypeParameter<int>()))))
+		            .Class("AnyClass", x => x.Add(new PropertyWriter(new TypeParameter<string>(), "Awesome"))));
+
 			
 			Console.WriteLine(module.Write());
 

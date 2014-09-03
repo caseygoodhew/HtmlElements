@@ -1,5 +1,7 @@
 ﻿using System;
 
+using CSharp.Writers;
+
 namespace CSharp.Binding
 {
 	public static class ModuleWriterExtensions

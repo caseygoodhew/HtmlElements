@@ -1,4 +1,6 @@
-﻿namespace CSharp.Binding
+﻿using CSharp.Writers;
+
+namespace CSharp.Binding
 {
 	public static class EnumWriterExtensions
 	{

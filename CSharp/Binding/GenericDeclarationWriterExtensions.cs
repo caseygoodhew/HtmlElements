@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 
+using CSharp.Writers;
+
 namespace CSharp.Binding
 {
 	public static class GenericDeclarationWriterExtensions

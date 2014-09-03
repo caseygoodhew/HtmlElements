@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using Coding;
 
+using CSharp.Writers;
+
 namespace CSharp.Binding
 {
 	public static class ClassWriterExtensions
@@ -91,5 +93,11 @@ namespace CSharp.Binding
 			configAction.Invoke(genericDeclaration);
 			return @class.Generic(genericDeclaration);
 		}
+
+	    public static ClassWriter Add(this ClassWriter @class, IClassChild child)
+	    {
+	        @class.Children.Add(child);
+	        return @class;
+	    }
 	}
 }

@@ -1,22 +1,63 @@
-﻿namespace Coding
+namespace Coding
 {
-	public abstract class Token
+	public enum Token
 	{
-		private readonly string m_value;
-
-		protected Token(string value)
-		{
-			m_value = value;
-		}
-
-		internal virtual string GetValue(TokenContext context)
-		{
-			return m_value;
-		}
-
-		internal bool Is<T>() where T : Token
-		{
-			return this is T;
-		}
+		NewLine,
+		Space,
+		TerminatingComma,
+		Comma,
+		Colon,
+		SemiColon,
+		OpenBracket,
+		CloseBracket,
+		OpenAngle,
+		CloseAngle,
+		OpenCurly,
+		CloseCurly,
+		Dot,
+		QuestionMark,
+		Equals,
+		NotEquals,
+		GreaterThan,
+		GreaterThanOrEqual,
+		LessThan,
+		LessThanOrEqual,
+		Null,
+		Nullable,
+		True,
+		False,
+		Return,
+		New,
+		If,
+		ElseIf,
+		Else,
+		Switch,
+		Case,
+		Default,
+		Override,
+		Public,
+		Internal,
+		Private,
+		Protected,
+		Class,
+		Enum,
+		Namespace,
+		Using,
+		Var,
+		Readonly,
+		Static,
+		Abstract,
+		Get,
+		Set,
+		Tab,
+		StaticReadonly,
+		Empty,
+		EndSection,
+		Base,
+		Interface,
+		Struct,
+		This,
+		Where,
+		GenericNew
 	}
 }
