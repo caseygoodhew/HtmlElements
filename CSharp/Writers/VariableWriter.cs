@@ -1,29 +1,38 @@
 ﻿using System;
-
 using Coding;
 
 namespace CSharp.Writers
 {
-	public class VariableWriter<T> : Writer, IInterfaceChild, IClassChild, IMethodChild where T : IParameterTypeWriter
-	{
-		internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
+    public abstract class VariableWriter : Writer
+    {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.ParameterDeclaration; } }
 
-		internal string Name { get; set; }
+        private string Name { get; set; }
+        
+        private IParameterTypeWriter ParameterType { get; set; }
 
-		internal bool Static { get; set; }
+        public VariableWriter(IParameterTypeWriter parameterType, string name)
+        {
+            ParameterType = parameterType;
+            Name = name;
+        }
 
-		internal bool Abstract { get; set; }
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                case WriterContext.ParameterDeclaration:
+                    WriteDeclaration(builder);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
 
-		public VariableWriter(string name)
-		{
-			Name = name;
-			PrimaryAccessModifier = PrimaryAccessModifiers.Public;
-			Static = false;
-		}
-
-		public override void Build(TokenBuilder builder)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        private void WriteDeclaration(TokenBuilder builder)
+        {
+            ParameterType.Write(builder, WriterContext.ParameterDeclaration);
+            builder.Add(Name);
+        }
+    }
 }

@@ -5,6 +5,8 @@ namespace Coding
 		Abstract,
 		Readonly,
 		Static,
-		StaticReadonly
+		StaticReadonly,
+	    Virtual,  
+	    Override
 	}
 }

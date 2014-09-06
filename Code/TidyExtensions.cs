@@ -116,7 +116,69 @@ namespace Coding
 
             return result;
         }
-        
+
+        internal static List<TokenBase> CleanPunctuationSpacing(this List<TokenBase> source)
+        {
+            var result = new List<TokenBase>();
+
+            for (var i = 0; i < source.Count; i++)
+            {
+                var token = source[i];
+                var prevToken = i > 0 ? source[i - 1] : new EmptyToken();
+                var nextToken = i + 1 < source.Count ? source[i + 1] : new EmptyToken();
+
+                if (token.Is<SpaceToken>())
+                {
+                    if (nextToken.Is<DotToken>() ||
+                        nextToken.Is<CommaToken>() ||
+                        nextToken.Is<SemiColonToken>() ||
+                        nextToken.Is<OpenAngleToken>() ||
+                        nextToken.Is<CloseAngleToken>())
+                    {
+                        continue;
+                    }
+
+                    if (nextToken.Is<OpenBracketToken>())
+                    {
+                        if (prevToken.Is<WordToken>() || 
+                            prevToken.Is<CloseAngleToken>() || 
+                            prevToken.Is<OpenBracketToken>() ||
+                            prevToken.Is<CloseBracketToken>())
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (nextToken.Is<ThisToken>() || nextToken.Is<BaseToken>())
+                    {
+                        if (prevToken.Is<OpenBracketToken>())
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (nextToken.Is<CloseBracketToken>())
+                    {
+                        if (prevToken.Is<CloseBracketToken>() ||
+                            prevToken.Is<OpenBracketToken>() ||
+                            prevToken.Is<WordToken>())
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (prevToken.Is<DotToken>() || prevToken.Is<TabToken>() || prevToken.Is<NewLineToken>())
+                    {
+                        continue;
+                    }
+                }
+
+                result.Add(token);
+            }
+
+            return result;
+        }
+
         internal static List<TokenBase> AddIndentation(this List<TokenBase> source)
         {
             var result = new List<TokenBase>();
@@ -153,6 +215,12 @@ namespace Coding
             }
 
             return result;
+        }
+
+        internal static List<TokenBase> Stub(this List<TokenBase> source)
+        {
+            // just here so that we can comment out other tidy functions for testing
+            return source;
         }
     }
 }

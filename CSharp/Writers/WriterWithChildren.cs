@@ -12,11 +12,6 @@ namespace CSharp.Writers
 			Children = new List<TChild>();
 		}
 
-		/*protected Code[] GetChildCodeBlocks<T>() where T : IWriter
-		{
-			return Children.OfType<T>().Select(x => x.GetCode()).ToArray();
-		}*/
-
 		internal List<TChild> SortChildren<TFirst>() where TFirst : TChild
 		{
 			var first = Children.OfType<TFirst>().Cast<TChild>();

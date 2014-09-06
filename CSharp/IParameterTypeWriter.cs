@@ -1,13 +1,7 @@
-using Coding;
-
-using CSharp.Writers;
-
 namespace CSharp
 {
-    public interface IParameterTypeWriter
+    public interface IParameterTypeWriter : IWriter
     {
         string Name { get; }
-
-        void BuildParameterTypeName(TokenBuilder builder);
     }
 }

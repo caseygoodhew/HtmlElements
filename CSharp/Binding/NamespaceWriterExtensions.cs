@@ -6,13 +6,13 @@ namespace CSharp.Binding
 {
 	public static class NamespaceWriterExtensions
 	{
-		public static NamespaceWriter Enum(this NamespaceWriter @namespace, EnumWriter @enum)
+		public static NamespaceWriter HasEnum(this NamespaceWriter @namespace, EnumWriter @enum)
 		{
 			@namespace.Children.Add(@enum);
 			return @namespace;
 		}
 
-		public static NamespaceWriter Enum(this NamespaceWriter @namespace, string @enum, Action<EnumWriter> configAction = null)
+		public static NamespaceWriter HasEnum(this NamespaceWriter @namespace, string @enum, Action<EnumWriter> configAction = null)
 		{
 			var enumWriter = new EnumWriter(@enum);
 
@@ -21,10 +21,10 @@ namespace CSharp.Binding
 				configAction.Invoke(enumWriter);
 			}
 
-			return @namespace.Enum(enumWriter);
+			return @namespace.HasEnum(enumWriter);
 		}
 
-		public static NamespaceWriter Class(this NamespaceWriter @namespace, string @class, Action<ClassWriter> configAction = null)
+		public static NamespaceWriter HasClass(this NamespaceWriter @namespace, string @class, Action<ClassWriter> configAction = null)
 		{
 			var classWriter = new ClassWriter(@class);
 			
@@ -33,16 +33,16 @@ namespace CSharp.Binding
 				configAction.Invoke(classWriter);
 			}
 
-			return @namespace.Class(classWriter);
+			return @namespace.HasClass(classWriter);
 		}
 
-		public static NamespaceWriter Class(this NamespaceWriter @namespace, ClassWriter @class)
+		public static NamespaceWriter HasClass(this NamespaceWriter @namespace, ClassWriter @class)
 		{
 			@namespace.Children.Add(@class);
 			return @namespace;
 		}
 
-		public static NamespaceWriter Interface(this NamespaceWriter @namespace, InterfaceWriter @interface)
+		public static NamespaceWriter HasInterface(this NamespaceWriter @namespace, InterfaceWriter @interface)
 		{
 			@namespace.Children.Add(@interface);
 			return @namespace;

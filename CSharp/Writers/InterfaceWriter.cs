@@ -5,23 +5,29 @@ using Coding;
 
 namespace CSharp.Writers
 {
-	public class InterfaceWriter : Writer, INamespaceChild
-	{
-		internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
+    public class InterfaceWriter : Writer, INamespaceChild
+    {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.Declaration; } }
+        
+        internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
 
-		internal string Name { get; set; }
+        internal string Name { get; set; }
 
-		internal List<IParameterTypeWriter> GenericParameters { get; set; }
+        internal List<IParameterTypeWriter> GenericParameters { get; set; }
 
-		public InterfaceWriter(string name)
-		{
-			Name = name;
-			PrimaryAccessModifier = PrimaryAccessModifiers.Public;
-		}
+        public InterfaceWriter(string name)
+        {
+            Name = name;
+            PrimaryAccessModifier = PrimaryAccessModifiers.Public;
+        }
 
-		public override void Build(TokenBuilder builder)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
+    }
 }

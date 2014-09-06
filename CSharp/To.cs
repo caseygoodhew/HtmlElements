@@ -35,6 +35,10 @@ namespace CSharp
                     return Coding.Token.Static;
                 case SecondaryAccessModifiers.StaticReadonly:
                     return Coding.Token.StaticReadonly;
+                case SecondaryAccessModifiers.Virtual:
+                    return Coding.Token.Virtual;
+                case SecondaryAccessModifiers.Override:
+                    return Coding.Token.Override;
                 case null:
                     return Coding.Token.Empty;
                 default:

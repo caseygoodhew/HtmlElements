@@ -1,29 +1,41 @@
+using System;
 using Coding;
 
 namespace CSharp.Writers
 {
-	public class UsingWriter : Writer, IModuleChild
-	{
-		internal NamespaceWriter Namespace { get; set; }
+    public class UsingWriter : Writer, IModuleChild
+    {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.Declaration; } }
 
-		public UsingWriter(string @namespace)
-		{
-			Namespace = new NamespaceWriter(@namespace);
-		}
+        internal NamespaceWriter Namespace { get; set; }
 
-		public UsingWriter(NamespaceWriter @namespace)
-		{
-			Namespace = @namespace;
-		}
+        public UsingWriter(string @namespace)
+        {
+            Namespace = new NamespaceWriter(@namespace);
+        }
 
-		/*public override Code GetCode()
-		{
-			return new CodeLine().Add("using").Add(Namespace.XName).SemiColon();
-		}*/
+        public UsingWriter(NamespaceWriter @namespace)
+        {
+            Namespace = @namespace;
+        }
 
-		public override void Build(TokenBuilder builder)
-		{
-			builder.Add(Token.Using).Add(Namespace.Name).Add(Token.SemiColon);
-		}
-	}
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                case WriterContext.Declaration:
+                    WriteDeclaration(builder);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
+
+        private void WriteDeclaration(TokenBuilder builder)
+        {
+            builder.Add(Token.Using)
+                       .Add(Namespace.Name)
+                       .Add(Token.TerminatingSemiColon);
+        }
+    }
 }

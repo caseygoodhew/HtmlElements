@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,35 +6,51 @@ using Coding;
 
 namespace CSharp.Writers
 {
-	public class GenericDeclarationWriter : WriterWithChildren<GenericParameterWriter>, IInterfaceChild, IClassChild, IMethodChild
-	{
-		public GenericDeclarationWriter(IEnumerable<GenericParameterWriter> parameters = null)
-		{
-			if (parameters != null)
-			{
-				Children.AddRange(parameters);
-			}
-		}
+    public class GenericDeclarationWriter : WriterWithChildren<GenericParameterWriter>, IInterfaceChild, IClassChild, IMethodChild
+    {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.GenericParameter; } }
+        
+        public GenericDeclarationWriter(IEnumerable<GenericParameterWriter> parameters = null)
+        {
+            if (parameters != null)
+            {
+                Children.AddRange(parameters);
+            }
+        }
 
-		public override void Build(TokenBuilder builder)
-		{
-			builder.Add(Token.OpenAngle);
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                case WriterContext.GenericParameter:
+                    WriteParameters(builder);
+                    break;
+                case WriterContext.GenericConstraint:
+                    WriteConstraints(builder);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
 
-			builder.Join(Children, x => x.Build(builder), Token.Comma);
+        private void WriteParameters(TokenBuilder builder)
+        {
+            builder.Add(Token.OpenAngle)
+                .Join(Children, x => x.Write(builder, WriterContext.GenericParameter), Token.Comma)
+                .Add(Token.CloseAngle);
+        }
 
-			builder.Add(Token.CloseAngle);
-		}
+        private void WriteConstraints(TokenBuilder builder)
+        {
+            builder.Join(Children.Where(x => x.Constraints.Any()), x =>
+            {
+                builder.Add(Token.Where)
+                    .Add(x.Name)
+                    .Add(Token.Colon);
 
-		public void BuildConstraints(TokenBuilder builder)
-		{
-			builder.Join(Children.Where(x => x.Constraints.Any()), x =>
-			{
-				builder.Add(Token.Where);
-				builder.Add(x.Name);
-				builder.Add(Token.Colon);
-
-				x.BuildConstraints(builder);
-			}, Token.Empty);
-		}
-	}
+                x.Write(builder, WriterContext.GenericConstraint);
+            
+            }, Token.Empty);
+        }
+    }
 }

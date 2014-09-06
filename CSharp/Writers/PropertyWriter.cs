@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Coding;
 
@@ -11,6 +6,8 @@ namespace CSharp.Writers
 {
     public class PropertyWriter : Writer, IClassChild, IInterfaceChild, IParameterTypeWriter
     {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.Declaration; } }
+        
         public string Name { get; internal set; }
 
         internal IParameterTypeWriter PropertyType { get; set; }
@@ -23,6 +20,10 @@ namespace CSharp.Writers
 
         internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
 
+        internal bool HasGetter { get; set; }
+
+        internal bool HasSetter { get; set; }
+
         public PropertyWriter(IParameterTypeWriter propertyType, string name)
         {
             PropertyType = propertyType;
@@ -30,26 +31,50 @@ namespace CSharp.Writers
             AccessModifier = PrimaryAccessModifiers.Public;
             GetterAccessModifier = PrimaryAccessModifiers.Public;
             SetterAccessModifier = PrimaryAccessModifiers.Public;
+            HasGetter = true;
+            HasSetter = true;
         }
 
-        public override void Build(TokenBuilder builder)
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                case WriterContext.Declaration:
+                    WriteDeclaration(builder);
+                    break;
+                case WriterContext.ParameterDeclaration:
+                    builder.Add(Name);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
+
+        private void WriteDeclaration(TokenBuilder builder)
         {
             builder.Add(To.Token(AccessModifier))
-                .Add(To.Token(SecondaryAccessModifier))
-                .Add(PropertyType.BuildParameterTypeName)
-                .Add(Name)
-                .Add(Token.OpenCurly)
-                .Add(To.TokenConditional(AccessModifier != GetterAccessModifier, GetterAccessModifier))
-                .Add(Token.Get)
-                .Add(Token.SemiColon)
-                .Add(To.TokenConditional(AccessModifier != SetterAccessModifier, SetterAccessModifier))
-                .Add(Token.SemiColon)
-                .Add(Token.CloseCurly);
-        }
+               .Add(To.Token(SecondaryAccessModifier));
 
-        public void BuildParameterTypeName(TokenBuilder builder)
-        {
-            builder.Add(Name);
+            PropertyType.Write(builder, WriterContext.ParameterDeclaration);
+
+            builder.Add(Name)
+                .Add(Token.OpenCurly);
+
+            if (HasGetter)
+            {
+                builder.Add(To.TokenConditional(AccessModifier > GetterAccessModifier, GetterAccessModifier))
+                    .Add(Token.Get)
+                    .Add(Token.SemiColon);
+            }
+
+            if (HasSetter)
+            {
+                builder.Add(To.TokenConditional(AccessModifier > SetterAccessModifier, SetterAccessModifier))
+                    .Add(Token.Set)
+                    .Add(Token.TerminatingSemiColon);
+            }
+
+            builder.Add(Token.CloseCurly);
         }
     }
 }

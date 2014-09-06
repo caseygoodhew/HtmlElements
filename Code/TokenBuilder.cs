@@ -10,16 +10,10 @@ namespace Coding
     {
         private readonly List<TokenBase> tokens = new List<TokenBase>();
 
-        public TokenBuilder Add(Action<TokenBuilder> configAction)
-        {
-            configAction.Invoke(this);
-            return this;
-        }
-
         public TokenBuilder Add(string value)
         {
             tokens.Add(new WordToken(value));
-            return this;
+            return Add(Token.Space);
         }
 
         public TokenBuilder Add(Token token)
@@ -58,7 +52,9 @@ namespace Coding
                 .CleanExtraSpaces()
                 .CleanRepeatingLineBreaks()
                 .CleanCurlyLineBreaks()
-                .AddIndentation();
+                .CleanPunctuationSpacing()
+                .AddIndentation()
+                .Stub();
         }
     }
 }

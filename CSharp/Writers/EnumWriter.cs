@@ -1,28 +1,43 @@
-﻿using Coding;
+﻿using System;
+using Coding;
 
 namespace CSharp.Writers
 {
-	public class EnumWriter : WriterWithChildren<EnumValueWriter>, INamespaceChild
-	{
-		internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
+    public class EnumWriter : WriterWithChildren<EnumValueWriter>, INamespaceChild
+    {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.Declaration; } }
+        
+        internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
 
-		internal string Name { get; set; }
+        internal string Name { get; set; }
 
-		public EnumWriter(string name)
-		{
-			Name = name;
-			PrimaryAccessModifier = PrimaryAccessModifiers.Public;
-		}
+        public EnumWriter(string name)
+        {
+            Name = name;
+            PrimaryAccessModifier = PrimaryAccessModifiers.Public;
+        }
 
-		public override void Build(TokenBuilder builder)
-		{
-			builder.Add(To.Token(PrimaryAccessModifier)).Add(Token.Enum).Add(Name);
-			
-			builder.Add(Token.OpenCurly);
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                case WriterContext.Declaration:
+                    WriteDeclaration(builder);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
 
-			builder.Join(Children, x => x.Build(builder), Token.TerminatingComma);
+        private void WriteDeclaration(TokenBuilder builder)
+        {
+            builder.Add(To.Token(PrimaryAccessModifier)).Add(Token.Enum).Add(Name);
 
-			builder.Add(Token.CloseCurly);
-		}
-	}
+            builder.Add(Token.OpenCurly);
+
+            builder.Join(Children, x => x.Write(builder, WriterContext.Declaration), Token.TerminatingComma);
+
+            builder.Add(Token.CloseCurly);
+        }
+    }
 }

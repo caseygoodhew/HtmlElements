@@ -9,50 +9,64 @@ using CSharp.Writers;
 
 namespace ConsoleApplication1
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			var module =
-				new ModuleWriter()
-				    .Using("System.Web")
-					.Using("System.Casey")
-					.Namespace(
-						new NamespaceWriter("Casey.Goodhew")
-							.Enum(
-								new EnumWriter("Anything")
-									.Item("Something")
-									.Item("Cool")
-									.Item("Happens"))
-							.Enum(
-								new EnumWriter("Anything")
-									.Item("Something")
-									.Item("Cool")
-									.Item("Happens")));
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var module =
+                new ModuleWriter()
+                    .HasUsing("System.Web")
+                    .HasUsing("System.Casey")
+                    .HasNamespace(
+                        new NamespaceWriter("Casey.Goodhew")
+                            .HasEnum(
+                                new EnumWriter("Anything")
+                                    .HasItem("Something")
+                                    .HasItem("Cool")
+                                    .HasItem("Happens"))
+                            .HasEnum(
+                                new EnumWriter("Anything")
+                                    .HasItem("Something")
+                                    .HasItem("Cool")
+                                    .HasItem("Happens")));
 
-		    var module2 = new ModuleWriter().Namespace(
-		        "Maria.Sanchez",
-		        n =>
-		        n.Enum("Testing", e => e.Item("ItemOne").Item("ItemTwo"))
-		            .Class(
-		                "MyFristClass",
-		                x =>
-		                x.Generic(
-		                    g =>
-		                    g.Add("TSomething", p => p.WhereIsStruct())
-		                        .Add("TElse", p => p.WhereIsNew().WhereIsType(new TypeParameter<int>()))))
-		            .Class("AnyClass", x => x.Add(new PropertyWriter(new TypeParameter<string>(), "Awesome"))));
+            var newClass = new ClassWriter("NewClass");
+            
+            var module2 = new ModuleWriter().HasNamespace(
+                "Maria.Sanchez",
+                n =>
+                n.HasEnum("Testing", e => e.HasItem("ItemOne").HasItem("ItemTwo"))
+                    .HasClass(
+                        "MyFristClass",
+                        x =>
+                        x.IsGeneric(
+                            g =>
+                            g.HasParameter("TSomething", p => p.WhereIsStruct())
+                                .HasParameter("TElse", p => p.WhereIsNew().WhereIsType(new TypeParameterWriter<int>()))))
+                    .HasClass("AnyClass", 
+                        x => x.Has(new FieldWriter(newClass, "NewClass").IsPrivate().IsStaticReadonly())
+                              .Has(new PropertyWriter(new TypeParameterWriter<string>(), "Awesome").IsPrivate(Property.Setter))
+                              .HasField<object>("Object", f => f.IsStatic())
+                              .HasProperty<bool>("Inline", p => p.IsInternal())
+                              .Has(new PropertyWriter(new TypeParameterWriter<string>(), "Awesome2").IsAbstract(Property.Setter))
+                              .Has(new FieldWriter(new TypeParameterWriter<DateTime>(), "SomeField").IsProtected())
+                              .Has(new MethodWriter("MyMethod")
+                                            .IsPrivate()
+                                            .IsGeneric(g => g.HasParameter("TDani").HasParameter("TOlivia", p => p.WhereIsNew()))
+                                            .HasParameter<Type>("type")
+                                            .HasParameter<string>("name"))
+                              .HasMethod("MyMethod", m => m.IsExtensionMethod<MethodWriter>("Testing"))
+                              .HasMethod<string>("MyMethod", m => m.HasParameter<IClassChild>("classChild").IsAbstract())
+                              .Has(new MethodWriter("MyOtherMethod"))
+                    ));
 
-			
-			Console.WriteLine(module.Write());
+            Console.WriteLine(module.Write());
 
-			Console.WriteLine();
+            Console.WriteLine(module2.Write());
 
-			Console.WriteLine(module2.Write());
+            Console.Read();
+        }
 
-			Console.Read();
-		}
-	}
 
-	
+    }
 }

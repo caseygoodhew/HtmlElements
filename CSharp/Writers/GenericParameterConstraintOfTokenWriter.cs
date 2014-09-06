@@ -1,9 +1,12 @@
+using System;
 using Coding;
 
 namespace CSharp.Writers
 {
     public class GenericParameterConstraintOfTokenWriter : Writer, IGenericParameterConstraint
     {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.GenericConstraint; } }
+        
         internal readonly Token Token;
         
         public GenericParameterConstraintOfTokenWriter(Token token)
@@ -11,9 +14,16 @@ namespace CSharp.Writers
             Token = token;
         }
 
-        public override void Build(TokenBuilder builder)
+        public override void Write(TokenBuilder builder, WriterContext context)
         {
-            builder.Add(Token);
+            switch (context)
+            {
+                case WriterContext.GenericConstraint:
+                    builder.Add(Token);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
         }
     }
 }

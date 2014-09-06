@@ -1,9 +1,12 @@
-﻿using Coding;
+﻿using System;
+using Coding;
 
 namespace CSharp.Writers
 {
     public class GenericParameterConstraintOfTypeWriter : Writer, IGenericParameterConstraint
     {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.GenericConstraint; } }
+        
         private readonly IParameterTypeWriter parameterType;
         
         public GenericParameterConstraintOfTypeWriter(IParameterTypeWriter parameterType)
@@ -11,9 +14,16 @@ namespace CSharp.Writers
             this.parameterType = parameterType;
         }
 
-        public override void Build(TokenBuilder builder)
+        public override void Write(TokenBuilder builder, WriterContext context)
         {
-            builder.Add(parameterType.BuildParameterTypeName);
+            switch (context)
+            {
+                case WriterContext.GenericConstraint:
+                    parameterType.Write(builder, WriterContext.ParameterDeclaration);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
         }
     }
 }

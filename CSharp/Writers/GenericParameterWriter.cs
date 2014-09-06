@@ -1,29 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Coding;
 
 namespace CSharp.Writers
 {
-	public class GenericParameterWriter : Writer, IGenericDeclarationChild
-	{
-		internal string Name { get; set; }
+    public class GenericParameterWriter : Writer, IGenericDeclarationChild
+    {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.GenericParameter; } }
+        
+        internal string Name { get; set; }
 
-		internal List<IGenericParameterConstraint> Constraints { get; set; }
+        internal List<IGenericParameterConstraint> Constraints { get; set; }
 
-		public GenericParameterWriter(string name)
-		{
-			Name = name;
-			Constraints = new List<IGenericParameterConstraint>();
-		}
+        public GenericParameterWriter(string name)
+        {
+            Name = name;
+            Constraints = new List<IGenericParameterConstraint>();
+        }
 
-		public override void Build(TokenBuilder builder)
-		{
-			builder.Add(Name);
-		}
-
-		public void BuildConstraints(TokenBuilder builder)
-		{
-			builder.Join(Constraints, x => x.Build(builder), Token.Comma);
-		}
-	}
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                case WriterContext.GenericParameter:
+                    builder.Add(Name);
+                    break;
+                case WriterContext.GenericConstraint:
+                    builder.Join(Constraints, x => x.Write(builder, context), Token.Comma);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
+    }
 }

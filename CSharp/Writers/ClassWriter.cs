@@ -1,9 +1,12 @@
-﻿using Coding;
+﻿using System;
+using Coding;
 
 namespace CSharp.Writers
 {
     public class ClassWriter : WriterWithChildren<IClassChild>, INamespaceChild, IParameterTypeWriter
     {
+        internal override WriterContext DefaultWriterContext { get { return WriterContext.Declaration; } }
+
         internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
 
         internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
@@ -16,10 +19,24 @@ namespace CSharp.Writers
         {
             Name = name;
             PrimaryAccessModifier = PrimaryAccessModifiers.Public;
-            SecondaryAccessModifier = null;
         }
-        
-        public override void Build(TokenBuilder builder)
+
+        public override void Write(TokenBuilder builder, WriterContext context)
+        {
+            switch (context)
+            {
+                case WriterContext.Declaration:
+                    WriteDeclaration(builder);
+                    break;
+                case WriterContext.ParameterDeclaration:
+                    builder.Add(Name);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("context");
+            }
+        }
+
+        private void WriteDeclaration(TokenBuilder builder)
         {
             builder
                 .Add(To.Token(PrimaryAccessModifier))
@@ -29,23 +46,18 @@ namespace CSharp.Writers
 
             if (GenericDeclaration != null)
             {
-                GenericDeclaration.Build(builder);
-                GenericDeclaration.BuildConstraints(builder);
+                GenericDeclaration.Write(builder, WriterContext.GenericParameter);
+                GenericDeclaration.Write(builder, WriterContext.GenericConstraint);
             }
 
             builder.Add(Token.OpenCurly);
 
             foreach (var child in SortChildren<PropertyWriter>())
             {
-                child.Build(builder);
+                child.Write(builder, WriterContext.Declaration);
             }
 
             builder.Add(Token.CloseCurly);
-        }
-
-        public void BuildParameterTypeName(TokenBuilder builder)
-        {
-            builder.Add(Name);
         }
     }
 }
