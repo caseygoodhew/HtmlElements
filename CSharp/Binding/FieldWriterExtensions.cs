@@ -1,5 +1,7 @@
 ﻿using Coding;
-using CSharp.Writers;
+using Coding.Writers;
+
+using FieldWriter = CSharp.Writers.FieldWriter;
 
 namespace CSharp.Binding
 {

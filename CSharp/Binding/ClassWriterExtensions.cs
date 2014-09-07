@@ -1,8 +1,15 @@
 using System;
 using System.Linq;
 using Coding;
+using Coding.Writers;
 
 using CSharp.Writers;
+
+using ClassWriter = CSharp.Writers.ClassWriter;
+using FieldWriter = CSharp.Writers.FieldWriter;
+using GenericParameterWriter = CSharp.Writers.GenericParameterWriter;
+using MethodWriter = CSharp.Writers.MethodWriter;
+using PropertyWriter = CSharp.Writers.PropertyWriter;
 
 namespace CSharp.Binding
 {

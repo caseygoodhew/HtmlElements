@@ -1,6 +1,8 @@
 ﻿using System;
 using Coding;
-using CSharp.Writers;
+using Coding.Writers;
+
+using PropertyWriter = CSharp.Writers.PropertyWriter;
 
 namespace CSharp.Binding
 {

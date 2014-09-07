@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Coding;
+using Coding.Writers;
+
 using CSharp.Writers;
+
+using GenericParameterWriter = CSharp.Writers.GenericParameterWriter;
+using MethodWriter = CSharp.Writers.MethodWriter;
+using ParameterWriter = CSharp.Writers.ParameterWriter;
 
 namespace CSharp.Binding
 {

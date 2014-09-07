@@ -1,6 +1,8 @@
 ﻿using System;
 
 using Coding;
+using Coding.Tokens;
+using Coding.Writers;
 
 namespace CSharp
 {
@@ -11,13 +13,13 @@ namespace CSharp
             switch (modifier)
             {
                 case PrimaryAccessModifiers.Public:
-                    return Coding.Token.Public;
+                    return Coding.Tokens.Token.Public;
                 case PrimaryAccessModifiers.Private:
-                    return Coding.Token.Private;
+                    return Coding.Tokens.Token.Private;
                 case PrimaryAccessModifiers.Protected:
-                    return Coding.Token.Protected;
+                    return Coding.Tokens.Token.Protected;
                 case PrimaryAccessModifiers.Internal:
-                    return Coding.Token.Internal;
+                    return Coding.Tokens.Token.Internal;
                 default:
                     throw new ArgumentOutOfRangeException("modifier");
             }
@@ -28,19 +30,19 @@ namespace CSharp
             switch (modifier)
             {
                 case SecondaryAccessModifiers.Abstract:
-                    return Coding.Token.Abstract;
+                    return Coding.Tokens.Token.Abstract;
                 case SecondaryAccessModifiers.Readonly:
-                    return Coding.Token.Readonly;
+                    return Coding.Tokens.Token.Readonly;
                 case SecondaryAccessModifiers.Static:
-                    return Coding.Token.Static;
+                    return Coding.Tokens.Token.Static;
                 case SecondaryAccessModifiers.StaticReadonly:
-                    return Coding.Token.StaticReadonly;
+                    return Coding.Tokens.Token.StaticReadonly;
                 case SecondaryAccessModifiers.Virtual:
-                    return Coding.Token.Virtual;
+                    return Coding.Tokens.Token.Virtual;
                 case SecondaryAccessModifiers.Override:
-                    return Coding.Token.Override;
+                    return Coding.Tokens.Token.Override;
                 case null:
-                    return Coding.Token.Empty;
+                    return Coding.Tokens.Token.Empty;
                 default:
                     throw new ArgumentOutOfRangeException("modifier");
             }
@@ -48,7 +50,7 @@ namespace CSharp
 
         public static Token TokenConditional(bool condition, PrimaryAccessModifiers modifier)
         {
-            return condition ? Token(modifier) : Coding.Token.Empty;
+            return condition ? Token(modifier) : Coding.Tokens.Token.Empty;
         }
     }
 }
