@@ -1,33 +1,30 @@
-﻿using Coding;
-using Coding.Writers;
+﻿using Coding.Writers;
 
-using FieldWriter = CSharp.Writers.FieldWriter;
-
-namespace CSharp.Binding
+namespace Coding.Binding
 {
     public static class FieldWriterExtensions
     {
         public static FieldWriter IsInternal(this FieldWriter field)
         {
-            field.AccessModifier = PrimaryAccessModifiers.Internal;
+            field.PrimaryAccessModifier = PrimaryAccessModifiers.Internal;
             return field;
         }
 
         public static FieldWriter IsPrivate(this FieldWriter field)
         {
-            field.AccessModifier = PrimaryAccessModifiers.Private;
+            field.PrimaryAccessModifier = PrimaryAccessModifiers.Private;
             return field;
         }
 
         public static FieldWriter IsProtected(this FieldWriter field)
         {
-            field.AccessModifier = PrimaryAccessModifiers.Protected;
+            field.PrimaryAccessModifier = PrimaryAccessModifiers.Protected;
             return field;
         }
 
         public static FieldWriter IsPublic(this FieldWriter field)
         {
-            field.AccessModifier = PrimaryAccessModifiers.Public;
+            field.PrimaryAccessModifier = PrimaryAccessModifiers.Public;
             return field;
         }
 

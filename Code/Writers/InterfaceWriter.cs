@@ -95,7 +95,7 @@ namespace Coding.Writers
 
         protected virtual void WriteGenericConstraints(TokenBuilder builder, WriterContext context)
         {
-            if (GenericParameters.SelectMany(x => x.GenericConstraints).Any())
+            if (GenericParameters.SelectMany(x => x.Constraints).Any())
             {
                 GenericParameters.ForEach(x => x.Write(builder, context.Switch(WriterContextFlags.GenericConstraints)));
             }

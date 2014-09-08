@@ -23,8 +23,7 @@ namespace Coding.Writers
 
         protected override void WriteDeclarationCompletion(TokenBuilder builder, WriterContext context)
         {
-            builder.Add(Name)
-                .Add(Token.OpenCurly);
+            builder.Add(Token.OpenCurly);
 
             if (HasGetter)
             {

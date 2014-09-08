@@ -21,9 +21,9 @@
             return new WriterContext(this, flag);
         }
 
-        public bool Is(WriterContextFlags flag)
+        public bool Is(WriterContextFlags flag, bool inherit = false)
         {
-            return flag == contextFlag || (parentContext != null && parentContext.Is(flag));
+            return flag == contextFlag || (inherit && parentContext != null && parentContext.Is(flag));
         }
     }
 }

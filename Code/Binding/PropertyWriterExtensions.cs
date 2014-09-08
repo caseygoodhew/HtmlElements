@@ -1,10 +1,7 @@
 ﻿using System;
-using Coding;
 using Coding.Writers;
 
-using PropertyWriter = CSharp.Writers.PropertyWriter;
-
-namespace CSharp.Binding
+namespace Coding.Binding
 {
     public static class PropertyWriterExtensions
     {
@@ -67,7 +64,7 @@ namespace CSharp.Binding
                     property.SetterAccessModifier = modifier;
                     break;
                 case null:
-                    property.AccessModifier = modifier;
+                    property.PrimaryAccessModifier = modifier;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("target");

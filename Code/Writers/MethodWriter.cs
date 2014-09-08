@@ -12,7 +12,7 @@ namespace Coding.Writers
         
         internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
 
-        internal SecondaryAccessModifiers? SeconaryAccessModifier { get; set; }
+        internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
 
         internal VariableTypeWriter ReturnType { get; set; }
 
@@ -20,10 +20,13 @@ namespace Coding.Writers
         
         internal readonly List<GenericParameterWriter> GenericParameters;
 
+        internal ParameterWriter ExtensionParameter { get; set; }
+
         internal readonly List<ParameterWriter> Parameters;
 
         public MethodWriter(string name)
         {
+            PrimaryAccessModifier = PrimaryAccessModifiers.Public;
             GenericParameters = new List<GenericParameterWriter>();
             Parameters = new List<ParameterWriter>();
             Name = name;
@@ -54,7 +57,7 @@ namespace Coding.Writers
             }
             else
             {
-                ReturnType.Write(builder, context.Switch(WriterContextFlags.VariableDeclaration));
+                ReturnType.Write(builder, context.Switch(WriterContextFlags.VariableType));
             }
 
             builder.Add(Name);
@@ -73,6 +76,18 @@ namespace Coding.Writers
 
             builder.Add(Token.OpenBracket);
 
+            if (ExtensionParameter != null)
+            {
+                builder.Add(Token.This);
+
+                ExtensionParameter.Write(builder, context.Switch(WriterContextFlags.VariableDeclaration));
+
+                if (Parameters.Any())
+                {
+                    builder.Add(Token.Comma);
+                }
+            }
+            
             builder.Join(
                 Parameters, 
                 x => x.Write(builder, context.Switch(WriterContextFlags.VariableDeclaration)),
@@ -80,7 +95,7 @@ namespace Coding.Writers
 
             builder.Add(Token.CloseBracket);
 
-            if (GenericParameters.SelectMany(x => x.GenericConstraints).Any())
+            if (GenericParameters.SelectMany(x => x.Constraints).Any())
             {
                 GenericParameters.ForEach(x => x.Write(builder, context.Switch(WriterContextFlags.GenericConstraints)));
             }
@@ -104,7 +119,7 @@ namespace Coding.Writers
 
         private void WriteSecondaryAccessModifier(TokenBuilder builder, WriterContext context)
         {
-            builder.Add(To.Token(SeconaryAccessModifier));
+            builder.Add(To.Token(SecondaryAccessModifier));
         }
     }
 }

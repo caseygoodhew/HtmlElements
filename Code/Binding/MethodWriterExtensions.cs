@@ -1,39 +1,32 @@
 ﻿using System;
 using System.Linq;
-using Coding;
 using Coding.Writers;
 
-using CSharp.Writers;
-
-using GenericParameterWriter = CSharp.Writers.GenericParameterWriter;
-using MethodWriter = CSharp.Writers.MethodWriter;
-using ParameterWriter = CSharp.Writers.ParameterWriter;
-
-namespace CSharp.Binding
+namespace Coding.Binding
 {
     public static class MethodWriterExtensions
     {
         public static MethodWriter IsInternal(this MethodWriter method)
         {
-            method.AccessModifier = PrimaryAccessModifiers.Internal;
+            method.PrimaryAccessModifier = PrimaryAccessModifiers.Internal;
             return method;
         }
 
         public static MethodWriter IsPrivate(this MethodWriter method)
         {
-            method.AccessModifier = PrimaryAccessModifiers.Private;
+            method.PrimaryAccessModifier = PrimaryAccessModifiers.Private;
             return method;
         }
 
         public static MethodWriter IsProtected(this MethodWriter method)
         {
-            method.AccessModifier = PrimaryAccessModifiers.Protected;
+            method.PrimaryAccessModifier = PrimaryAccessModifiers.Protected;
             return method;
         }
 
         public static MethodWriter IsPublic(this MethodWriter method)
         {
-            method.AccessModifier = PrimaryAccessModifiers.Public;
+            method.PrimaryAccessModifier = PrimaryAccessModifiers.Public;
             return method;
         }
 
@@ -76,15 +69,15 @@ namespace CSharp.Binding
             return method;
         }
 
-        public static MethodWriter IsExtensionMethod(this MethodWriter method, ExtensionParameterWriter parameter)
+        public static MethodWriter IsExtensionMethod(this MethodWriter method, ParameterWriter parameter)
         {
             method.ExtensionParameter = parameter;
             return method.IsStatic();
         }
 
-        public static MethodWriter IsExtensionMethod(this MethodWriter method, IParameterTypeWriter type, string name, Action<ParameterWriter> configAction = null)
+        public static MethodWriter IsExtensionMethod(this MethodWriter method, VariableTypeWriter type, string name, Action<ParameterWriter> configAction = null)
         {
-            var parameter = new ExtensionParameterWriter(type, name);
+            var parameter = new ParameterWriter(type, name);
 
             if (configAction != null)
             {
@@ -94,41 +87,36 @@ namespace CSharp.Binding
             return method.IsExtensionMethod(parameter);
         }
 
-        public static MethodWriter IsExtensionMethod<TParamType>(this MethodWriter method, string name, Action<ParameterWriter> configAction = null)
+        public static MethodWriter IsExtensionMethod<TParamType>(this MethodWriter method, string name, Action<ParameterWriter> configAction = null) 
         {
-            return method.IsExtensionMethod(new TypeParameterWriter<TParamType>(), name, configAction);
+            return method.IsExtensionMethod(To.VariableTypeWriter<TParamType>(), name, configAction);
         }
 
-        public static MethodWriter IsGeneric(this MethodWriter method, GenericDeclarationWriter genericDeclaration)
+        public static MethodWriter HasGenericParameter(this MethodWriter method, GenericParameterWriter genericParameterWriter)
         {
-            method.GenericDeclaration = genericDeclaration;
+            method.GenericParameters.Add(genericParameterWriter);
             return method;
         }
 
-        public static MethodWriter IsGeneric(this MethodWriter method, params GenericParameterWriter[] genericParameterWriters)
+        public static MethodWriter HasGenericParameter(this MethodWriter method, string name, Action<GenericParameterWriter> configAction = null)
         {
-            return method.IsGeneric(new GenericDeclarationWriter(genericParameterWriters.ToList()));
-        }
+            var genericParameter = new GenericParameterWriter(name);
 
-        public static MethodWriter IsGeneric(this MethodWriter method, Action<GenericDeclarationWriter> configAction)
-        {
-            var genericDeclaration = new GenericDeclarationWriter();
-            configAction.Invoke(genericDeclaration);
-            return method.IsGeneric(genericDeclaration);
-        }
-            
-        public static MethodWriter HasParameter(this MethodWriter method, ParameterWriter parameter)
-        {
-            if (parameter is ExtensionParameterWriter)
+            if (configAction != null)
             {
-                throw new ArgumentException("Extension parameters must be created through IsExtensionMethod.");
+                configAction.Invoke(genericParameter);
             }
 
+            return method.HasGenericParameter(genericParameter);
+        }
+
+        public static MethodWriter HasParameter(this MethodWriter method, ParameterWriter parameter)
+        {
             method.Parameters.Add(parameter);
             return method;
         }
 
-        public static MethodWriter HasParameter(this MethodWriter method, IParameterTypeWriter type, string name, Action<ParameterWriter> configAction = null)
+        public static MethodWriter HasParameter(this MethodWriter method, VariableTypeWriter type, string name, Action<ParameterWriter> configAction = null)
         {
             var parameter = new ParameterWriter(type, name);
 
@@ -142,10 +130,10 @@ namespace CSharp.Binding
 
         public static MethodWriter HasParameter<TParamType>(this MethodWriter method, string name, Action<ParameterWriter> configAction = null)
         {
-            return method.HasParameter(new TypeParameterWriter<TParamType>(), name, configAction);
+            return method.HasParameter(To.VariableTypeWriter<TParamType>(), name, configAction);
         }
 
-        public static MethodWriter HasReturnType(this MethodWriter method, IParameterTypeWriter parameter)
+        public static MethodWriter HasReturnType(this MethodWriter method, VariableTypeWriter parameter)
         {
             if (method.ReturnType != null)
             {
@@ -154,18 +142,6 @@ namespace CSharp.Binding
 
             method.ReturnType = parameter;
             return method;
-        }
-
-        public static MethodWriter HasReturnType<TParamType>(this MethodWriter method, Action<IParameterTypeWriter> configAction = null)
-        {
-            var parameterType = new TypeParameterWriter<TParamType>();
-
-            if (configAction != null)
-            {
-                configAction.Invoke(parameterType);
-            }
-
-            return method.HasReturnType(parameterType);
         }
     }
 }

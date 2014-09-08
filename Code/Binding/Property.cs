@@ -1,4 +1,4 @@
-﻿namespace CSharp.Binding
+﻿namespace Coding.Binding
 {
     public enum Property
     {

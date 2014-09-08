@@ -76,9 +76,9 @@ namespace Coding.Writers
             if (ParentNamespace != null)
             {
                 ParentNamespace.Write(builder, context.Switch(WriterContextFlags.NamespaceName));
+                builder.Add(Token.Dot);
             }
             
-            builder.Add(Token.Dot);
             builder.Add(Name);
         }
     }

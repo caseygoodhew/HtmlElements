@@ -12,12 +12,12 @@ namespace Coding.Writers
         
         internal readonly string Name;
 
-        internal readonly List<GenericConstraintWriter> GenericConstraints;
+        internal readonly List<GenericConstraintWriter> Constraints;
         
         public GenericParameterWriter(string name, params GenericConstraintWriter[] genericConstraints)
         {
             Name = name;
-            GenericConstraints = genericConstraints.ToList();
+            Constraints = genericConstraints.ToList();
         }
         
         public override void Write(TokenBuilder builder, WriterContext context)
@@ -44,7 +44,7 @@ namespace Coding.Writers
 
         private void WriteGenericConstraints(TokenBuilder builder, WriterContext context)
         {
-            if (!GenericConstraints.Any())
+            if (!Constraints.Any())
             {
                 return;
             }
@@ -53,7 +53,7 @@ namespace Coding.Writers
                     .Add(Name)
                     .Add(Token.Colon);
 
-            builder.Join(GenericConstraints, x => x.Write(builder, context), Token.Comma);
+            builder.Join(Constraints, x => x.Write(builder, context), Token.Comma);
         }
     }
 }

@@ -1,17 +1,9 @@
 using System;
 using System.Linq;
-using Coding;
 using Coding.Writers;
 
-using CSharp.Writers;
 
-using ClassWriter = CSharp.Writers.ClassWriter;
-using FieldWriter = CSharp.Writers.FieldWriter;
-using GenericParameterWriter = CSharp.Writers.GenericParameterWriter;
-using MethodWriter = CSharp.Writers.MethodWriter;
-using PropertyWriter = CSharp.Writers.PropertyWriter;
-
-namespace CSharp.Binding
+namespace Coding.Binding
 {
     public static class ClassWriterExtensions
     {
@@ -83,36 +75,51 @@ namespace CSharp.Binding
             return @class;
         }
 
-        public static ClassWriter IsGeneric(this ClassWriter @class, GenericDeclarationWriter genericDeclaration)
+        public static ClassWriter HasGenericParameter(this ClassWriter @class, GenericParameterWriter genericParameterWriter)
         {
-            @class.GenericDeclaration = genericDeclaration;
+            @class.GenericParameters.Add(genericParameterWriter);
             return @class;
         }
 
-        public static ClassWriter IsGeneric(this ClassWriter @class, params GenericParameterWriter[] genericParameterWriters)
+        public static ClassWriter HasGenericParameter(this ClassWriter @class, string name, Action<GenericParameterWriter> configAction = null)
         {
-            return @class.IsGeneric(new GenericDeclarationWriter(genericParameterWriters.ToList()));
+            var genericParameter = new GenericParameterWriter(name);
+
+            if (configAction != null)
+            {
+                configAction.Invoke(genericParameter);
+            }
+
+            return @class.HasGenericParameter(genericParameter);
         }
 
-        public static ClassWriter IsGeneric(this ClassWriter @class, Action<GenericDeclarationWriter> configAction)
+        public static ClassWriter Has(this ClassWriter @class, FieldWriter field)
         {
-            var genericDeclaration = new GenericDeclarationWriter();
-            configAction.Invoke(genericDeclaration);
-            return @class.IsGeneric(genericDeclaration);
+            return @class.HasField(field);
         }
 
-        public static ClassWriter Has(this ClassWriter @class, IClassChild child)
+        public static ClassWriter Has(this ClassWriter @class, PropertyWriter property)
         {
-            @class.Children.Add(child);
-            return @class;
+            return @class.HasProperty(property);
+        }
+
+        public static ClassWriter Has(this ClassWriter @class, MethodWriter method)
+        {
+            return @class.HasMethod(method);
         }
 
         public static ClassWriter HasProperty<TParamType>(this ClassWriter @class, string name, Action<PropertyWriter> configAction = null)
         {
-            return @class.HasProperty(new TypeParameterWriter<TParamType>(), name, configAction);
+            return @class.HasProperty(To.VariableTypeWriter<TParamType>(), name, configAction);
         }
-        
-        public static ClassWriter HasProperty(this ClassWriter @class, IParameterTypeWriter type, string name, Action<PropertyWriter> configAction = null)
+
+        public static ClassWriter HasProperty(this ClassWriter @class, PropertyWriter property)
+        {
+            @class.Properties.Add(property);
+            return @class;
+        }
+
+        public static ClassWriter HasProperty(this ClassWriter @class, VariableTypeWriter type, string name, Action<PropertyWriter> configAction = null)
         {
             var property = new PropertyWriter(type, name);
 
@@ -120,16 +127,22 @@ namespace CSharp.Binding
             {
                 configAction.Invoke(property);
             }
-            
-            return @class.Has(property);
+
+            return @class.HasProperty(property);
         }
 
         public static ClassWriter HasField<TParamType>(this ClassWriter @class, string name, Action<FieldWriter> configAction = null)
         {
-            return @class.HasField(new TypeParameterWriter<TParamType>(), name, configAction);
+            return @class.HasField(To.VariableTypeWriter<TParamType>(), name, configAction);
         }
 
-        public static ClassWriter HasField(this ClassWriter @class, IParameterTypeWriter type, string name, Action<FieldWriter> configAction = null)
+        public static ClassWriter HasField(this ClassWriter @class, FieldWriter field)
+        {
+            @class.Fields.Add(field);
+            return @class;
+        }
+
+        public static ClassWriter HasField(this ClassWriter @class, VariableTypeWriter type, string name, Action<FieldWriter> configAction = null)
         {
             var field = new FieldWriter(type, name);
 
@@ -138,19 +151,26 @@ namespace CSharp.Binding
                 configAction.Invoke(field);
             }
 
-            return @class.Has(field);
+            return @class.HasField(field);
         }
 
         public static ClassWriter HasMethod<TReturnType>(this ClassWriter @class, string name, Action<MethodWriter> configAction = null)
         {
-            var method = new MethodWriter(name).HasReturnType<TReturnType>();
+            var method = new MethodWriter(name).HasReturnType(To.VariableTypeWriter<TReturnType>());
             
             if (configAction != null)
             {
                 configAction.Invoke(method);
             }
 
-            return @class.Has(method);
+            @class.Methods.Add(method);
+            return @class;
+        }
+
+        public static ClassWriter HasMethod(this ClassWriter @class, MethodWriter method)
+        {
+            @class.Methods.Add(method);
+            return @class;
         }
 
         public static ClassWriter HasMethod(this ClassWriter @class, string name, Action<MethodWriter> configAction = null)
@@ -162,7 +182,7 @@ namespace CSharp.Binding
                 configAction.Invoke(method);
             }
 
-            return @class.Has(method);
+            return @class.HasMethod(method);
         }
     }
 }

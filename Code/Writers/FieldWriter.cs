@@ -12,7 +12,7 @@ namespace Coding.Writers
 
         protected override void WriteSecondaryAccessModifier(TokenBuilder builder, WriterContext context)
         {
-            switch (SeconaryAccessModifier)
+            switch (SecondaryAccessModifier)
             {
                 case null:
                 case SecondaryAccessModifiers.Readonly:
@@ -24,7 +24,7 @@ namespace Coding.Writers
                 case SecondaryAccessModifiers.Abstract:
                 case SecondaryAccessModifiers.Virtual:
                 case SecondaryAccessModifiers.Override:
-                    throw new InvalidOperationException(string.Format("Fields cannot be marked as {0}.", SeconaryAccessModifier.Value));
+                    throw new InvalidOperationException(string.Format("Fields cannot be marked as {0}.", SecondaryAccessModifier.Value));
                 default:
                     throw new ArgumentOutOfRangeException();
             }

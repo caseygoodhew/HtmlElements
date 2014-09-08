@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CSharp;
-using CSharp.Binding;
-using CSharp.Writers;
+
+using Coding.Binding;
+using Coding.Writers;
 
 namespace ConsoleApplication1
 {
@@ -39,24 +39,23 @@ namespace ConsoleApplication1
                     .HasClass(
                         "MyFristClass",
                         x =>
-                        x.IsGeneric(
-                            g =>
-                            g.HasParameter("TSomething", p => p.WhereIsStruct())
-                                .HasParameter("TElse", p => p.WhereIsNew().WhereIsType(new TypeParameterWriter<int>()))))
+                        x.HasGenericParameter("TSomething", p => p.WhereIsStruct())
+                         .HasGenericParameter("TElse", p => p.WhereIsNew().WhereIs<IntWriter>()))
                     .HasClass("AnyClass", 
                         x => x.Has(new FieldWriter(newClass, "NewClass").IsPrivate().IsStaticReadonly())
-                              .Has(new PropertyWriter(new TypeParameterWriter<string>(), "Awesome").IsPrivate(Property.Setter))
+                              .Has(new PropertyWriter(new StringWriter(), "Awesome").IsPrivate(Property.Setter))
                               .HasField<object>("Object", f => f.IsStatic())
                               .HasProperty<bool>("Inline", p => p.IsInternal())
-                              .Has(new PropertyWriter(new TypeParameterWriter<string>(), "Awesome2").IsAbstract(Property.Setter))
-                              .Has(new FieldWriter(new TypeParameterWriter<DateTime>(), "SomeField").IsProtected())
+                              .Has(new PropertyWriter(new StringWriter(), "Awesome2").IsAbstract(Property.Setter))
+                              .Has(new FieldWriter(new RealVariableTypeWriter<DateTime>(), "SomeField").IsProtected())
                               .Has(new MethodWriter("MyMethod")
                                             .IsPrivate()
-                                            .IsGeneric(g => g.HasParameter("TDani").HasParameter("TOlivia", p => p.WhereIsNew()))
+                                            .HasGenericParameter("TDani")
+                                            .HasGenericParameter("TOlivia", p => p.WhereIsNew())
                                             .HasParameter<Type>("type")
                                             .HasParameter<string>("name"))
                               .HasMethod("MyMethod", m => m.IsExtensionMethod<MethodWriter>("Testing"))
-                              .HasMethod<string>("MyMethod", m => m.HasParameter<IClassChild>("classChild").IsAbstract())
+                              .HasMethod<string>("MyMethod", m => m.HasParameter<IDisposable>("classChild").IsAbstract())
                               .Has(new MethodWriter("MyOtherMethod"))
                     ));
 

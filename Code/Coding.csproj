@@ -39,6 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding\ClassWriterExtensions.cs" />
+    <Compile Include="Binding\EnumWriterExtensions.cs" />
+    <Compile Include="Binding\FieldWriterExtensions.cs" />
+    <Compile Include="Binding\GenericParameterWriterExtensions.cs" />
+    <Compile Include="Binding\MethodWriterExtensions.cs" />
+    <Compile Include="Binding\ModuleWriterExtensions.cs" />
+    <Compile Include="Binding\NamespaceWriterExtensions.cs" />
+    <Compile Include="Binding\Property.cs" />
+    <Compile Include="Binding\PropertyWriterExtensions.cs" />
     <Compile Include="Tokens\BoolToken.cs" />
     <Compile Include="Tokens\ByteToken.cs" />
     <Compile Include="Tokens\CharToken.cs" />
@@ -82,6 +91,7 @@
     <Compile Include="Writers\ObjectWriter.cs" />
     <Compile Include="Writers\ParameterWriter.cs" />
     <Compile Include="Writers\PropertyWriter.cs" />
+    <Compile Include="Writers\RealVariableTypeWriter.cs" />
     <Compile Include="Writers\StructWriter.cs" />
     <Compile Include="Writers\To.cs" />
     <Compile Include="Writers\UsingDirectiveWriter.cs" />

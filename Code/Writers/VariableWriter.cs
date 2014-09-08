@@ -9,7 +9,7 @@ namespace Coding.Writers
         
         internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
 
-        internal SecondaryAccessModifiers? SeconaryAccessModifier { get; set; }
+        internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
 
         internal readonly VariableTypeWriter VariableType;
         
@@ -24,7 +24,7 @@ namespace Coding.Writers
 
         public override void Write(TokenBuilder builder, WriterContext context)
         {
-            if (context.Is(WriterContextFlags.VariableDeclaration))
+            if (context.Is(WriterContextFlags.VariableDeclaration) || context.Is(WriterContextFlags.ClassDeclaration))
             {
                 WriteVariableDeclaration(builder, context);
 
@@ -63,7 +63,7 @@ namespace Coding.Writers
 
         protected virtual void WriteSecondaryAccessModifier(TokenBuilder builder, WriterContext context)
         {
-            builder.Add(To.Token(SeconaryAccessModifier));
+            builder.Add(To.Token(SecondaryAccessModifier));
         }
 
         protected virtual void WriteDeclarationCompletion(TokenBuilder builder, WriterContext context)

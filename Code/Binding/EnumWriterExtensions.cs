@@ -1,12 +1,12 @@
-﻿using CSharp.Writers;
+﻿using Coding.Writers;
 
-namespace CSharp.Binding
+namespace Coding.Binding
 {
 	public static class EnumWriterExtensions
 	{
 		public static EnumWriter HasItem(this EnumWriter @enum, string name)
 		{
-			@enum.Children.Add(new EnumValueWriter(@enum, name));
+			@enum.EnumValues.Add(new EnumValueWriter(@enum, name));
 			return @enum;
 		}
 	}
