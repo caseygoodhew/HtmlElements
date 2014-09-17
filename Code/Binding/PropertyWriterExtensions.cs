@@ -49,6 +49,18 @@ namespace Coding.Binding
             return property;
         }
 
+        public static PropertyWriter HasGetter(this PropertyWriter property, bool state = true)
+        {
+            property.HasGetter = state;
+            return property;
+        }
+
+        public static PropertyWriter HasSetter(this PropertyWriter property, bool state = true)
+        {
+            property.HasSetter = state;
+            return property;
+        }
+
         private static PropertyWriter SetAccessor(PropertyWriter property, PrimaryAccessModifiers modifier, Property? target)
         {
             switch (target)

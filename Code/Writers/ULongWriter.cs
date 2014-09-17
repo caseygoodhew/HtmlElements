@@ -4,7 +4,7 @@ namespace Coding.Writers
 {
     public class ULongWriter : ValueTypeWriter
     {
-        public override Token TypeToken
+        internal override Token TypeToken
         {
             get { return Token.ULong; }
         }

@@ -5,6 +5,10 @@ namespace Coding.Writers
 {
     public class PropertyWriter : VariableWriter
     {
+        internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
+
+        internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
+
         internal PrimaryAccessModifiers GetterAccessModifier { get; set; }
 
         internal PrimaryAccessModifiers SetterAccessModifier { get; set; }
@@ -15,10 +19,24 @@ namespace Coding.Writers
         
         public PropertyWriter(VariableTypeWriter variableType, string name) : base(variableType, name)
         {
+            PrimaryAccessModifier = PrimaryAccessModifiers.Public;
             GetterAccessModifier = PrimaryAccessModifiers.Public;
             SetterAccessModifier = PrimaryAccessModifiers.Public;
             HasGetter = true;
             HasSetter = true;
+        }
+
+        protected override void WriteAccessModifier(TokenBuilder builder, WriterContext context)
+        {
+            if (!context.Is(WriterContextFlags.VariableDeclaration) && 
+                !context.Is(WriterContextFlags.ClassDeclaration) &&
+                !context.Is(WriterContextFlags.StructDeclaration))
+            {
+                return;
+            }
+
+            builder.Add(To.Token(PrimaryAccessModifier));
+            builder.Add(To.Token(SecondaryAccessModifier));
         }
 
         protected override void WriteDeclarationCompletion(TokenBuilder builder, WriterContext context)

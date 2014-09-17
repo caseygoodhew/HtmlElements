@@ -13,6 +13,8 @@ namespace Coding.Writers
 
         internal readonly NamespaceWriter ParentNamespace;
 
+        internal readonly List<NamespaceWriter> DecendantNamespaces;
+
         internal readonly List<EnumWriter> Enums;
 
         internal readonly List<InterfaceWriter> Interfaces;
@@ -33,6 +35,7 @@ namespace Coding.Writers
             Interfaces = new List<InterfaceWriter>();
             Structs = new List<StructWriter>();
             Classes = new List<ClassWriter>();
+            DecendantNamespaces = new List<NamespaceWriter>();
         }
 
         public override void Write(TokenBuilder builder, WriterContext context)
@@ -40,6 +43,7 @@ namespace Coding.Writers
             if (context.Is(WriterContextFlags.NamespaceDeclaration) || context.Is(WriterContextFlags.ModuleDeclaration))
             {
                 WriteNamespaceDeclaration(builder, context);
+                builder.Join(DecendantNamespaces, x => x.Write(builder, context), Token.NewLine);
                 return;
             }
 

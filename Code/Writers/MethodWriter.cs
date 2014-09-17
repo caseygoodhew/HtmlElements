@@ -6,51 +6,23 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public class MethodWriter : Writer
+    public class MethodWriter : InvokableWriter
     {
-        protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.ModuleDeclaration; } }
-        
-        internal PrimaryAccessModifiers PrimaryAccessModifier { get; set; }
-
         internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
-
+        
         internal VariableTypeWriter ReturnType { get; set; }
 
-        internal readonly string Name;
-        
         internal readonly List<GenericParameterWriter> GenericParameters;
 
         internal ParameterWriter ExtensionParameter { get; set; }
 
-        internal readonly List<ParameterWriter> Parameters;
-
-        public MethodWriter(string name)
+        public MethodWriter(string name) : base(name)
         {
-            PrimaryAccessModifier = PrimaryAccessModifiers.Public;
             GenericParameters = new List<GenericParameterWriter>();
-            Parameters = new List<ParameterWriter>();
-            Name = name;
         }
 
-        public override void Write(TokenBuilder builder, WriterContext context)
+        protected override void WriteReturnType(TokenBuilder builder, WriterContext context)
         {
-            if (context.Is(WriterContextFlags.ClassDeclaration) || context.Is(WriterContextFlags.InterfaceDeclaration) || context.Is(WriterContextFlags.ModuleDeclaration))
-            {
-                WriteMethodDeclaration(builder, context);
-                return;
-            }
-            
-            base.Write(builder, context);
-        }
-
-        private void WriteMethodDeclaration(TokenBuilder builder, WriterContext context)
-        {
-            if (context.Is(WriterContextFlags.ClassDeclaration))
-            {
-                WritePrimaryAccessModifier(builder, context);
-                WriteSecondaryAccessModifier(builder, context);
-            }
-
             if (ReturnType == null)
             {
                 builder.Add(Token.Void);
@@ -59,9 +31,10 @@ namespace Coding.Writers
             {
                 ReturnType.Write(builder, context.Switch(WriterContextFlags.VariableType));
             }
+        }
 
-            builder.Add(Name);
-
+        protected override void WriteGenericParameters(TokenBuilder builder, WriterContext context)
+        {
             if (GenericParameters.Any())
             {
                 builder.Add(Token.OpenAngle);
@@ -73,9 +46,16 @@ namespace Coding.Writers
 
                 builder.Add(Token.CloseAngle);
             }
+        }
 
-            builder.Add(Token.OpenBracket);
+        protected override void WriteAccessModifier(TokenBuilder builder, WriterContext context)
+        {
+            base.WriteAccessModifier(builder, context);
+            builder.Add(To.Token(SecondaryAccessModifier));
+        }
 
+        protected override void WriteParameters(TokenBuilder builder, WriterContext context)
+        {
             if (ExtensionParameter != null)
             {
                 builder.Add(Token.This);
@@ -87,39 +67,16 @@ namespace Coding.Writers
                     builder.Add(Token.Comma);
                 }
             }
-            
-            builder.Join(
-                Parameters, 
-                x => x.Write(builder, context.Switch(WriterContextFlags.VariableDeclaration)),
-                Token.Comma);
 
-            builder.Add(Token.CloseBracket);
+            base.WriteParameters(builder, context);
+        }
 
+        protected override void WriteGenericConstraints(TokenBuilder builder, WriterContext context)
+        {
             if (GenericParameters.SelectMany(x => x.Constraints).Any())
             {
                 GenericParameters.ForEach(x => x.Write(builder, context.Switch(WriterContextFlags.GenericConstraints)));
             }
-
-            if (context.Is(WriterContextFlags.InterfaceDeclaration))
-            {
-                builder.Add(Token.TerminatingSemiColon);
-            }
-            else
-            {
-                builder.Add(Token.OpenCurly);
-
-                builder.Add(Token.CloseCurly);
-            }
-        }
-
-        private void WritePrimaryAccessModifier(TokenBuilder builder, WriterContext context)
-        {
-            builder.Add(To.Token(PrimaryAccessModifier));
-        }
-
-        private void WriteSecondaryAccessModifier(TokenBuilder builder, WriterContext context)
-        {
-            builder.Add(To.Token(SecondaryAccessModifier));
         }
     }
 }

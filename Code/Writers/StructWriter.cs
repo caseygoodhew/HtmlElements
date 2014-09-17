@@ -3,7 +3,7 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public class StructWriter : InterfaceWriter
+    public class StructWriter : ComposableWriter
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.StructDeclaration; } }
         

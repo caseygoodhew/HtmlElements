@@ -1,12 +1,13 @@
 using System;
-using System.Linq;
 using Coding.Writers;
-
 
 namespace Coding.Binding
 {
     public static class ClassWriterExtensions
     {
+        /*********************************************************
+         *  Primary Access Modifier
+         ********************************************************/
         public static ClassWriter IsPublic(this ClassWriter @class)
         {
             @class.PrimaryAccessModifier = PrimaryAccessModifiers.Public;
@@ -31,6 +32,9 @@ namespace Coding.Binding
             return @class;
         }
 
+        /*********************************************************
+         *  Secondary Access Modifier
+         ********************************************************/
         public static ClassWriter IsAbstract(this ClassWriter @class)
         {
             if (@class.SecondaryAccessModifier.HasValue)
@@ -75,6 +79,9 @@ namespace Coding.Binding
             return @class;
         }
 
+        /*********************************************************
+         *  Generic Parameters
+         ********************************************************/
         public static ClassWriter HasGenericParameter(this ClassWriter @class, GenericParameterWriter genericParameterWriter)
         {
             @class.GenericParameters.Add(genericParameterWriter);
@@ -93,6 +100,9 @@ namespace Coding.Binding
             return @class.HasGenericParameter(genericParameter);
         }
 
+        /*********************************************************
+         *  Utility
+         ********************************************************/
         public static ClassWriter Has(this ClassWriter @class, FieldWriter field)
         {
             return @class.HasField(field);
@@ -103,11 +113,19 @@ namespace Coding.Binding
             return @class.HasProperty(property);
         }
 
+        public static ClassWriter Has(this ClassWriter @class, ConstructorWriter constructor)
+        {
+            return @class.HasConstructor(constructor);
+        }
+
         public static ClassWriter Has(this ClassWriter @class, MethodWriter method)
         {
             return @class.HasMethod(method);
         }
 
+        /*********************************************************
+         *  Properties
+         ********************************************************/
         public static ClassWriter HasProperty<TParamType>(this ClassWriter @class, string name, Action<PropertyWriter> configAction = null)
         {
             return @class.HasProperty(To.VariableTypeWriter<TParamType>(), name, configAction);
@@ -131,6 +149,9 @@ namespace Coding.Binding
             return @class.HasProperty(property);
         }
 
+        /*********************************************************
+         *  Fields
+         ********************************************************/
         public static ClassWriter HasField<TParamType>(this ClassWriter @class, string name, Action<FieldWriter> configAction = null)
         {
             return @class.HasField(To.VariableTypeWriter<TParamType>(), name, configAction);
@@ -154,6 +175,30 @@ namespace Coding.Binding
             return @class.HasField(field);
         }
 
+        /*********************************************************
+         *  Constructors
+         ********************************************************/
+        public static ClassWriter HasConstructor(this ClassWriter @class, ConstructorWriter constructor)
+        {
+            @class.Constructors.Add(constructor);
+            return @class;
+        }
+
+        public static ClassWriter HasConstructor(this ClassWriter @class, string name, Action<ConstructorWriter> configAction = null)
+        {
+            var constructor = new ConstructorWriter(@class);
+
+            if (configAction != null)
+            {
+                configAction.Invoke(constructor);
+            }
+
+            return @class.HasConstructor(constructor);
+        }
+
+        /*********************************************************
+         *  Methods
+         ********************************************************/
         public static ClassWriter HasMethod<TReturnType>(this ClassWriter @class, string name, Action<MethodWriter> configAction = null)
         {
             var method = new MethodWriter(name).HasReturnType(To.VariableTypeWriter<TReturnType>());
@@ -183,6 +228,49 @@ namespace Coding.Binding
             }
 
             return @class.HasMethod(method);
+        }
+
+        /*********************************************************
+         *  Extends Class
+         ********************************************************/
+        public static ClassWriter Extends(this ClassWriter @class, ClassWriter extendsClass)
+        {
+            return @class.Extends(new ExtendsClassTypeWriter(extendsClass));
+        }
+
+        public static ClassWriter Extends<T>(this ClassWriter @class) where T : class
+        {
+            return @class.Extends(new ExtendsGenericClassWriter<T>());
+        }
+
+        public static ClassWriter Extends(this ClassWriter @class, ExtendsClassWriter extendsClass)
+        {
+            if (@class.ExtendsClass != null)
+            {
+                throw new InvalidOperationException("Extension class already exists.");
+            }
+
+            @class.ExtendsClass = extendsClass;
+            return @class;
+        }
+
+        /*********************************************************
+         *  Implmements Interfaces
+         ********************************************************/
+        public static ClassWriter Implments(this ClassWriter @class, InterfaceWriter implementsInterface)
+        {
+            return @class.Implments(new ImplementsInterfaceTypeWriter(implementsInterface));
+        }
+
+        public static ClassWriter Implments<T>(this ClassWriter @class) where T : class
+        {
+            return @class.Implments(new ImplementsGenericInterfaceWriter<T>());
+        }
+
+        public static ClassWriter Implments(this ClassWriter @class, ImplementsInterfaceWriter implementsInterface)
+        {
+            @class.ImplementsInterfaceWriters.Add(implementsInterface);
+            return @class;
         }
     }
 }

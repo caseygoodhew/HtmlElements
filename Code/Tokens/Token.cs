@@ -16,8 +16,9 @@ namespace Coding.Tokens
         CloseCurly,
         Dot,
         QuestionMark,
+        EqualTo,
         Equals,
-        NotEquals,
+        NotEqualTo,
         GreaterThan,
         GreaterThanOrEqual,
         LessThan,
@@ -78,6 +79,12 @@ namespace Coding.Tokens
         Decimal,
         Object,
         Dynamic,
-        Delegate
+        Delegate,
+        OpenSquare,
+        CloseSquare,
+        Params,
+        Exclamation,
+        ConditionalOr,
+        ConditionalAnd
     }
 }

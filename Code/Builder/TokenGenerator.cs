@@ -41,8 +41,10 @@ namespace Coding.Builder
                     return new QuestionMarkToken();
                 case Token.Equals:
                     return new EqualsToken();
-                case Token.NotEquals:
-                    return new NotEqualsToken();
+                case Token.EqualTo:
+                    return new EqualToToken();
+                case Token.NotEqualTo:
+                    return new NotEqualToToken();
                 case Token.GreaterThan:
                     return new GreaterThanToken();
                 case Token.GreaterThanOrEqual:
@@ -161,6 +163,18 @@ namespace Coding.Builder
                     return new DynamicToken();
                 case Token.Delegate:
                     return new DelegateToken();
+                case Token.OpenSquare:
+                    return new OpenSquareToken();
+                case Token.CloseSquare:
+                    return new CloseSquareToken();
+                case Token.Params:
+                    return new ParamsToken();
+                case Token.Exclamation:
+                    return new ExclamationToken();
+                case Token.ConditionalOr:
+                    return new ConditionalOrToken();
+                case Token.ConditionalAnd:
+                    return new ConditionalAndToken();
                 default:
                     throw new ArgumentOutOfRangeException("token");
             }
@@ -172,8 +186,9 @@ namespace Coding.Builder
             {
                 case Token.Colon:
                 case Token.QuestionMark:
+                case Token.EqualTo:
                 case Token.Equals:
-                case Token.NotEquals:
+                case Token.NotEqualTo:
                 case Token.GreaterThan:
                 case Token.GreaterThanOrEqual:
                 case Token.LessThan:
@@ -223,6 +238,9 @@ namespace Coding.Builder
                 case Token.Object:
                 case Token.Dynamic:
                 case Token.Delegate:
+                case Token.Params:
+                case Token.ConditionalOr:
+                case Token.ConditionalAnd:
                     return new SpaceToken();
                 case Token.Namespace:
                 case Token.Public:
@@ -245,8 +263,9 @@ namespace Coding.Builder
                 case Token.Comma:
                 case Token.QuestionMark:
                 case Token.Nullable:
+                case Token.EqualTo:
                 case Token.Equals:
-                case Token.NotEquals:
+                case Token.NotEqualTo:
                 case Token.GreaterThan:
                 case Token.GreaterThanOrEqual:
                 case Token.LessThan:
@@ -298,6 +317,10 @@ namespace Coding.Builder
                 case Token.Object:
                 case Token.Dynamic:
                 case Token.Delegate:
+                case Token.CloseSquare:
+                case Token.Params:
+                case Token.ConditionalOr:
+                case Token.ConditionalAnd:
                     return new SpaceToken();
                 case Token.OpenCurly:
                 case Token.CloseCurly:

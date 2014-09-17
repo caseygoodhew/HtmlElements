@@ -1,4 +1,5 @@
-﻿using Coding.Writers;
+﻿using System;
+using Coding.Writers;
 
 namespace Coding.Binding
 {
@@ -6,8 +7,18 @@ namespace Coding.Binding
 	{
 		public static EnumWriter HasItem(this EnumWriter @enum, string name)
 		{
-			@enum.EnumValues.Add(new EnumValueWriter(@enum, name));
-			return @enum;
+			return @enum.HasItem(new EnumValueWriter(@enum, name));
 		}
+
+        public static EnumWriter HasItem(this EnumWriter @enum, EnumValueWriter enumValue)
+        {
+            if (enumValue.ParentEnum != @enum)
+            {
+                throw new InvalidOperationException("enumValue.ParentEnum to enum (this) mismatch.");
+            }
+
+            @enum.EnumValues.Add(enumValue);
+            return @enum;
+        }
 	}
 }

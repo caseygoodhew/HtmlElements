@@ -7,21 +7,19 @@
         ClassDeclaration,
         InterfaceDeclaration,
         GenericParameter,
-
         GenericConstraints,
-
         NamespaceDeclaration,
-
         ImplementsInterface,
-
         ExtendsClass,
-
         NamespaceName,
-
         EnumDeclaration,
-
         ModuleDeclaration,
+        StructDeclaration,
+        InvokableDeclaration,
 
-        StructDeclaration
+        Statement,
+
+        VariableName,
+        Condition
     }
 }

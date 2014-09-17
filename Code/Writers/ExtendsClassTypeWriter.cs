@@ -6,7 +6,7 @@ namespace Coding.Writers
     {
         internal readonly ClassWriter ClassWriter;
 
-        protected ExtendsClassTypeWriter(ClassWriter classWriter)
+        public ExtendsClassTypeWriter(ClassWriter classWriter)
         {
             ClassWriter = classWriter;
         }

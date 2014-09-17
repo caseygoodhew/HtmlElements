@@ -43,14 +43,20 @@
     <Compile Include="Binding\EnumWriterExtensions.cs" />
     <Compile Include="Binding\FieldWriterExtensions.cs" />
     <Compile Include="Binding\GenericParameterWriterExtensions.cs" />
+    <Compile Include="Binding\InterfaceWriterExtensions.cs" />
     <Compile Include="Binding\MethodWriterExtensions.cs" />
     <Compile Include="Binding\ModuleWriterExtensions.cs" />
     <Compile Include="Binding\NamespaceWriterExtensions.cs" />
     <Compile Include="Binding\Property.cs" />
     <Compile Include="Binding\PropertyWriterExtensions.cs" />
+    <Compile Include="Builder\EqualToToken.cs" />
+    <Compile Include="Builder\ExclamationToken.cs" />
     <Compile Include="Tokens\BoolToken.cs" />
     <Compile Include="Tokens\ByteToken.cs" />
     <Compile Include="Tokens\CharToken.cs" />
+    <Compile Include="Tokens\CloseSquareToken.cs" />
+    <Compile Include="Tokens\ParamsToken.cs" />
+    <Compile Include="Tokens\OpenSquareToken.cs" />
     <Compile Include="Tokens\DecimalToken.cs" />
     <Compile Include="Tokens\DelegateToken.cs" />
     <Compile Include="Tokens\DoubleToken.cs" />
@@ -58,11 +64,16 @@
     <Compile Include="Tokens\FloatToken.cs" />
     <Compile Include="Tokens\IntToken.cs" />
     <Compile Include="Tokens\LongToken.cs" />
+    <Compile Include="Writers2\ConditionWriter.cs" />
+    <Compile Include="Writers\ArrayVariableTypeWriter.cs" />
     <Compile Include="Writers\BoolWriter.cs" />
     <Compile Include="Writers\ByteWriter.cs" />
     <Compile Include="Writers\CharWriter.cs" />
     <Compile Include="Writers\BuiltInReferenceTypeWriter.cs" />
     <Compile Include="Writers\ClassWriter.cs" />
+    <Compile Include="Writers\ConstructorWriter.cs" />
+    <Compile Include="Writers\ComposableWriter.cs" />
+    <Compile Include="Writers\ExternalVariableTypeWriter.cs" />
     <Compile Include="Writers\DynamicWriter.cs" />
     <Compile Include="Writers\EnumValueWriter.cs" />
     <Compile Include="Writers\EnumWriter.cs" />
@@ -85,11 +96,13 @@
     <Compile Include="Writers\ImplementsInterfaceTypeWriter.cs" />
     <Compile Include="Writers\ImplementsInterfaceWriter.cs" />
     <Compile Include="Writers\InterfaceWriter.cs" />
+    <Compile Include="Writers\InvokableWriter.cs" />
     <Compile Include="Writers\MethodWriter.cs" />
     <Compile Include="Writers\ModuleWriter.cs" />
     <Compile Include="Writers\NamespaceWriter.cs" />
     <Compile Include="Writers\ObjectWriter.cs" />
     <Compile Include="Writers\ParameterWriter.cs" />
+    <Compile Include="Writers\ParamsParameterWriter.cs" />
     <Compile Include="Writers\PropertyWriter.cs" />
     <Compile Include="Writers\RealVariableTypeWriter.cs" />
     <Compile Include="Writers\StructWriter.cs" />
@@ -153,7 +166,7 @@
     <Compile Include="Tokens\NamespaceToken.cs" />
     <Compile Include="Tokens\NewLineToken.cs" />
     <Compile Include="Tokens\NewToken.cs" />
-    <Compile Include="Tokens\NotEqualsToken.cs" />
+    <Compile Include="Tokens\NotEqualToToken.cs" />
     <Compile Include="Tokens\NullableToken.cs" />
     <Compile Include="Tokens\NullToken.cs" />
     <Compile Include="Tokens\OpenAngleToken.cs" />
@@ -188,7 +201,9 @@
     <Compile Include="Tokens\ULongToken.cs" />
     <Compile Include="Tokens\UShortToken.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Binding2\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

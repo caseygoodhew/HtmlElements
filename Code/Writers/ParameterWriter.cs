@@ -8,16 +8,6 @@ namespace Coding.Writers
         {
         }
 
-        protected override void WritePrimaryAccessModifier(TokenBuilder builder, WriterContext context)
-        {
-            // do nothing
-        }
-
-        protected override void WriteSecondaryAccessModifier(TokenBuilder builder, WriterContext context)
-        {
-            // do nothing
-        }
-
         protected override void WriteDeclarationCompletion(TokenBuilder builder, WriterContext context)
         {
             // do nothing

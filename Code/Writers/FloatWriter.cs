@@ -4,7 +4,7 @@ namespace Coding.Writers
 {
     public class FloatWriter : ValueTypeWriter
     {
-        public override Token TypeToken
+        internal override Token TypeToken
         {
             get { return Token.Float; }
         }

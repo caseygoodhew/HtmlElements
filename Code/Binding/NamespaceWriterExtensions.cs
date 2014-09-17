@@ -6,6 +6,19 @@ namespace Coding.Binding
 {
     public static class NamespaceWriterExtensions
     {
+        public static NamespaceWriter HasNamespace(this NamespaceWriter @namespace, string name, Action<NamespaceWriter> configAction = null)
+        {
+            var childNamespace = new NamespaceWriter(@namespace, "name");
+
+            if (configAction != null)
+            {
+                configAction.Invoke(childNamespace);
+            }
+
+            @namespace.DecendantNamespaces.Add(childNamespace);
+            return @namespace;
+        }
+
         public static NamespaceWriter HasEnum(this NamespaceWriter @namespace, EnumWriter @enum)
         {
             @namespace.Enums.Add(@enum);
@@ -77,9 +90,5 @@ namespace Coding.Binding
             @namespace.Classes.Add(@class);
             return @namespace;
         }
-
-        
-
-        
     }
 }

@@ -1,18 +1,22 @@
-﻿using Coding.Builder;
+﻿using System.Collections.Generic;
+using Coding.Builder;
 using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public class ClassWriter : InterfaceWriter
+    public class ClassWriter : ComposableWriter
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.ClassDeclaration; } }
         
         internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; } 
 
         internal ExtendsClassWriter ExtendsClass { get; set; }
+
+        internal List<ConstructorWriter> Constructors { get; set; }
         
         public ClassWriter(string name) : base(name, Token.Class)
         {
+            Constructors = new List<ConstructorWriter>();
         }
 
         public override void Write(TokenBuilder builder, WriterContext context)
@@ -43,6 +47,15 @@ namespace Coding.Writers
                 ExtendsClass.Write(builder, context.Switch(WriterContextFlags.ExtendsClass));
                 WriteImplementsInterfaces(builder, context, Token.Comma);
             }
+        }
+
+        protected override void WriteMethods(TokenBuilder builder, WriterContext context)
+        {
+            builder.Join(Constructors, x => x.Write(builder, context), Token.NewLine);
+
+            builder.Add(Token.NewLine);
+
+            base.WriteMethods(builder, context);
         }
     }
 }

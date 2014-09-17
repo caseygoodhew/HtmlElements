@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Coding.Writers;
 
 namespace Coding.Binding
@@ -116,21 +115,35 @@ namespace Coding.Binding
             return method;
         }
 
-        public static MethodWriter HasParameter(this MethodWriter method, VariableTypeWriter type, string name, Action<ParameterWriter> configAction = null)
+        public static MethodWriter HasParameter(this MethodWriter method, VariableTypeWriter type, string name)
         {
-            var parameter = new ParameterWriter(type, name);
-
-            if (configAction != null)
-            {
-                configAction.Invoke(parameter);
-            }
-
-            return method.HasParameter(parameter);
+            return method.HasParameter(new ParameterWriter(type, name));
         }
 
-        public static MethodWriter HasParameter<TParamType>(this MethodWriter method, string name, Action<ParameterWriter> configAction = null)
+        public static MethodWriter HasParameter<TParamType>(this MethodWriter method, string name)
         {
-            return method.HasParameter(To.VariableTypeWriter<TParamType>(), name, configAction);
+            return method.HasParameter(To.VariableTypeWriter<TParamType>(), name);
+        }
+
+        public static MethodWriter HasParamsParameter(this MethodWriter method, ParamsParameterWriter paramsParameter)
+        {
+            if (method.ParamsParameter != null)
+            {
+                throw new InvalidOperationException("Params parameter is already set.");
+            }
+            
+            method.ParamsParameter = paramsParameter;
+            return method;
+        }
+
+        public static MethodWriter HasParamsParameter(this MethodWriter method, VariableTypeWriter type, string name)
+        {
+            return method.HasParamsParameter(new ParamsParameterWriter(type, name));
+        }
+
+        public static MethodWriter HasParamsParameter<TParamType>(this MethodWriter method, string name)
+        {
+            return method.HasParamsParameter(To.VariableTypeWriter<TParamType>(), name);
         }
 
         public static MethodWriter HasReturnType(this MethodWriter method, VariableTypeWriter parameter)
@@ -142,6 +155,11 @@ namespace Coding.Binding
 
             method.ReturnType = parameter;
             return method;
+        }
+
+        public static MethodWriter HasReturnType<TReturnType>(this MethodWriter method)
+        {
+            return method.HasReturnType(To.VariableTypeWriter<TReturnType>());
         }
     }
 }
