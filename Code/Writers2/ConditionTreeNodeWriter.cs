@@ -3,7 +3,7 @@ using Coding.Writers;
 
 namespace Coding.Writers2
 {
-    public abstract class BaseConditionWriter : Writer
+    public abstract class ConditionTreeNodeWriter : Writer
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.Condition; } }
 

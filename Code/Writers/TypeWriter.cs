@@ -1,8 +1,9 @@
-﻿using Coding.Builder;
+﻿using System;
+using Coding.Builder;
 
 namespace Coding.Writers
 {
-    public abstract class VariableTypeWriter : Writer
+    public abstract class TypeWriter : Writer
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.VariableType; } }
         
@@ -18,5 +19,17 @@ namespace Coding.Writers
         }
 
         protected abstract void WriteTypeName(TokenBuilder builder, WriterContext context);
+
+        protected internal abstract bool IsValidType(Type type);
+
+        public static TypeWriter Get<T>()
+        {
+            var typeT = typeof(T);
+
+            if (typeT.IsValueType && typeT.IsPrimitive)
+            {
+                
+            }
+        }
     }
 }

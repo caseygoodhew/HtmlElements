@@ -74,7 +74,7 @@ namespace Coding.Binding
             return method.IsStatic();
         }
 
-        public static MethodWriter IsExtensionMethod(this MethodWriter method, VariableTypeWriter type, string name, Action<ParameterWriter> configAction = null)
+        public static MethodWriter IsExtensionMethod(this MethodWriter method, TypeWriter type, string name, Action<ParameterWriter> configAction = null)
         {
             var parameter = new ParameterWriter(type, name);
 
@@ -115,7 +115,7 @@ namespace Coding.Binding
             return method;
         }
 
-        public static MethodWriter HasParameter(this MethodWriter method, VariableTypeWriter type, string name)
+        public static MethodWriter HasParameter(this MethodWriter method, TypeWriter type, string name)
         {
             return method.HasParameter(new ParameterWriter(type, name));
         }
@@ -136,7 +136,7 @@ namespace Coding.Binding
             return method;
         }
 
-        public static MethodWriter HasParamsParameter(this MethodWriter method, VariableTypeWriter type, string name)
+        public static MethodWriter HasParamsParameter(this MethodWriter method, TypeWriter type, string name)
         {
             return method.HasParamsParameter(new ParamsParameterWriter(type, name));
         }
@@ -146,7 +146,7 @@ namespace Coding.Binding
             return method.HasParamsParameter(To.VariableTypeWriter<TParamType>(), name);
         }
 
-        public static MethodWriter HasReturnType(this MethodWriter method, VariableTypeWriter parameter)
+        public static MethodWriter HasReturnType(this MethodWriter method, TypeWriter parameter)
         {
             if (method.ReturnType != null)
             {

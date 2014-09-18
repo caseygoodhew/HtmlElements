@@ -137,7 +137,7 @@ namespace Coding.Binding
             return @class;
         }
 
-        public static ClassWriter HasProperty(this ClassWriter @class, VariableTypeWriter type, string name, Action<PropertyWriter> configAction = null)
+        public static ClassWriter HasProperty(this ClassWriter @class, TypeWriter type, string name, Action<PropertyWriter> configAction = null)
         {
             var property = new PropertyWriter(type, name);
 
@@ -163,7 +163,7 @@ namespace Coding.Binding
             return @class;
         }
 
-        public static ClassWriter HasField(this ClassWriter @class, VariableTypeWriter type, string name, Action<FieldWriter> configAction = null)
+        public static ClassWriter HasField(this ClassWriter @class, TypeWriter type, string name, Action<FieldWriter> configAction = null)
         {
             var field = new FieldWriter(type, name);
 

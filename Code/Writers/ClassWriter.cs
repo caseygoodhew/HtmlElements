@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Coding.Builder;
 using Coding.Tokens;
 
@@ -28,6 +29,11 @@ namespace Coding.Writers
             }
             
             base.Write(builder, context);
+        }
+
+        protected internal override bool IsValidType(Type type)
+        {
+            throw new System.NotImplementedException();
         }
 
         protected override void WriteAccessModifier(TokenBuilder builder, WriterContext context)

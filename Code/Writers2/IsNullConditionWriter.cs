@@ -17,7 +17,7 @@ namespace Coding.Writers2
 
         protected override void WriteLeftCondition(TokenBuilder builder, WriterContext context)
         {
-            Variable.Write(builder, context);
+            Variable.Write(builder, context.Switch(WriterContextFlags.VariableName));
         }
 
         protected override void WriteRightCondition(TokenBuilder builder, WriterContext context)

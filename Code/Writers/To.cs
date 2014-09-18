@@ -51,7 +51,7 @@ namespace Coding.Writers
             return condition ? Token(modifier) : Tokens.Token.Empty;
         }
 
-        internal static VariableTypeWriter VariableTypeWriter<TType>()
+        internal static TypeWriter VariableTypeWriter<TType>()
         {
             var ttype = typeof(TType);
 
@@ -133,19 +133,19 @@ namespace Coding.Writers
                 return new ObjectWriter();
             }
 
-            if (typeof(VariableTypeWriter).IsAssignableFrom(ttype))
+            if (typeof(TypeWriter).IsAssignableFrom(ttype))
             {
                 var constructor = ttype.GetConstructor(new Type[] { });
                 
                 if (constructor == null)
                 {
-                    throw new InvalidOperationException(string.Format("Cannot find a public parameterless constructor for VariableTypeWriter derived type {0}.", ttype.Name));
+                    throw new InvalidOperationException(string.Format("Cannot find a public parameterless constructor for TypeWriter derived type {0}.", ttype.Name));
                 }
 
-                return constructor.Invoke(new object[] {}) as VariableTypeWriter;
+                return constructor.Invoke(new object[] {}) as TypeWriter;
             }
 
-            return new RealVariableTypeWriter<TType>();
+            return new RealTypeWriter<TType>();
         }
     }
 }

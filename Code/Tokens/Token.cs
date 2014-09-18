@@ -85,6 +85,8 @@ namespace Coding.Tokens
         Params,
         Exclamation,
         ConditionalOr,
-        ConditionalAnd
+        ConditionalAnd,
+        DoubleQuote,
+        SingleQuote
     }
 }

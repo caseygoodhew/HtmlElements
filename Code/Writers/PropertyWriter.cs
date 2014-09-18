@@ -17,7 +17,7 @@ namespace Coding.Writers
 
         internal bool HasSetter { get; set; }
         
-        public PropertyWriter(VariableTypeWriter variableType, string name) : base(variableType, name)
+        public PropertyWriter(TypeWriter type, string name) : base(type, name)
         {
             PrimaryAccessModifier = PrimaryAccessModifiers.Public;
             GetterAccessModifier = PrimaryAccessModifiers.Public;

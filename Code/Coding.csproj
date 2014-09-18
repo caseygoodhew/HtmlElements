@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding2\ConditionWriterExtensions.cs" />
     <Compile Include="Binding\ClassWriterExtensions.cs" />
     <Compile Include="Binding\EnumWriterExtensions.cs" />
     <Compile Include="Binding\FieldWriterExtensions.cs" />
@@ -49,8 +50,12 @@
     <Compile Include="Binding\NamespaceWriterExtensions.cs" />
     <Compile Include="Binding\Property.cs" />
     <Compile Include="Binding\PropertyWriterExtensions.cs" />
-    <Compile Include="Builder\EqualToToken.cs" />
-    <Compile Include="Builder\ExclamationToken.cs" />
+    <Compile Include="Tokens\DoubleQuoteToken.cs" />
+    <Compile Include="Tokens\SingleQuoteToken.cs" />
+    <Compile Include="Tokens\ConditionalAndToken.cs" />
+    <Compile Include="Tokens\ConditionalOrToken.cs" />
+    <Compile Include="Tokens\EqualToToken.cs" />
+    <Compile Include="Tokens\ExclamationToken.cs" />
     <Compile Include="Tokens\BoolToken.cs" />
     <Compile Include="Tokens\ByteToken.cs" />
     <Compile Include="Tokens\CharToken.cs" />
@@ -64,8 +69,19 @@
     <Compile Include="Tokens\FloatToken.cs" />
     <Compile Include="Tokens\IntToken.cs" />
     <Compile Include="Tokens\LongToken.cs" />
+    <Compile Include="Writers2\AreNotEqualConditionWriter.cs" />
+    <Compile Include="Writers2\BaseConditionWriter.cs" />
+    <Compile Include="Writers2\BooleanConditionWriter.cs" />
+    <Compile Include="Writers2\ComparableConditionWriter.cs" />
+    <Compile Include="Writers2\ConditionTreeAndWriter.cs" />
+    <Compile Include="Writers2\ConditionTreeLeafWriter.cs" />
+    <Compile Include="Writers2\ConditionTreeNodeWriter.cs" />
+    <Compile Include="Writers2\ConditionTreeOrWriter.cs" />
     <Compile Include="Writers2\ConditionWriter.cs" />
-    <Compile Include="Writers\ArrayVariableTypeWriter.cs" />
+    <Compile Include="Writers2\AreEqualConditionWriter.cs" />
+    <Compile Include="Writers2\IsNotNullConditionWriter.cs" />
+    <Compile Include="Writers2\IsNullConditionWriter.cs" />
+    <Compile Include="Writers\ArrayTypeWriter.cs" />
     <Compile Include="Writers\BoolWriter.cs" />
     <Compile Include="Writers\ByteWriter.cs" />
     <Compile Include="Writers\CharWriter.cs" />
@@ -73,7 +89,8 @@
     <Compile Include="Writers\ClassWriter.cs" />
     <Compile Include="Writers\ConstructorWriter.cs" />
     <Compile Include="Writers\ComposableWriter.cs" />
-    <Compile Include="Writers\ExternalVariableTypeWriter.cs" />
+    <Compile Include="Writers\EnumValueTypeWriter.cs" />
+    <Compile Include="Writers\ExternalTypeWriter.cs" />
     <Compile Include="Writers\DynamicWriter.cs" />
     <Compile Include="Writers\EnumValueWriter.cs" />
     <Compile Include="Writers\EnumWriter.cs" />
@@ -104,12 +121,12 @@
     <Compile Include="Writers\ParameterWriter.cs" />
     <Compile Include="Writers\ParamsParameterWriter.cs" />
     <Compile Include="Writers\PropertyWriter.cs" />
-    <Compile Include="Writers\RealVariableTypeWriter.cs" />
+    <Compile Include="Writers\RealTypeWriter.cs" />
     <Compile Include="Writers\StructWriter.cs" />
     <Compile Include="Writers\To.cs" />
     <Compile Include="Writers\UsingDirectiveWriter.cs" />
     <Compile Include="Writers\VariableWriter.cs" />
-    <Compile Include="Writers\WellKnownVariableTypeWriter.cs" />
+    <Compile Include="Writers\WellKnownTypeWriter.cs" />
     <Compile Include="Writers\DecimalWriter.cs" />
     <Compile Include="Writers\DoubleWriter.cs" />
     <Compile Include="Writers\FloatWriter.cs" />
@@ -122,8 +139,8 @@
     <Compile Include="Writers\UIntWriter.cs" />
     <Compile Include="Writers\ULongWriter.cs" />
     <Compile Include="Writers\UShortWriter.cs" />
-    <Compile Include="Writers\ValueTypeWriter.cs" />
-    <Compile Include="Writers\VariableTypeWriter.cs" />
+    <Compile Include="Writers\BuiltinValueTypeWriter.cs" />
+    <Compile Include="Writers\TypeWriter.cs" />
     <Compile Include="Writers\Writer.cs" />
     <Compile Include="Writers\WriterContext.cs" />
     <Compile Include="Writers\WriterContextFlags.cs" />
@@ -201,9 +218,7 @@
     <Compile Include="Tokens\ULongToken.cs" />
     <Compile Include="Tokens\UShortToken.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Binding2\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,5 @@
-﻿using Coding.Tokens;
+﻿using System;
+using Coding.Tokens;
 
 namespace Coding.Writers
 {
@@ -7,6 +8,11 @@ namespace Coding.Writers
         internal override Token TypeToken
         {
             get { return Token.Dynamic; }
+        }
+
+        protected internal override bool IsValidType(Type type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

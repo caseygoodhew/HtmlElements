@@ -11,35 +11,35 @@ namespace Coding.Writers2
 
         protected readonly ConditionWriter InnerCondition;
         
-        protected readonly bool State;
+        protected readonly bool ExpectedState;
 
-        public BooleanConditionWriter(VariableWriter variable, bool state = true)
+        public BooleanConditionWriter(VariableWriter variable, bool expectedState = true)
         {
-            if (!(variable.VariableType is BoolWriter))
+            if (!(variable.Type is BoolWriter))
             {
                 throw new InvalidOperationException("Boolean conditions can only be created for boolean variable types or other conditions");
             }
 
             Variable = variable;
-            State = state;
+            ExpectedState = expectedState;
         }
 
-        public BooleanConditionWriter(ConditionWriter innerCondition, bool state = true)
+        public BooleanConditionWriter(ConditionWriter innerCondition, bool expectedState = true)
         {
-            State = state;
+            ExpectedState = expectedState;
             InnerCondition = innerCondition;
         }
 
-        internal override void WriteCondition(TokenBuilder builder, WriterContext context)
+        protected override void WriteCondition(TokenBuilder builder, WriterContext context)
         {
-            if (!State)
+            if (!ExpectedState)
             {
                 builder.Add(Token.Exclamation);
             }
 
             if (InnerCondition != null)
             {
-                InnerCondition.WriteCondition(builder, context);
+                InnerCondition.Write(builder, context);
             }
 
             if (Variable != null)

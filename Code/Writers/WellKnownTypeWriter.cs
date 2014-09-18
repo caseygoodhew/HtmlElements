@@ -3,7 +3,7 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public abstract class WellKnownVariableTypeWriter : VariableTypeWriter
+    public abstract class WellKnownTypeWriter : TypeWriter
     {
         internal abstract Token TypeToken { get; }
 

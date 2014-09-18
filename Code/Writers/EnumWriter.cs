@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Coding.Builder;
@@ -6,7 +7,7 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public class EnumWriter : VariableTypeWriter
+    public class EnumWriter : TypeWriter
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.EnumDeclaration; } }
         
@@ -37,6 +38,12 @@ namespace Coding.Writers
         protected override void WriteTypeName(TokenBuilder builder, WriterContext context)
         {
             builder.Add(Name);
+        }
+
+        protected internal override bool IsValidType(Type type)
+        {
+            //return type == typeof(EnumValueWriter) && (value as EnumValueWriter).ParentEnum.Name == Name;
+            throw new NotImplementedException();
         }
 
         private void WriteEnumDeclaration(TokenBuilder builder, WriterContext context)

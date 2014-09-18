@@ -15,6 +15,11 @@ using Coding.Writers2;
 
 namespace ConsoleApplication1
 {
+    public enum TestEnum
+    {
+        SomeValue
+    }
+    
     internal class Program
     {
         private static void Main(string[] args)
@@ -34,16 +39,29 @@ namespace ConsoleApplication1
 
             Console.WriteLine(module.Write());
 
-            var variableOne = new VariableWriter(new BoolWriter(), "test");
-            var variableTwo = new VariableWriter(new BoolWriter(), "test");
+            var variableOne = new VariableWriter(new BoolWriter(), "test1");
+            var variableTwo = new VariableWriter(new BoolWriter(), "test2");
+            
+            var conditionOne = new ConditionWriter();
+            
+            conditionOne
+                .IsFalse(variableTwo)
+                .And(x => x.IsNull(variableOne)
+                    .Or()
+                    .IsNotNull(variableOne))
+                .And()
+                .AreEqual(variableOne, variableTwo)
+                .And()
+                .AreNotEqual(variableOne, variableTwo)
+                .And()
+                .AreEqual(variableOne, 42)
+                .And()
+                .AreEqual(variableOne, TestEnum.SomeValue);
+            
 
-            var conditionOne = new ConditionWriter(x => x.IsTrue().And().IsFalse().Or().Group(y => y.AreEqual()));
-            conditionOne.IsTrue(variableOne);
-                        .IsFalse(variableOne);
-                        .IsNull(variableOne);
-                        .IsNotNull(variableOne);
+            Console.WriteLine(conditionOne.Write());
 
-            var conditionTwo = new ConditionWriter();
+            /*var conditionTwo = new ConditionWriter();
             conditionTwo.AreEqual(variableTwo, 42);
                         .NotEqual(variableTwo, 42);
 
@@ -59,7 +77,7 @@ namespace ConsoleApplication1
             ifStatement.If(conditionOne, conditionStatementOne)
                     .ElseIf(conditionTwo, conditionStatementTwo)
                     .Else(conditionStatementThree);
-            
+            */
             
             
             /*
@@ -97,7 +115,7 @@ namespace ConsoleApplication1
                               .HasField<object>("Object", f => f.IsStatic())
                               .HasProperty<bool>("Inline", p => p.IsInternal())
                               .Has(new PropertyWriter(new StringWriter(), "Awesome2").IsAbstract(Property.Setter))
-                              .Has(new FieldWriter(new RealVariableTypeWriter<DateTime>(), "SomeField").IsProtected())
+                              .Has(new FieldWriter(new RealTypeWriter<DateTime>(), "SomeField").IsProtected())
                               .Has(new MethodWriter("MyMethod")
                                             .IsPrivate()
                                             .HasGenericParameter("TDani")

@@ -13,7 +13,7 @@ namespace Coding.Writers2
             ComparisonToken = comparisonToken;
         }
 
-        internal override void WriteCondition(TokenBuilder builder, WriterContext context)
+        protected override void WriteCondition(TokenBuilder builder, WriterContext context)
         {
             WriteLeftCondition(builder, context);
             builder.Add(ComparisonToken);

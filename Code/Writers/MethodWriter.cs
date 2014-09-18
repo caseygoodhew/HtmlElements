@@ -10,7 +10,7 @@ namespace Coding.Writers
     {
         internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
         
-        internal VariableTypeWriter ReturnType { get; set; }
+        internal TypeWriter ReturnType { get; set; }
 
         internal readonly List<GenericParameterWriter> GenericParameters;
 

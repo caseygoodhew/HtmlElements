@@ -1,3 +1,4 @@
+using System;
 using Coding.Builder;
 using Coding.Tokens;
 
@@ -20,6 +21,11 @@ namespace Coding.Writers
             }
             
             base.Write(builder, context);
+        }
+
+        protected internal override bool IsValidType(Type type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

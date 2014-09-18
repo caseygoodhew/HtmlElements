@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Coding.Builder;
 
 namespace Coding.Writers
@@ -10,9 +9,10 @@ namespace Coding.Writers
 
         internal SecondaryAccessModifiers? SecondaryAccessModifier { get; set; }
         
-        public FieldWriter(VariableTypeWriter variableType, string name) : base(variableType, name)
+        public FieldWriter(TypeWriter type, string name, object initialValue = null) : base(type, name)
         {
             PrimaryAccessModifier = PrimaryAccessModifiers.Public;
+            Value = initialValue;
         }
 
         protected override void WriteAccessModifier(TokenBuilder builder, WriterContext context)
@@ -23,7 +23,6 @@ namespace Coding.Writers
             {
                 return;
             }
-
             
             builder.Add(To.Token(PrimaryAccessModifier));
             

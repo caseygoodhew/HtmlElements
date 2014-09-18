@@ -175,6 +175,10 @@ namespace Coding.Builder
                     return new ConditionalOrToken();
                 case Token.ConditionalAnd:
                     return new ConditionalAndToken();
+                case Token.DoubleQuote:
+                    return new DoubleQuoteToken();
+                case Token.SingleQuote:
+                    return new SingleQuoteToken();
                 default:
                     throw new ArgumentOutOfRangeException("token");
             }

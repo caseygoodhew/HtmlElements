@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Coding.Builder;
@@ -6,7 +7,7 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public class GenericParameterWriter : VariableTypeWriter
+    public class GenericParameterWriter : TypeWriter
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.GenericParameter; } }
         
@@ -40,6 +41,11 @@ namespace Coding.Writers
         protected override void WriteTypeName(TokenBuilder builder, WriterContext context)
         {
             builder.Add(Name);
+        }
+
+        protected internal override bool IsValidType(Type type)
+        {
+            throw new NotImplementedException();
         }
 
         private void WriteGenericConstraints(TokenBuilder builder, WriterContext context)

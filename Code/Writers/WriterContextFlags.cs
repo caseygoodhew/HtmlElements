@@ -16,10 +16,9 @@
         ModuleDeclaration,
         StructDeclaration,
         InvokableDeclaration,
-
         Statement,
-
         VariableName,
-        Condition
+        Condition,
+        Value
     }
 }

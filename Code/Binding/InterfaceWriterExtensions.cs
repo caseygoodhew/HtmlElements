@@ -85,7 +85,7 @@ namespace Coding.Binding
             return @interface;
         }
 
-        public static InterfaceWriter HasProperty(this InterfaceWriter @interface, VariableTypeWriter type, string name, Action<PropertyWriter> configAction = null)
+        public static InterfaceWriter HasProperty(this InterfaceWriter @interface, TypeWriter type, string name, Action<PropertyWriter> configAction = null)
         {
             var property = new PropertyWriter(type, name);
 
@@ -111,7 +111,7 @@ namespace Coding.Binding
             return @interface;
         }
 
-        public static InterfaceWriter HasField(this InterfaceWriter @interface, VariableTypeWriter type, string name, Action<FieldWriter> configAction = null)
+        public static InterfaceWriter HasField(this InterfaceWriter @interface, TypeWriter type, string name, Action<FieldWriter> configAction = null)
         {
             var field = new FieldWriter(type, name);
 

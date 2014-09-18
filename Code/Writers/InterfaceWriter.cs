@@ -1,4 +1,5 @@
-﻿using Coding.Tokens;
+﻿using System;
+using Coding.Tokens;
 
 namespace Coding.Writers
 {
@@ -6,6 +7,11 @@ namespace Coding.Writers
     {
         public InterfaceWriter(string name) : base(name, Token.Interface)
         {
+        }
+
+        protected internal override bool IsValidType(Type type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,7 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public abstract class ComposableWriter : VariableTypeWriter
+    public abstract class ComposableWriter : TypeWriter
     {
         protected readonly Token DeclaringToken;
 

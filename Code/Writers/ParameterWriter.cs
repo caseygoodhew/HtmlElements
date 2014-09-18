@@ -4,7 +4,7 @@ namespace Coding.Writers
 {
     public class ParameterWriter : VariableWriter
     {
-        public ParameterWriter(VariableTypeWriter variableType, string name) : base(variableType, name)
+        public ParameterWriter(TypeWriter type, string name) : base(type, name)
         {
         }
 
