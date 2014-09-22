@@ -19,6 +19,8 @@
         Statement,
         VariableName,
         Condition,
-        Value
+        Value,
+
+        Invocation
     }
 }

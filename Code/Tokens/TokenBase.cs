@@ -9,7 +9,7 @@
             this.value = value;
         }
 
-        internal virtual string GetValue()
+        internal string GetValue()
         {
             return value;
         }

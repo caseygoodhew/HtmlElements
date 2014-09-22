@@ -9,10 +9,10 @@ namespace Coding.Writers
         {
             get { return Token.Char; }
         }
-        
-        protected internal override bool IsValidType(Type type)
+
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
-            return type == typeof(char);
+            return value is char;
         }
     }
 }

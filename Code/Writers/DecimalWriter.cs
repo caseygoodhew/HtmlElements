@@ -10,9 +10,9 @@ namespace Coding.Writers
             get { return Token.Decimal; }
         }
 
-        protected internal override bool IsValidType(Type type)
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
-            return type == typeof(decimal);
+            return value is decimal;
         }
     }
 }

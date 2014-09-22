@@ -12,10 +12,36 @@ namespace Coding.Builder
             return source.Where(token => !token.Is<EmptyToken>()).ToList();
         }
 
+        internal static List<TokenBase> TrimWhitespace(this List<TokenBase> source)
+        {
+            var start = 0;
+            var end = source.Count - 1;
+
+            for (var i = start; i < end; i++)
+            {
+                if (!source[i].Is<WhitespaceToken>())
+                {
+                    start = i;
+                    break;
+                }
+            }
+
+            for (var i = end; i > start; i--)
+            {
+                if (!source[i].Is<WhitespaceToken>())
+                {
+                    end = i;
+                    break;
+                }
+            }
+
+            return source.GetRange(start, end - start + 1);
+        }
+        
         internal static List<TokenBase> CleanExtraSpaces(this List<TokenBase> source)
         {
             var result = new List<TokenBase>();
-
+            
             for (var i = 0; i < source.Count() - 1; i++)
             {
                 var token = source[i];
@@ -132,6 +158,7 @@ namespace Coding.Builder
                     if (nextToken.Is<DotToken>() ||
                         nextToken.Is<CommaToken>() ||
                         nextToken.Is<SemiColonToken>() ||
+                        nextToken.Is<OpenSquareToken>() ||
                         nextToken.Is<OpenAngleToken>() ||
                         nextToken.Is<CloseAngleToken>())
                     {
@@ -149,7 +176,7 @@ namespace Coding.Builder
                         }
                     }
 
-                    if (nextToken.Is<ThisToken>() || nextToken.Is<BaseToken>())
+                    if (nextToken.Is<ThisToken>() || nextToken.Is<BaseToken>() || nextToken.Is<ParamsToken>())
                     {
                         if (prevToken.Is<OpenBracketToken>())
                         {
@@ -167,7 +194,7 @@ namespace Coding.Builder
                         }
                     }
 
-                    if (prevToken.Is<DotToken>() || prevToken.Is<TabToken>() || prevToken.Is<NewLineToken>())
+                    if (prevToken.Is<DotToken>() || prevToken.Is<TabToken>() || prevToken.Is<NewLineToken>() || prevToken.Is<ExclamationToken>() || prevToken.Is<OpenBracketToken>())
                     {
                         continue;
                     }

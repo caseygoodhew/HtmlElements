@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Coding.Binding;
-using Coding.Binding2;
 using Coding.Writers;
 using Coding.Writers2;
 
@@ -24,6 +23,32 @@ namespace ConsoleApplication1
     {
         private static void Main(string[] args)
         {
+            var @class = new ClassWriter("MyClass").HasConstructor(x => x.HasParameter<bool>("flag"));
+            var method = new MethodWriter("MyMethod").HasParameter<int>("id").HasParameter<object>("name", null);
+            @class.HasMethod(method);
+
+            var newUp = new NewClassInstanceWriter(@class, true);
+            var variable = new VariableWriter(@class, "someVariable", newUp);
+            var variableDeclaration = new VariableDeclarationStatementWriter(variable);
+
+            var callMethod = new InvokeMethodWriter(variable, method, 101, "casey");
+
+            Console.WriteLine(@class.Write());
+            Console.WriteLine(new StatementsWriter(variableDeclaration, callMethod).Write());
+            
+
+
+
+            //Console.ReadKey();
+            Console.WriteLine();
+            Console.WriteLine();
+            
+            var ifstatement = new IfStatementWriter(new ConditionWriter().IsFalse(new ValueWriter<bool>(false)) as ConditionWriter);
+
+            Console.WriteLine(new StatementsWriter(ifstatement).Write());
+
+            Console.ReadKey();
+
             var module = new ModuleWriter();
             var codingNamespace = new NamespaceWriter("Coding");
             module.HasUsing(new NamespaceWriter(codingNamespace, "Binding"));
@@ -39,13 +64,14 @@ namespace ConsoleApplication1
 
             Console.WriteLine(module.Write());
 
-            var variableOne = new VariableWriter(new BoolWriter(), "test1");
-            var variableTwo = new VariableWriter(new BoolWriter(), "test2");
+            var variableOne = new VariableWriter<bool>("test1", true);
+            var variableTwo = new VariableWriter<int>("test2", 32);
+            var variableThree = new VariableWriter(new BoolWriter(), "test2", false);
             
             var conditionOne = new ConditionWriter();
             
             conditionOne
-                .IsFalse(variableTwo)
+                .IsFalse(variableThree)
                 .And(x => x.IsNull(variableOne)
                     .Or()
                     .IsNotNull(variableOne))
@@ -54,34 +80,22 @@ namespace ConsoleApplication1
                 .And()
                 .AreNotEqual(variableOne, variableTwo)
                 .And()
-                .AreEqual(variableOne, 42)
+                .AreEqual(variableOne, 'x')
                 .And()
                 .AreEqual(variableOne, TestEnum.SomeValue);
-            
 
+            Console.WriteLine(new VariableDeclarationStatementWriter(new VariableWriter<bool>("isTrue", new ConditionWriter().IsFalse(new ValueWriter<bool>(false)) as ConditionWriter)).Write());
+
+            //Console.ReadKey();
+
+            Console.WriteLine(new VariableAssignmentStatementWriter(new VariableWriter(new ClassWriter("SomeClass"), "classVar"), new VariableWriter(new ClassWriter("SomeClass"), "harry")).Write());
             Console.WriteLine(conditionOne.Write());
 
-            /*var conditionTwo = new ConditionWriter();
-            conditionTwo.AreEqual(variableTwo, 42);
-                        .NotEqual(variableTwo, 42);
+            
 
-            var conditionThree = new ConditionWriter();
-            //conditionThree.`
 
-            var ifStatement = new StatementWriter();
-            
-            var conditionStatementOne = new StatementWriter();
-            var conditionStatementTwo = new StatementWriter();
-            var conditionStatementThree = new StatementWriter();
-            
-            ifStatement.If(conditionOne, conditionStatementOne)
-                    .ElseIf(conditionTwo, conditionStatementTwo)
-                    .Else(conditionStatementThree);
-            */
-            
-            
-            /*
-            var module =
+
+            var module1 =
                 new ModuleWriter()
                     .HasUsing("System.Web")
                     .HasUsing("System.Casey")
@@ -115,23 +129,24 @@ namespace ConsoleApplication1
                               .HasField<object>("Object", f => f.IsStatic())
                               .HasProperty<bool>("Inline", p => p.IsInternal())
                               .Has(new PropertyWriter(new StringWriter(), "Awesome2").IsAbstract(Property.Setter))
-                              .Has(new FieldWriter(new RealTypeWriter<DateTime>(), "SomeField").IsProtected())
+                              .Has(new FieldWriter(To.GetTypeWriter<DateTime>(), "SomeField").IsProtected())
                               .Has(new MethodWriter("MyMethod")
                                             .IsPrivate()
                                             .HasGenericParameter("TDani")
                                             .HasGenericParameter("TOlivia", p => p.WhereIsNew())
                                             .HasParameter<Type>("type")
                                             .HasParameter<string>("name"))
-                              .HasMethod("MyMethod", m => m.IsExtensionMethod<MethodWriter>("Testing"))
+                              .HasMethod("MyMethod", m => m.IsExtensionMethod<Program>("Testing"))
                               .HasMethod<string>("MyMethod", m => m.HasParameter<IDisposable>("classChild").IsAbstract())
                               .Has(new MethodWriter("MyOtherMethod"))
                     ));
 
             Console.WriteLine(module.Write());
 
+            Console.WriteLine(module1.Write());
+
             Console.WriteLine(module2.Write());
 
-            */
 
             Console.Read();
         }

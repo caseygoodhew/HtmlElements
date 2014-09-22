@@ -40,10 +40,9 @@ namespace Coding.Writers
             builder.Add(Name);
         }
 
-        protected internal override bool IsValidType(Type type)
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
-            //return type == typeof(EnumValueWriter) && (value as EnumValueWriter).ParentEnum.Name == Name;
-            throw new NotImplementedException();
+            return value is EnumValueWriter && (value as EnumValueWriter).ParentEnum.Name == Name;
         }
 
         private void WriteEnumDeclaration(TokenBuilder builder, WriterContext context)

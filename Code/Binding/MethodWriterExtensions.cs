@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+
 using Coding.Writers;
+using Coding.Writers2;
 
 namespace Coding.Binding
 {
@@ -88,7 +91,7 @@ namespace Coding.Binding
 
         public static MethodWriter IsExtensionMethod<TParamType>(this MethodWriter method, string name, Action<ParameterWriter> configAction = null) 
         {
-            return method.IsExtensionMethod(To.VariableTypeWriter<TParamType>(), name, configAction);
+            return method.IsExtensionMethod(To.GetTypeWriter<TParamType>(), name, configAction);
         }
 
         public static MethodWriter HasGenericParameter(this MethodWriter method, GenericParameterWriter genericParameterWriter)
@@ -111,6 +114,19 @@ namespace Coding.Binding
 
         public static MethodWriter HasParameter(this MethodWriter method, ParameterWriter parameter)
         {
+            if (method.Parameters.Any())
+            {
+                if (method.Parameters.Last().Value != null && parameter.Value == null)
+                {
+                    throw new InvalidOperationException("Method already contains a parameter with a default value. All subsequent parameters must also have default values.");
+                }
+            }
+
+            if (parameter.Value is StatementWriter)
+            {
+                throw new InvalidOperationException("Parameters cannot be initialized through statement invocation.");
+            }
+
             method.Parameters.Add(parameter);
             return method;
         }
@@ -120,9 +136,19 @@ namespace Coding.Binding
             return method.HasParameter(new ParameterWriter(type, name));
         }
 
+        public static MethodWriter HasParameter(this MethodWriter method, TypeWriter type, string name, object defaultValue)
+        {
+            return method.HasParameter(new ParameterWriter(type, name, defaultValue));
+        }
+
         public static MethodWriter HasParameter<TParamType>(this MethodWriter method, string name)
         {
-            return method.HasParameter(To.VariableTypeWriter<TParamType>(), name);
+            return method.HasParameter(To.GetTypeWriter<TParamType>(), name);
+        }
+
+        public static MethodWriter HasParameter<TParamType>(this MethodWriter method, string name, object defaultValue)
+        {
+            return method.HasParameter(To.GetTypeWriter<TParamType>(), name, defaultValue);
         }
 
         public static MethodWriter HasParamsParameter(this MethodWriter method, ParamsParameterWriter paramsParameter)
@@ -143,7 +169,7 @@ namespace Coding.Binding
 
         public static MethodWriter HasParamsParameter<TParamType>(this MethodWriter method, string name)
         {
-            return method.HasParamsParameter(To.VariableTypeWriter<TParamType>(), name);
+            return method.HasParamsParameter(To.GetTypeWriter<TParamType>(), name);
         }
 
         public static MethodWriter HasReturnType(this MethodWriter method, TypeWriter parameter)
@@ -159,7 +185,7 @@ namespace Coding.Binding
 
         public static MethodWriter HasReturnType<TReturnType>(this MethodWriter method)
         {
-            return method.HasReturnType(To.VariableTypeWriter<TReturnType>());
+            return method.HasReturnType(To.GetTypeWriter<TReturnType>());
         }
     }
 }

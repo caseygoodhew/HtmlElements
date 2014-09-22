@@ -76,7 +76,7 @@ namespace Coding.Binding
          ********************************************************/
         public static InterfaceWriter HasProperty<TParamType>(this InterfaceWriter @interface, string name, Action<PropertyWriter> configAction = null)
         {
-            return @interface.HasProperty(To.VariableTypeWriter<TParamType>(), name, configAction);
+            return @interface.HasProperty(To.GetTypeWriter<TParamType>(), name, configAction);
         }
 
         public static InterfaceWriter HasProperty(this InterfaceWriter @interface, PropertyWriter property)
@@ -102,7 +102,7 @@ namespace Coding.Binding
          ********************************************************/
         public static InterfaceWriter HasField<TParamType>(this InterfaceWriter @interface, string name, Action<FieldWriter> configAction = null)
         {
-            return @interface.HasField(To.VariableTypeWriter<TParamType>(), name, configAction);
+            return @interface.HasField(To.GetTypeWriter<TParamType>(), name, configAction);
         }
 
         public static InterfaceWriter HasField(this InterfaceWriter @interface, FieldWriter field)
@@ -128,7 +128,7 @@ namespace Coding.Binding
          ********************************************************/
         public static InterfaceWriter HasMethod<TReturnType>(this InterfaceWriter @interface, string name, Action<MethodWriter> configAction = null)
         {
-            var method = new MethodWriter(name).HasReturnType(To.VariableTypeWriter<TReturnType>());
+            var method = new MethodWriter(name).HasReturnType(To.GetTypeWriter<TReturnType>());
 
             if (configAction != null)
             {
@@ -160,17 +160,17 @@ namespace Coding.Binding
         /*********************************************************
          *  Implmements Interfaces
          ********************************************************/
-        public static InterfaceWriter Implments(this InterfaceWriter @interface, InterfaceWriter implementsInterface)
+        public static InterfaceWriter Implements(this InterfaceWriter @interface, InterfaceWriter implementsInterface)
         {
-            return @interface.Implments(new ImplementsInterfaceTypeWriter(implementsInterface));
+            return @interface.Implements(new ImplementsInterfaceTypeWriter(implementsInterface));
         }
 
-        public static InterfaceWriter Implments<T>(this InterfaceWriter @interface) where T : class
+        public static InterfaceWriter Implements<T>(this InterfaceWriter @interface) where T : class
         {
-            return @interface.Implments(new ImplementsGenericInterfaceWriter<T>());
+            return @interface.Implements(new ImplementsGenericInterfaceWriter<T>());
         }
 
-        public static InterfaceWriter Implments(this InterfaceWriter @interface, ImplementsInterfaceWriter implementsInterface)
+        public static InterfaceWriter Implements(this InterfaceWriter @interface, ImplementsInterfaceWriter implementsInterface)
         {
             @interface.ImplementsInterfaceWriters.Add(implementsInterface);
             return @interface;

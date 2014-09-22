@@ -4,7 +4,7 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    internal static class To
+    public static class To
     {
         internal static Token Token(PrimaryAccessModifiers modifier)
         {
@@ -51,101 +51,119 @@ namespace Coding.Writers
             return condition ? Token(modifier) : Tokens.Token.Empty;
         }
 
-        internal static TypeWriter VariableTypeWriter<TType>()
+        public static TypeWriter GetTypeWriter<TType>()
         {
-            var ttype = typeof(TType);
+            return GetTypeWriter(typeof(TType));
+        }
 
-            if (ttype.IsValueType)
+        public static TypeWriter GetTypeWriter(Type type)
+        {
+            if (type.IsValueType)
             {
-                if (ttype == typeof(bool))
+                if (type == typeof(bool))
                 {
                     return new BoolWriter();
                 }
 
-                if (ttype == typeof(byte))
+                if (type == typeof(byte))
                 {
                     return new ByteWriter();
                 }
 
-                if (ttype == typeof(char))
+                if (type == typeof(char))
                 {
                     return new CharWriter();
                 }
 
-                if (ttype == typeof(decimal))
+                if (type == typeof(decimal))
                 {
                     return new DecimalWriter();
                 }
 
-                if (ttype == typeof(double))
+                if (type == typeof(double))
                 {
                     return new DoubleWriter();
                 }
 
-                if (ttype == typeof(float))
+                if (type == typeof(float))
                 {
                     return new FloatWriter();
                 }
 
-                if (ttype == typeof(int))
+                if (type == typeof(int))
                 {
                     return new IntWriter();
                 }
 
-                if (ttype == typeof(long))
+                if (type == typeof(long))
                 {
                     return new LongWriter();
                 }
 
-                if (ttype == typeof(sbyte))
+                if (type == typeof(sbyte))
                 {
                     return new SByteWriter();
                 }
 
-                if (ttype == typeof(short))
+                if (type == typeof(short))
                 {
                     return new ShortWriter();
                 }
 
-                if (ttype == typeof(uint))
+                if (type == typeof(uint))
                 {
                     return new UIntWriter();
                 }
 
-                if (ttype == typeof(ulong))
+                if (type == typeof(ulong))
                 {
                     return new ULongWriter();
                 }
 
-                if (ttype == typeof(ushort))
+                if (type == typeof(ushort))
                 {
                     return new UShortWriter();
                 }
             }
 
-            if (ttype == typeof(string))
+            if (type == typeof(string))
             {
                 return new StringWriter();
             }
 
-            if (ttype == typeof(object))
+            if (type == typeof(object))
             {
                 return new ObjectWriter();
             }
 
-            if (typeof(TypeWriter).IsAssignableFrom(ttype))
+            if (typeof(TypeWriter).IsAssignableFrom(type))
             {
-                var constructor = ttype.GetConstructor(new Type[] { });
+                var constructor = type.GetConstructor(new Type[] { });
                 
                 if (constructor == null)
                 {
-                    throw new InvalidOperationException(string.Format("Cannot find a public parameterless constructor for TypeWriter derived type {0}.", ttype.Name));
+                    throw new InvalidOperationException(string.Format("Cannot find a public parameterless constructor for TypeWriter derived type {0}.", type.Name));
                 }
 
                 return constructor.Invoke(new object[] {}) as TypeWriter;
             }
 
-            return new RealTypeWriter<TType>();
+            if (type.IsComposable())
+            {
+                return new ComposableTypeWriter(type);    
+            }
+
+            throw new ArgumentOutOfRangeException(string.Format("Could not find a corresponding TypeWriter for {0}.", type.Name));
+        }
+
+        internal static bool IsStruct(this Type type)
+        {
+            return type.IsValueType && !type.IsEnum && !type.IsPrimitive;
+        }
+
+        internal static bool IsComposable(this Type type)
+        {
+            return type.IsClass || type.IsInterface || type.IsStruct();
         }
     }
 }

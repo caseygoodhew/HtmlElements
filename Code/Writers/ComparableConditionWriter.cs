@@ -1,8 +1,7 @@
 using Coding.Builder;
 using Coding.Tokens;
-using Coding.Writers;
 
-namespace Coding.Writers2
+namespace Coding.Writers
 {
     public abstract class ComparableConditionWriter : BaseConditionWriter
     {

@@ -1,19 +1,18 @@
 using Coding.Builder;
 using Coding.Tokens;
-using Coding.Writers;
 
-namespace Coding.Writers2
+namespace Coding.Writers
 {
     public class IsNullConditionWriter : ComparableConditionWriter
     {
-        protected readonly VariableWriter Variable;
+        protected readonly ValueWriter Variable;
 
-        protected IsNullConditionWriter(VariableWriter variable, Token token) : base(token)
+        protected IsNullConditionWriter(ValueWriter variable, Token token) : base(token)
         {
             Variable = variable;   
         }
         
-        public IsNullConditionWriter(VariableWriter variable) : this(variable, Token.EqualTo) { }
+        public IsNullConditionWriter(ValueWriter variable) : this(variable, Token.EqualTo) { }
 
         protected override void WriteLeftCondition(TokenBuilder builder, WriterContext context)
         {

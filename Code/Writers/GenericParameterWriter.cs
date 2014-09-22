@@ -43,7 +43,7 @@ namespace Coding.Writers
             builder.Add(Name);
         }
 
-        protected internal override bool IsValidType(Type type)
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
             throw new NotImplementedException();
         }

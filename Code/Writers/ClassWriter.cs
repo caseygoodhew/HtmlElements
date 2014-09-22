@@ -31,9 +31,26 @@ namespace Coding.Writers
             base.Write(builder, context);
         }
 
-        protected internal override bool IsValidType(Type type)
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
-            throw new System.NotImplementedException();
+            if (value == null)
+            {
+                return true;
+            }
+
+            if (asParameterDefault)
+            {
+                return false;
+            }
+
+            if (!(value is VariableWriter))
+            {
+                return false;
+            }
+
+            var variableType = (value as VariableWriter).Type;
+
+            return (variableType is ClassWriter) && (variableType as ClassWriter).Name == Name;
         }
 
         protected override void WriteAccessModifier(TokenBuilder builder, WriterContext context)
@@ -62,6 +79,16 @@ namespace Coding.Writers
             builder.Add(Token.NewLine);
 
             base.WriteMethods(builder, context);
+        }
+
+        internal override List<MethodWriter> GetMethods(MethodWriter method)
+        {
+            return base.GetMethods(method);
+        }
+
+        internal override List<MethodWriter> GetMethods(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,19 +1,18 @@
 using System;
 using Coding.Builder;
 using Coding.Tokens;
-using Coding.Writers;
 
-namespace Coding.Writers2
+namespace Coding.Writers
 {
     public class BooleanConditionWriter : BaseConditionWriter
     {
-        protected readonly VariableWriter Variable;
+        protected readonly ValueWriter Variable;
 
         protected readonly ConditionWriter InnerCondition;
         
         protected readonly bool ExpectedState;
 
-        public BooleanConditionWriter(VariableWriter variable, bool expectedState = true)
+        public BooleanConditionWriter(ValueWriter variable, bool expectedState = true)
         {
             if (!(variable.Type is BoolWriter))
             {
@@ -44,7 +43,14 @@ namespace Coding.Writers2
 
             if (Variable != null)
             {
-                Variable.Write(builder, context.Switch(WriterContextFlags.VariableName));
+                if (Variable is VariableWriter)
+                {
+                    Variable.Write(builder, context.Switch(WriterContextFlags.VariableName));
+                }
+                else
+                {
+                    Variable.Write(builder, context.Switch(WriterContextFlags.Value));
+                }
             }
         }
     }

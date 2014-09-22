@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 using Coding.Tokens;
@@ -10,6 +11,20 @@ namespace Coding.Builder
     {
         private readonly List<TokenBase> tokens = new List<TokenBase>();
 
+        public TokenBuilder Literal(char value)
+        {
+            Add(Token.SingleQuote);
+            tokens.Add(new WordToken(value.ToString(CultureInfo.InvariantCulture)));
+            return Add(Token.SingleQuote); 
+        }
+
+        public TokenBuilder Literal(string value)
+        {
+            Add(Token.DoubleQuote);
+            tokens.Add(new WordToken(value));
+            return Add(Token.DoubleQuote);
+        }
+        
         public TokenBuilder Add(string value)
         {
             tokens.Add(new WordToken(value));
@@ -49,6 +64,7 @@ namespace Coding.Builder
         {
             return tokens
                 .CleanEmptyTokens()
+                .TrimWhitespace()
                 .CleanExtraSpaces()
                 .CleanRepeatingLineBreaks()
                 .CleanCurlyLineBreaks()

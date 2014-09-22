@@ -1,9 +1,8 @@
 using Coding.Builder;
-using Coding.Writers;
 
-namespace Coding.Writers2
+namespace Coding.Writers
 {
-    public abstract class BaseConditionWriter : Writer
+    public abstract class ConditionTreeNodeWriter : Writer
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.Condition; } }
 

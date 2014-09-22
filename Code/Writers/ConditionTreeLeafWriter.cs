@@ -1,7 +1,7 @@
 using Coding.Builder;
-using Coding.Writers;
+using Coding.Tokens;
 
-namespace Coding.Writers2
+namespace Coding.Writers
 {
     public class ConditionTreeLeafWriter : ConditionTreeNodeWriter
     {
@@ -14,7 +14,19 @@ namespace Coding.Writers2
 
         protected override void WriteCondition(TokenBuilder builder, WriterContext context)
         {
+            var wrap = Condition is ConditionWriter && (Condition as ConditionWriter).Nodes.Count > 1;
+
+            if (wrap)
+            {
+                builder.Add(Token.OpenBracket);
+            }
+            
             Condition.Write(builder, context);
+
+            if (wrap)
+            {
+                builder.Add(Token.CloseBracket);
+            }
         }
     }
 }

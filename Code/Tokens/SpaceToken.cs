@@ -1,7 +1,7 @@
 namespace Coding.Tokens
 {
-	internal class SpaceToken : TokenBase
-	{
-		public SpaceToken() : base(" ") { }
-	}
+    internal class SpaceToken : WhitespaceToken
+    {
+        public SpaceToken() : base(" ") { }
+    }
 }

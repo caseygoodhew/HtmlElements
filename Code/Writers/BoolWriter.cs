@@ -10,9 +10,9 @@ namespace Coding.Writers
             get { return Token.Bool; }
         }
 
-        protected internal override bool IsValidType(Type type)
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
-            return type == typeof(bool);
+            return value is bool;
         }
     }
 }

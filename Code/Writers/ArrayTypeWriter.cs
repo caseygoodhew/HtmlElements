@@ -1,5 +1,4 @@
-﻿using System;
-using Coding.Builder;
+﻿using Coding.Builder;
 using Coding.Tokens;
 
 namespace Coding.Writers
@@ -20,9 +19,9 @@ namespace Coding.Writers
             builder.Add(Token.CloseSquare);
         }
 
-        protected internal override bool IsValidType(Type type)
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
-            return type.IsArray;
+            return value == null || (!asParameterDefault && value.GetType().IsArray);
         }
     }
 }

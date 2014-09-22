@@ -1,9 +1,9 @@
 using Coding.Builder;
-using Coding.Writers;
+using Coding.Writers2;
 
-namespace Coding.Writers2
+namespace Coding.Writers
 {
-    public abstract class ConditionTreeNodeWriter : Writer
+    public abstract class BaseConditionWriter : StatementWriter
     {
         protected override WriterContextFlags DefaultContextFlag { get { return WriterContextFlags.Condition; } }
 
@@ -16,6 +16,11 @@ namespace Coding.Writers2
             }
 
             base.Write(builder, context);
+        }
+
+        protected override void WriteStatement(TokenBuilder builder, WriterContext context)
+        {
+            WriteCondition(builder, context.Switch(WriterContextFlags.Condition));
         }
 
         protected abstract void WriteCondition(TokenBuilder builder, WriterContext context);

@@ -10,9 +10,9 @@ namespace Coding.Writers
             get { return Token.ULong; }
         }
 
-        protected internal override bool IsValidType(Type type)
+        protected internal override bool IsValidValue(object value, bool asParameterDefault = false)
         {
-            return type == typeof(ulong);
+            return value is ulong;
         }
     }
 }

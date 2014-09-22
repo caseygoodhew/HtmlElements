@@ -3,6 +3,7 @@ using System.Linq;
 
 using Coding.Builder;
 using Coding.Tokens;
+using Coding.Writers2;
 
 namespace Coding.Writers
 {
@@ -77,6 +78,25 @@ namespace Coding.Writers
             {
                 GenericParameters.ForEach(x => x.Write(builder, context.Switch(WriterContextFlags.GenericConstraints)));
             }
+        }
+
+        internal override bool IsEquivalentTo<T>(T invokable)
+        {
+            var method = invokable as MethodWriter;
+
+            return method != null
+                   && base.IsEquivalentTo(method)
+                   && TypesAreEquivalent(method.ReturnType, ReturnType)
+                   && VariablesAreEquivalent(method.ExtensionParameter, ExtensionParameter)
+                   && TypesAreEquivalent(method.GenericParameters, GenericParameters);
+        }
+
+        internal override void FillStats(InvokableStats invokableStats)
+        {
+            base.FillStats(invokableStats);
+            invokableStats.ExtensionParameterType = ExtensionParameter == null ? null : ExtensionParameter.Type;
+            invokableStats.ReturnType = ReturnType;
+            invokableStats.GenericParameterTypes = GenericParameters.Cast<TypeWriter>().ToList();
         }
     }
 }

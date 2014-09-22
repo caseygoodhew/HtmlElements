@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Coding.Builder;
@@ -6,7 +7,7 @@ using Coding.Tokens;
 
 namespace Coding.Writers
 {
-    public abstract class ComposableWriter : TypeWriter
+    public abstract class ComposableWriter : InvokableContainerWriter
     {
         protected readonly Token DeclaringToken;
 
@@ -151,6 +152,16 @@ namespace Coding.Writers
         protected virtual void WriteAccessModifier(TokenBuilder builder, WriterContext context)
         {
             builder.Add(To.Token(PrimaryAccessModifier));
+        }
+
+        internal override List<MethodWriter> GetMethods(MethodWriter method)
+        {
+            return Methods.Where(x => x.IsEquivalentTo(method)).ToList();
+        }
+
+        internal override List<MethodWriter> GetMethods(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

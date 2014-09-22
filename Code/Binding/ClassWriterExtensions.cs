@@ -128,7 +128,7 @@ namespace Coding.Binding
          ********************************************************/
         public static ClassWriter HasProperty<TParamType>(this ClassWriter @class, string name, Action<PropertyWriter> configAction = null)
         {
-            return @class.HasProperty(To.VariableTypeWriter<TParamType>(), name, configAction);
+            return @class.HasProperty(To.GetTypeWriter<TParamType>(), name, configAction);
         }
 
         public static ClassWriter HasProperty(this ClassWriter @class, PropertyWriter property)
@@ -154,7 +154,7 @@ namespace Coding.Binding
          ********************************************************/
         public static ClassWriter HasField<TParamType>(this ClassWriter @class, string name, Action<FieldWriter> configAction = null)
         {
-            return @class.HasField(To.VariableTypeWriter<TParamType>(), name, configAction);
+            return @class.HasField(To.GetTypeWriter<TParamType>(), name, configAction);
         }
 
         public static ClassWriter HasField(this ClassWriter @class, FieldWriter field)
@@ -184,7 +184,7 @@ namespace Coding.Binding
             return @class;
         }
 
-        public static ClassWriter HasConstructor(this ClassWriter @class, string name, Action<ConstructorWriter> configAction = null)
+        public static ClassWriter HasConstructor(this ClassWriter @class, Action<ConstructorWriter> configAction = null)
         {
             var constructor = new ConstructorWriter(@class);
 
@@ -201,7 +201,7 @@ namespace Coding.Binding
          ********************************************************/
         public static ClassWriter HasMethod<TReturnType>(this ClassWriter @class, string name, Action<MethodWriter> configAction = null)
         {
-            var method = new MethodWriter(name).HasReturnType(To.VariableTypeWriter<TReturnType>());
+            var method = new MethodWriter(name).HasReturnType(To.GetTypeWriter<TReturnType>());
             
             if (configAction != null)
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using Coding.Builder;
+﻿using Coding.Builder;
 
 namespace Coding.Writers
 {
@@ -20,16 +19,11 @@ namespace Coding.Writers
 
         protected abstract void WriteTypeName(TokenBuilder builder, WriterContext context);
 
-        protected internal abstract bool IsValidType(Type type);
+        protected internal abstract bool IsValidValue(object value, bool asParameterDefault = false);
 
-        public static TypeWriter Get<T>()
+        public bool IsEquivalentTo(TypeWriter type)
         {
-            var typeT = typeof(T);
-
-            if (typeT.IsValueType && typeT.IsPrimitive)
-            {
-                
-            }
+            return type != null && type.GetType() == GetType();
         }
     }
 }
