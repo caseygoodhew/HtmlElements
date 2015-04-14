@@ -3,11 +3,11 @@
 namespace Definition
 {
 	[AttributeUsage(AttributeTargets.Class)]
-	internal class RestrictToParentAttribute : Attribute
+	internal class RestrictToParentOfAttribute : Attribute
 	{
 		public readonly Type ParentType;
 
-		public RestrictToParentAttribute(Type type)
+		public RestrictToParentOfAttribute(Type type)
 		{
 			ParentType = type;
 		}

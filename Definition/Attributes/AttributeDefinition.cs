@@ -12,1079 +12,1204 @@ using Object = Definition.Elements.Object;
 
 namespace Definition.Attributes
 {
-	internal enum AttributeValue
-	{
-		Required,
-		Optional,
-		Forbidden
-	}
+    internal enum AttributeValueType
+    {
+        Required,
+        Optional,
+        Forbidden
+    }
 
-	internal abstract class AttributeDefinition
-	{
-		internal readonly string Name;
-		
-		internal readonly AttributeValue AttributeValue;
-		
-		protected AttributeDefinition(string name) : this(name, AttributeValue.Required)
-		{
-		}
-		
-		protected AttributeDefinition(string name, AttributeValue attributeValue)
-		{
-			Name = name;
-			AttributeValue = attributeValue;
-		}
+    internal abstract class AttributeDefinition
+    {
+        public readonly string Name;
+        
+        public readonly AttributeValueType AttributeValueType;
+        
+        protected AttributeDefinition(string name) : this(name, AttributeValueType.Required)
+        {
+        }
+        
+        protected AttributeDefinition(string name, AttributeValueType attributeValueType)
+        {
+            Name = name;
+            AttributeValueType = attributeValueType;
+        }
 
         
-	}
+    }
 
-	[OneCharacterValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_accesskey.asp")]
-	internal class AccessKeyAttribute : AttributeDefinition
-	{
-		internal AccessKeyAttribute() : base("accesskey")
-		{
-		}
-	}
+    [OneCharacterValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_accesskey.asp")]
+    internal class AccessKeyAttribute : AttributeDefinition
+    {
+        public AccessKeyAttribute() : base("accesskey")
+        {
+        }
+    }
 
-	[ClassValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_class.asp")]
-	internal class ClassAttribute : AttributeDefinition
-	{
-		internal ClassAttribute() : base("class")
-		{
-		}
-	}
+    [ClassValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_class.asp")]
+    internal class ClassAttribute : AttributeDefinition
+    {
+        public ClassAttribute() : base("class")
+        {
+        }
+    }
 
-	[EditableEnumValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_contenteditable.asp")]
-	internal class ContentEditableAttribute : AttributeDefinition
-	{
-		internal ContentEditableAttribute() : base("contenteditable")
-		{
-		}
-	}
+    [EditableEnumValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_contenteditable.asp")]
+    internal class ContentEditableAttribute : AttributeDefinition
+    {
+        public ContentEditableAttribute() : base("contenteditable")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_data.asp")]
-	internal class DataAttribute : AttributeDefinition
-	{
-		private string _dataName ;
-		
-		internal DataAttribute(string dataName) : base("data")
-		{
-			_dataName = dataName;
-		}
-	}
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_data.asp")]
+    internal class DataAttribute : AttributeDefinition
+    {
+        private string _dataName ;
 
-	[TextDirectionEnumValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_dir.asp")]
-	internal class DirAttribute : AttributeDefinition
-	{
-		internal DirAttribute() : base("dir")
-		{
-		}
-	}
+        public DataAttribute() : base("dataFIXTHIS")
+        {
+            
+        }
+        
+        public DataAttribute(string dataName) : base("data")
+        {
+            _dataName = dataName;
+        }
+    }
 
-	[DraggableEnumValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_draggable.asp")]
-	internal class DraggableAttribute : AttributeDefinition
-	{
-		internal DraggableAttribute() : base("draggable")
-		{
-		}
-	}
+    [TextDirectionEnumValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_dir.asp")]
+    internal class DirAttribute : AttributeDefinition
+    {
+        public DirAttribute() : base("dir")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_hidden.asp")]
-	internal class HiddenAttribute : AttributeDefinition
-	{
-		internal HiddenAttribute() : base("hidden", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [DraggableEnumValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_draggable.asp")]
+    internal class DraggableAttribute : AttributeDefinition
+    {
+        public DraggableAttribute() : base("draggable")
+        {
+        }
+    }
 
-	[IdValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_id.asp")]
-	internal class IdAttribute : AttributeDefinition
-	{
-		internal IdAttribute() : base("id")
-		{
-		}
-	}
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_hidden.asp")]
+    internal class HiddenAttribute : AttributeDefinition
+    {
+        public HiddenAttribute() : base("hidden", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[LanguageCodeValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_lang.asp")]
-	internal class LangAttribute : AttributeDefinition
-	{
-		internal LangAttribute() : base("lang")
-		{
-		}
-	}
+    [IdValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_id.asp")]
+    internal class IdAttribute : AttributeDefinition
+    {
+        public IdAttribute() : base("id")
+        {
+        }
+    }
 
-	[EditableEnumValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_spellcheck.asp")]
-	internal class SpellcheckAttribute: AttributeDefinition
-	{
-		internal SpellcheckAttribute() : base("spellcheck")
-		{
-		}
-	}
+    [LanguageCodeValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_lang.asp")]
+    internal class LangAttribute : AttributeDefinition
+    {
+        public LangAttribute() : base("lang")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_style.asp")]
-	internal class StyleAttribute: AttributeDefinition
-	{
-		internal StyleAttribute() : base("style")
-		{
-		}
-	}
+    [EditableEnumValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_spellcheck.asp")]
+    internal class SpellcheckAttribute: AttributeDefinition
+    {
+        public SpellcheckAttribute() : base("spellcheck")
+        {
+        }
+    }
 
-	[MimimumOneIntegerValidator]
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_tabindex.asp")]
-	internal class TabIndexAttribute : AttributeDefinition
-	{
-		internal TabIndexAttribute() : base("tabindex")
-		{
-		}
-	}
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_style.asp")]
+    internal class StyleAttribute: AttributeDefinition
+    {
+        public StyleAttribute() : base("style")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_title.asp")]
-	internal class TitleAttribute : AttributeDefinition
-	{
-		internal TitleAttribute() : base("title")
-		{
-		}
-	}
+    [MimimumOneIntegerValidator]
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_tabindex.asp")]
+    internal class TabIndexAttribute : AttributeDefinition
+    {
+        public TabIndexAttribute() : base("tabindex")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_download.asp")]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_download.asp")]
-	internal class DownloadAttribute : AttributeDefinition
-	{
-		internal DownloadAttribute() : base("download", AttributeValue.Optional)
-		{
-		}
-	}
+    [AppliesToElement(typeof(ElementDefinition), "http://www.w3schools.com/tags/att_global_title.asp")]
+    internal class TitleAttribute : AttributeDefinition
+    {
+        public TitleAttribute() : base("title")
+        {
+        }
+    }
 
-	[UrlValidator]
-	[AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_href.asp")]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_href.asp")]
-	[AppliesToElement(typeof(Base), "http://www.w3schools.com/tags/att_base_href.asp")]
-	[AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_href.asp")]
-	internal class HrefAttribute : AttributeDefinition
-	{
-		internal HrefAttribute() : base("href")
-		{
-		}
-	}
+    [AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_download.asp")]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_download.asp")]
+    internal class DownloadAttribute : AttributeDefinition
+    {
+        public DownloadAttribute() : base("download", AttributeValueType.Optional)
+        {
+        }
+    }
 
-	[LanguageCodeValidator]
-	[AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_hreflang.asp")]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_hreflang.asp")]
-	[AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_hreflang.asp")]
-	internal class HrefLangAttribute : AttributeDefinition
-	{
-		internal HrefLangAttribute() : base("hreflang")
-		{
-		}
-	}
+    [UrlValidator]
+    [AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_href.asp")]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_href.asp")]
+    [AppliesToElement(typeof(Base), "http://www.w3schools.com/tags/att_base_href.asp")]
+    [AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_href.asp")]
+    internal class HrefAttribute : AttributeDefinition
+    {
+        public HrefAttribute() : base("href")
+        {
+        }
+    }
 
-	[MediaExpressionValidator]
-	[AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_media.asp")]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_media.asp")]
-	[AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_media.asp")]
-	[AppliesToElement(typeof(Style), "http://www.w3schools.com/tags/att_style_media.asp")]
-	internal class MediaAttribute : AttributeDefinition
-	{
-		internal MediaAttribute() : base("media")
-		{
-		}
-	}
+    [LanguageCodeValidator]
+    [AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_hreflang.asp")]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_hreflang.asp")]
+    [AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_hreflang.asp")]
+    internal class HrefLangAttribute : AttributeDefinition
+    {
+        public HrefLangAttribute() : base("hreflang")
+        {
+        }
+    }
 
-	[LinkedRelEnumValidator]
-	[AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_rel.asp")]
+    [MediaExpressionValidator]
+    [AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_media.asp")]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_media.asp")]
+    [AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_media.asp")]
+    [AppliesToElement(typeof(Style), "http://www.w3schools.com/tags/att_style_media.asp")]
+    internal class MediaAttribute : AttributeDefinition
+    {
+        public MediaAttribute() : base("media")
+        {
+        }
+    }
+
+    [LinkedRelEnumValidator]
+    [AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_rel.asp")]
     [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_rel.asp")]
-    [AttributeName("Rel")]
     internal class LinkedRelAttribute : AttributeDefinition
     {
-        internal LinkedRelAttribute() : base("rel")
+        public LinkedRelAttribute() : base("rel")
         {
         }
     }
 
-	[ResourceRelEnumValidator]
-	[AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_rel.asp")]
-    [AttributeName("Rel")]
+    [ResourceRelEnumValidator]
+    [AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_rel.asp")]
     internal class ResourceRelAttribute : AttributeDefinition
     {
-        internal ResourceRelAttribute() : base("rel")
+        public ResourceRelAttribute() : base("rel")
         {
         }
     }
 
-	[TargetValidator]
-	[AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_target.asp")]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_target.asp")]
-	[AppliesToElement(typeof(Base), "http://www.w3schools.com/tags/att_base_target.asp")]
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_target.asp")]
-	internal class TargetAttribute : AttributeDefinition
-	{
-		internal TargetAttribute() : base("target")
-		{
-		}
-	}
+    [TargetValidator]
+    [AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_target.asp")]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_target.asp")]
+    [AppliesToElement(typeof(Base), "http://www.w3schools.com/tags/att_base_target.asp")]
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_target.asp")]
+    internal class TargetAttribute : AttributeDefinition
+    {
+        public TargetAttribute() : base("target")
+        {
+        }
+    }
 
-	[MediaTypeValidator]
-	[AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_type.asp")]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_type.asp")]
-	[AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_type.asp")]
-	[AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_type.asp")]
-	[AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_type.asp")]
-	[AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_type.asp")]
-	[AppliesToElement(typeof(Source), "http://www.w3schools.com/tags/att_source_type.asp")]
-	[AppliesToElementWithoutAttach(typeof(Style), "text/css", "http://www.w3schools.com/tags/att_style_type.asp")]
-	[AttributeName("Type")]
-	internal class MediaTypeAttribute : AttributeDefinition
-	{
-		internal MediaTypeAttribute()
-			: base("type")
-		{
-		}
-	}
+    [MediaTypeValidator]
+    [AppliesToElement(typeof(A), "http://www.w3schools.com/tags/att_a_type.asp")]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_type.asp")]
+    [AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_type.asp")]
+    [AppliesToElement(typeof(Link), "http://www.w3schools.com/tags/att_link_type.asp")]
+    [AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_type.asp")]
+    [AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_type.asp")]
+    [AppliesToElement(typeof(Source), "http://www.w3schools.com/tags/att_source_type.asp")]
+    internal class MediaTypeAttribute : AttributeDefinition
+    {
+        public MediaTypeAttribute()
+            : base("type")
+        {
+        }
+    }
 
-	[OrderedListTypeEnumValidator]
-	[AppliesToElement(typeof(Ol), "http://www.w3schools.com/tags/att_ol_type.asp")]
-	[AttributeName("Type")]
-	internal class OrderedListTypeAttribute : AttributeDefinition
-	{
-		internal OrderedListTypeAttribute() : base("type")
-		{
-		}
-	}
+    [TextCssMediaTypeValidator]
+    [AppliesToElement(typeof(Style), "http://www.w3schools.com/tags/att_style_type.asp")]
+    internal class TextCssMediaTypeAttribute : AttributeDefinition
+    {
+        public TextCssMediaTypeAttribute()
+            : base("type")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/tag_area.asp")]
-	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_alt.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_alt.asp")]
-	internal class AltAttribute : AttributeDefinition
-	{
-		internal AltAttribute() : base("alt")
-		{
-		}
-	}
+    [OrderedListTypeEnumValidator]
+    [AppliesToElement(typeof(Ol), "http://www.w3schools.com/tags/att_ol_type.asp")]
+    internal class OrderedListTypeAttribute : AttributeDefinition
+    {
+        public OrderedListTypeAttribute() : base("type")
+        {
+        }
+    }
 
-	[CoordsValidator(typeof(Tuple<int, int, int>), typeof(ShapeAttribute), Shape.Circle)]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/tag_area.asp")]
+    [AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_alt.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_alt.asp")]
+    internal class AltAttribute : AttributeDefinition
+    {
+        public AltAttribute() : base("alt")
+        {
+        }
+    }
+
+    internal abstract class CoordsAttribute : AttributeDefinition
+    {
+        protected CoordsAttribute()
+            : base("coords")
+        {
+        }
+    }
+
+    [CoordsValidator(typeof(Tuple<int, int, int>), typeof(ShapeAttribute), Shape.Circle)]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_coords.asp")]
+    internal class ThreeIntCircleCoordsAttribute : CoordsAttribute
+    {
+    }
+
     [CoordsValidator(typeof(Tuple<Point, int>), typeof(ShapeAttribute), Shape.Circle)]
-	[CoordsValidator(typeof(Tuple<int, int, int, int>), typeof(ShapeAttribute), Shape.Rectangle)]
+    internal class PointIntCircleCoordsAttribute : CoordsAttribute
+    {
+    }
+
+    [CoordsValidator(typeof(Tuple<int, int, int, int>), typeof(ShapeAttribute), Shape.Rectangle)]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_coords.asp")]
+    internal class FourIntRectangleCoordsAttribute : CoordsAttribute
+    {
+    }
+
     [CoordsValidator(typeof(Tuple<Point, Point>), typeof(ShapeAttribute), Shape.Rectangle)]
-	[CoordsValidator(typeof(Point[]), typeof(ShapeAttribute), Shape.Polygon)]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_coords.asp")]
-	internal class CoordsAttribute : AttributeDefinition
-	{
-		internal CoordsAttribute() : base("coords")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_coords.asp")]
+    internal class TwoPointRectangleCoordsAttribute : CoordsAttribute
+    {
+    }
 
-	[ShapeEnumValidator(typeof(CoordsAttribute))]
-	[AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_shape.asp")]
-	internal class ShapeAttribute : AttributeDefinition
-	{
-		internal ShapeAttribute() : base("shape")
-		{
-		}
-	}
+    [CoordsValidator(typeof(Point[]), typeof(ShapeAttribute), Shape.Polygon)]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_coords.asp")]
+    internal class PointArrayPolygonCoordsAttribute : CoordsAttribute
+    {
+    }
 
-	[AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_autoplay.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_autoplay.asp")]
-	internal class AutoPlayAttribute : AttributeDefinition
-	{
-		internal AutoPlayAttribute() : base("autoplay", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [ShapeEnumValidator(typeof(CoordsAttribute))]
+    [AppliesToElement(typeof(Area), "http://www.w3schools.com/tags/att_area_shape.asp")]
+    internal class ShapeAttribute : AttributeDefinition
+    {
+        public ShapeAttribute() : base("shape")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_controls.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_controls.asp")]
-	internal class ControlsAttribute : AttributeDefinition
-	{
-		internal ControlsAttribute() : base("controls", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_autoplay.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_autoplay.asp")]
+    internal class AutoPlayAttribute : AttributeDefinition
+    {
+        public AutoPlayAttribute() : base("autoplay", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_loop.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_loop.asp")]
-	internal class LoopAttribute : AttributeDefinition
-	{
-		internal LoopAttribute() : base("loop", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_controls.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_controls.asp")]
+    internal class ControlsAttribute : AttributeDefinition
+    {
+        public ControlsAttribute() : base("controls", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_muted.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_muted.asp")]
-	internal class MutedAttribute : AttributeDefinition
-	{
-		internal MutedAttribute() : base("muted", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_loop.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_loop.asp")]
+    internal class LoopAttribute : AttributeDefinition
+    {
+        public LoopAttribute() : base("loop", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[PreloadEnumValidator]
-	[AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_preload.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_preload.asp")]
-	internal class PreloadAttribute : AttributeDefinition
-	{
-		internal PreloadAttribute() : base("preload")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_muted.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_muted.asp")]
+    internal class MutedAttribute : AttributeDefinition
+    {
+        public MutedAttribute() : base("muted", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[UrlValidator]
-	[AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_src.asp")]
-	[AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_src.asp")]
-	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_src.asp")]
-	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_src.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_src.asp")]
-	[AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_src.asp")]
-	[AppliesToElement(typeof(Source), "http://www.w3schools.com/tags/att_source_src.asp")]
-	[AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_src.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_src.asp")]
-	internal class SrcAttribute : AttributeDefinition
-	{
-		internal SrcAttribute() : base("src")
-		{
-		}
-	}
+    [PreloadEnumValidator]
+    [AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_preload.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_preload.asp")]
+    internal class PreloadAttribute : AttributeDefinition
+    {
+        public PreloadAttribute() : base("preload")
+        {
+        }
+    }
 
-	[UrlValidator]
-	[AppliesToElement(typeof(BlockQuote), "http://www.w3schools.com/tags/att_blockquote_cite.asp")]
-	[AppliesToElement(typeof(Del), "http://www.w3schools.com/tags/att_del_cite.asp")]
-	[AppliesToElement(typeof(Ins), "http://www.w3schools.com/tags/att_ins_cite.asp")]
-	[AppliesToElement(typeof(Q), "http://www.w3schools.com/tags/att_q_cite.asp")]
-	internal class CiteAttribute : AttributeDefinition
-	{
-		internal CiteAttribute() : base("cite")
-		{
-		}
-	}
+    [UrlValidator]
+    [AppliesToElement(typeof(Audio), "http://www.w3schools.com/tags/att_audio_src.asp")]
+    [AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_src.asp")]
+    [AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_src.asp")]
+    [AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_src.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_src.asp")]
+    [AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_src.asp")]
+    [AppliesToElement(typeof(Source), "http://www.w3schools.com/tags/att_source_src.asp")]
+    [AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_src.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_src.asp")]
+    internal class SrcAttribute : AttributeDefinition
+    {
+        public SrcAttribute() : base("src")
+        {
+        }
+    }
 
-	[DateTimeValidator]
-	[AppliesToElement(typeof(Del), "http://www.w3schools.com/tags/att_del_datetime.asp")]
-	[AppliesToElement(typeof(Ins), "http://www.w3schools.com/tags/att_ins_datetime.asp")]
-	[AppliesToElement(typeof(Time), "http://www.w3schools.com/tags/att_time_datetime.asp")]
-	internal class DateTimeAttribute : AttributeDefinition
-	{
-		internal DateTimeAttribute() : base("datetime")
-		{
-		}
-	}
+    [UrlValidator]
+    [AppliesToElement(typeof(BlockQuote), "http://www.w3schools.com/tags/att_blockquote_cite.asp")]
+    [AppliesToElement(typeof(Del), "http://www.w3schools.com/tags/att_del_cite.asp")]
+    [AppliesToElement(typeof(Ins), "http://www.w3schools.com/tags/att_ins_cite.asp")]
+    [AppliesToElement(typeof(Q), "http://www.w3schools.com/tags/att_q_cite.asp")]
+    internal class CiteAttribute : AttributeDefinition
+    {
+        public CiteAttribute() : base("cite")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Details), "http://www.w3schools.com/tags/att_details_open.asp")]
-	internal class OpenAttribute : AttributeDefinition
-	{
-		internal OpenAttribute() : base("open", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [DateTimeValidator]
+    [AppliesToElement(typeof(Del), "http://www.w3schools.com/tags/att_del_datetime.asp")]
+    [AppliesToElement(typeof(Ins), "http://www.w3schools.com/tags/att_ins_datetime.asp")]
+    [AppliesToElement(typeof(Time), "http://www.w3schools.com/tags/att_time_datetime.asp")]
+    internal class DateTimeAttribute : AttributeDefinition
+    {
+        public DateTimeAttribute() : base("datetime")
+        {
+        }
+    }
 
-	[MimimumZeroIntegerValidator]
-	[AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_height.asp")]
-	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_height.asp")]
-	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_height.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_height.asp")]
-	[AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_height.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_height.asp")]
-	internal class HeightAttribute : AttributeDefinition
-	{
-		internal HeightAttribute() : base("height")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Details), "http://www.w3schools.com/tags/att_details_open.asp")]
+    internal class OpenAttribute : AttributeDefinition
+    {
+        public OpenAttribute() : base("open", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[MimimumZeroIntegerValidator]
-	[AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_width.asp")]
-	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_width.asp")]
-	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_width.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_width.asp")]
-	[AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_width.asp")]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_width.asp")]
-	internal class WidthAttribute : AttributeDefinition
-	{
-		internal WidthAttribute() : base("width")
-		{
-		}
-	}
+    [MimimumZeroIntegerValidator]
+    [AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_height.asp")]
+    [AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_height.asp")]
+    [AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_height.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_height.asp")]
+    [AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_height.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_height.asp")]
+    internal class HeightAttribute : AttributeDefinition
+    {
+        public HeightAttribute() : base("height")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(FieldSet), "http://www.w3schools.com/tags/att_fieldset_disabled.asp")]
-	[AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_disabled.asp")]
-	[AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_disabled.asp")]
-	[AppliesToElement(typeof(OptGroup), "http://www.w3schools.com/tags/att_optgroup_disabled.asp")]
-	[AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_disabled.asp")]
-	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_disabled.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_disabled.asp")]
-	internal class DisabledAttribute : AttributeDefinition
-	{
-		internal DisabledAttribute() : base("disabled", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [MimimumZeroIntegerValidator]
+    [AppliesToElement(typeof(Embed), "http://www.w3schools.com/tags/att_embed_width.asp")]
+    [AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_width.asp")]
+    [AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_width.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_width.asp")]
+    [AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_width.asp")]
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_width.asp")]
+    internal class WidthAttribute : AttributeDefinition
+    {
+        public WidthAttribute() : base("width")
+        {
+        }
+    }
 
-	[IdValidator]
-	[AppliesToElement(typeof(FieldSet), "http://www.w3schools.com/tags/att_fieldset_form.asp")]
-	[AppliesToElement(typeof(Input), "http://www.w3schools.com/tags/att_input_form.asp")]
-	[AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_form.asp")]
-	[AppliesToElement(typeof(Label), "http://www.w3schools.com/tags/att_label_form.asp")]
-	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_form.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_form.asp")]
-	internal class FormAttribute : AttributeDefinition
-	{
-		internal FormAttribute() : base("form")
-		{
-		}
-	}
+    [AppliesToElement(typeof(FieldSet), "http://www.w3schools.com/tags/att_fieldset_disabled.asp")]
+    [AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_disabled.asp")]
+    [AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_disabled.asp")]
+    [AppliesToElement(typeof(OptGroup), "http://www.w3schools.com/tags/att_optgroup_disabled.asp")]
+    [AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_disabled.asp")]
+    [AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_disabled.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_disabled.asp")]
+    internal class DisabledAttribute : AttributeDefinition
+    {
+        public DisabledAttribute() : base("disabled", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[NameValidator]
-	[AppliesToElement(typeof(FieldSet), "http://www.w3schools.com/tags/att_fieldset_name.asp")]
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_name.asp")]
-	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_name.asp")]
-	[AppliesToElement(typeof(Input), "http://www.w3schools.com/tags/att_input_name.asp")]
-	[AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_name.asp")]
-	[AppliesToElement(typeof(Map), "http://www.w3schools.com/tags/att_map_name.asp")]
-	[AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_name.asp")]
-	[AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_name.asp")]
-	[AppliesToElement(typeof(Output), "http://www.w3schools.com/tags/att_output_name.asp")]
-	[AppliesToElement(typeof(Param), "http://www.w3schools.com/tags/att_param_name.asp")]
-	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_name.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_name.asp")]
-	internal class NameAttribute : AttributeDefinition
-	{
-		internal NameAttribute() : base("name")
-		{
-		}
-	}
+    [IdValidator]
+    [AppliesToElement(typeof(FieldSet), "http://www.w3schools.com/tags/att_fieldset_form.asp")]
+    [AppliesToElement(typeof(Input), "http://www.w3schools.com/tags/att_input_form.asp")]
+    [AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_form.asp")]
+    [AppliesToElement(typeof(Label), "http://www.w3schools.com/tags/att_label_form.asp")]
+    [AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_form.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_form.asp")]
+    internal class FormAttribute : AttributeDefinition
+    {
+        public FormAttribute() : base("form")
+        {
+        }
+    }
 
-	[CharSetValidator]
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_accept_charset.asp")]
-	[AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_charset.asp")]
-	internal class AcceptCharsetAttribute : AttributeDefinition
-	{
-		internal AcceptCharsetAttribute() : base("accept-charset")
-		{
-		}
-	}
+    [NameValidator]
+    [AppliesToElement(typeof(FieldSet), "http://www.w3schools.com/tags/att_fieldset_name.asp")]
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_name.asp")]
+    [AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_name.asp")]
+    [AppliesToElement(typeof(Input), "http://www.w3schools.com/tags/att_input_name.asp")]
+    [AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_name.asp")]
+    [AppliesToElement(typeof(Map), "http://www.w3schools.com/tags/att_map_name.asp")]
+    [AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_name.asp")]
+    [AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_name.asp")]
+    [AppliesToElement(typeof(Output), "http://www.w3schools.com/tags/att_output_name.asp")]
+    [AppliesToElement(typeof(Param), "http://www.w3schools.com/tags/att_param_name.asp")]
+    [AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_name.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_name.asp")]
+    internal class NameAttribute : AttributeDefinition
+    {
+        public NameAttribute() : base("name")
+        {
+        }
+    }
 
-	[UrlValidator]
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_action.asp")]
-	internal class ActionAttribute : AttributeDefinition
-	{
-		internal ActionAttribute() : base("action")
-		{
-		}
-	}
+    [CharSetValidator]
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_accept_charset.asp")]
+    [AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_charset.asp")]
+    internal class AcceptCharsetAttribute : AttributeDefinition
+    {
+        public AcceptCharsetAttribute()
+            : base("accept-charset")
+        {
+        }
+    }
 
-	[OnOffEnumValidator]
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_autocomplete.asp")]
-	[AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
-	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
-	[AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
-	[AppliesToElement(typeof(ColorInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
-	internal class AutoCompleteAttribute : AttributeDefinition
-	{
-		internal AutoCompleteAttribute() : base("autocomplete")
-		{
-		}
-	}
+    [UrlValidator]
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_action.asp")]
+    internal class ActionAttribute : AttributeDefinition
+    {
+        public ActionAttribute() : base("action")
+        {
+        }
+    }
 
-	[EncodeTypeEnumValidator]
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_enctype.asp")]
-	internal class EncTypeAttribute : AttributeDefinition
-	{
-		internal EncTypeAttribute() : base("enctype")
-		{
-		}
-	}
+    [OnOffEnumValidator]
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_autocomplete.asp")]
+    [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
+    [AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
+    [AppliesToElement(typeof(ColorInput), "http://www.w3schools.com/tags/att_input_autocomplete.asp")]
+    internal class AutoCompleteAttribute : AttributeDefinition
+    {
+        public AutoCompleteAttribute() : base("autocomplete")
+        {
+        }
+    }
 
-	[GetPostEnumValidator]
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_method.asp")]
-	internal class MethodAttribute : AttributeDefinition
-	{
-		internal MethodAttribute() : base("method")
-		{
-		}
-	}
+    [EncodeTypeEnumValidator]
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_enctype.asp")]
+    internal class EncTypeAttribute : AttributeDefinition
+    {
+        public EncTypeAttribute() : base("enctype")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_novalidate.asp")]
-	internal class NoValidateAttribute : AttributeDefinition
-	{
-		internal NoValidateAttribute() : base("novalidate", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [GetPostEnumValidator]
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_method.asp")]
+    internal class MethodAttribute : AttributeDefinition
+    {
+        public MethodAttribute() : base("method")
+        {
+        }
+    }
 
-	[UrlValidator]
-	[AppliesToElement(typeof(Html), "http://www.w3schools.com/tags/att_html_manifest.asp")]
-	internal class ManifestAttribute : AttributeDefinition
-	{
-		internal ManifestAttribute() : base("manifest")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Form), "http://www.w3schools.com/tags/att_form_novalidate.asp")]
+    internal class NoValidateAttribute : AttributeDefinition
+    {
+        public NoValidateAttribute() : base("novalidate", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[XmlNsEnumValidator]
-	[AppliesToElement(typeof(Html), "http://www.w3schools.com/tags/att_html_xmlns.asp")]
-	internal class XmlNsAttribute : AttributeDefinition
-	{
-		internal XmlNsAttribute() : base("xmlns")
-		{
-		}
-	}
+    [UrlValidator]
+    [AppliesToElement(typeof(Html), "http://www.w3schools.com/tags/att_html_manifest.asp")]
+    internal class ManifestAttribute : AttributeDefinition
+    {
+        public ManifestAttribute() : base("manifest")
+        {
+        }
+    }
 
-	[SandboxEnumValidator]
-	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_sandbox.asp")]
-	internal class SandboxAttribute : AttributeDefinition
-	{
-		internal SandboxAttribute() : base("sandbox")
-		{
-		}
-	}
+    [XmlNsEnumValidator]
+    [AppliesToElement(typeof(Html), "http://www.w3schools.com/tags/att_html_xmlns.asp")]
+    internal class XmlNsAttribute : AttributeDefinition
+    {
+        public XmlNsAttribute() : base("xmlns")
+        {
+        }
+    }
 
-	[HtmlValidator]
-	[AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_srcdoc.asp")]
-	internal class SrcDocAttribute : AttributeDefinition
-	{
-		internal SrcDocAttribute() : base("srcdoc")
-		{
-		}
-	}
+    [SandboxEnumValidator]
+    [AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_sandbox.asp")]
+    internal class SandboxAttribute : AttributeDefinition
+    {
+        public SandboxAttribute() : base("sandbox")
+        {
+        }
+    }
 
-	[HashIdValidator]
-	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_usemap.asp")]
-	[AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_usemap.asp")]
-	internal class UseMapAttribute : AttributeDefinition
-	{
-		internal UseMapAttribute() : base("usemap")
-		{
-		}
-	}
+    [HtmlValidator]
+    [AppliesToElement(typeof(IFrame), "http://www.w3schools.com/tags/att_iframe_srcdoc.asp")]
+    internal class SrcDocAttribute : AttributeDefinition
+    {
+        public SrcDocAttribute() : base("srcdoc")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_ismap.asp")]
-	internal class IsMapAttribute : AttributeDefinition
-	{
-		internal IsMapAttribute() : base("ismap", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [HashIdValidator]
+    [AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_usemap.asp")]
+    [AppliesToElement(typeof(Object), "http://www.w3schools.com/tags/att_object_usemap.asp")]
+    internal class UseMapAttribute : AttributeDefinition
+    {
+        public UseMapAttribute() : base("usemap")
+        {
+        }
+    }
 
-	[AcceptTypesEnumValidator]
-	[MediaTypeValidator]
-	[AppliesToElement(typeof(FileInput), "http://www.w3schools.com/tags/att_input_accept.asp")]
-	internal class AcceptAttribute : AttributeDefinition
-	{
-		internal AcceptAttribute() : base("accept")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Img), "http://www.w3schools.com/tags/att_img_ismap.asp")]
+    internal class IsMapAttribute : AttributeDefinition
+    {
+        public IsMapAttribute() : base("ismap", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_autofocus.asp")]
-	[AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_autofocus.asp")]
-	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_autofocus.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_autofocus.asp")]
-	internal class AutoFocusAttribute : AttributeDefinition
-	{
-		internal AutoFocusAttribute() : base("autofocus", AttributeValue.Forbidden)
-		{
-		}
-	}
+    internal abstract class AcceptAttribute : AttributeDefinition
+    {
+        public AcceptAttribute()
+            : base("accept")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(CheckboxInput), "http://www.w3schools.com/tags/att_input_checked.asp")]
-	[AppliesToElement(typeof(RadioInput), "http://www.w3schools.com/tags/att_input_checked.asp")]
-	internal class CheckedAttribute : AttributeDefinition
-	{
-		internal CheckedAttribute() : base("checked", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [AcceptTypesEnumValidator]
+    [AppliesToElement(typeof(FileInput), "http://www.w3schools.com/tags/att_input_accept.asp")]
+    internal class StandardAcceptAttribute : AcceptAttribute
+    {
+    }
 
-	[UrlValidator]
-	[AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formaction.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formaction.asp")]
-	internal class FormActionAttribute : AttributeDefinition
-	{
-		internal FormActionAttribute() : base("formaction")
-		{
-		}
-	}
+    [MediaTypeValidator]
+    [AppliesToElement(typeof(FileInput), "http://www.w3schools.com/tags/att_input_accept.asp")]
+    internal class MediatypeAcceptAttribute : AcceptAttribute
+    {
+    }
 
-	[EncodeTypeEnumValidator]
-	[AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formenctype.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formenctype.asp")]
-	internal class FormEncTypeAttribute : AttributeDefinition
-	{
-		internal FormEncTypeAttribute() : base("formenctype")
-		{
-		}
-	}
+    [AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_autofocus.asp")]
+    [AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_autofocus.asp")]
+    [AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_autofocus.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_autofocus.asp")]
+    internal class AutoFocusAttribute : AttributeDefinition
+    {
+        public AutoFocusAttribute() : base("autofocus", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[GetPostEnumValidator]
-	[AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formmethod.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formmethod.asp")]
-	internal class FormMethodAttribute : AttributeDefinition
-	{
-		internal FormMethodAttribute() : base("formmethod")
-		{
-		}
-	}
+    [AppliesToElement(typeof(CheckboxInput), "http://www.w3schools.com/tags/att_input_checked.asp")]
+    [AppliesToElement(typeof(RadioInput), "http://www.w3schools.com/tags/att_input_checked.asp")]
+    internal class CheckedAttribute : AttributeDefinition
+    {
+        public CheckedAttribute() : base("checked", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formnovalidate.asp")]
-	internal class FormNoValidateAttribute : AttributeDefinition
-	{
-		internal FormNoValidateAttribute() : base("formnovalidate", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [UrlValidator]
+    [AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formaction.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formaction.asp")]
+    internal class FormActionAttribute : AttributeDefinition
+    {
+        public FormActionAttribute() : base("formaction")
+        {
+        }
+    }
 
-	[TargetValidator]
-	[AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formtarget.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formtarget.asp")]
-	internal class FormTargetAttribute : AttributeDefinition
-	{
-		internal FormTargetAttribute() : base("formtarget")
-		{
-		}
-	}
+    [EncodeTypeEnumValidator]
+    [AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formenctype.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formenctype.asp")]
+    internal class FormEncTypeAttribute : AttributeDefinition
+    {
+        public FormEncTypeAttribute() : base("formenctype")
+        {
+        }
+    }
 
-	[IdValidator]
-	[AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_list.asp")]
-	internal class ListAttribute : AttributeDefinition
-	{
-		internal ListAttribute() : base("list")
-		{
-		}
-	}
+    [GetPostEnumValidator]
+    [AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formmethod.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formmethod.asp")]
+    internal class FormMethodAttribute : AttributeDefinition
+    {
+        public FormMethodAttribute() : base("formmethod")
+        {
+        }
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_max.asp")]
-	[AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_max.asp")]
-	[AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_max.asp")]
-	[AppliesToElement(typeof(Progress), "http://www.w3schools.com/tags/att_progress_max.asp")]
-	[AttributeName("Max")]
-	internal class MaxNumberAttribute : AttributeDefinition
-	{
-		internal MaxNumberAttribute() : base("max")
-		{
-		}
-	}
+    [AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formnovalidate.asp")]
+    internal class FormNoValidateAttribute : AttributeDefinition
+    {
+        public FormNoValidateAttribute() : base("formnovalidate", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[DateTimeValidator]
-	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_max.asp")]
-	[AttributeName("Max")]
-	internal class MaxDateAttribute : AttributeDefinition
-	{
-		internal MaxDateAttribute() : base("max")
-		{
-		}
-	}
+    [TargetValidator]
+    [AppliesToElement(typeof(SubmitInput), "http://www.w3schools.com/tags/att_input_formtarget.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_formtarget.asp")]
+    internal class FormTargetAttribute : AttributeDefinition
+    {
+        public FormTargetAttribute() : base("formtarget")
+        {
+        }
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_min.asp")]
-	[AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_min.asp")]
-	[AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_min.asp")]
-	[AttributeName("Min")]
-	internal class MinNumberAttribute : AttributeDefinition
-	{
-		internal MinNumberAttribute() : base("min")
-		{
-		}
-	}
+    [IdValidator]
+    [AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_list.asp")]
+    internal class ListAttribute : AttributeDefinition
+    {
+        public ListAttribute() : base("list")
+        {
+        }
+    }
 
-	[DateTimeValidator]
-	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_min.asp")]
-	[AttributeName("Min")]
-	internal class MinDateAttribute : AttributeDefinition
-	{
-		internal MinDateAttribute() : base("min")
-		{
-		}
-	}
+    internal abstract class MaxNumberAttribute : AttributeDefinition
+    {
+        protected MaxNumberAttribute()
+            : base("max")
+        {
+        }
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_maxlength.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_maxlength.asp")]
-	internal class MaxLengthAttribute : AttributeDefinition
-	{
-		internal MaxLengthAttribute() : base("maxlength")
-		{
-		}
-	}
+    [DecimalValidator]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_max.asp")]
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_max.asp")]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_max.asp")]
+    [AppliesToElement(typeof(Progress), "http://www.w3schools.com/tags/att_progress_max.asp")]
+    internal class MaxDecimalAttribute : MaxNumberAttribute
+    {
+    }
 
-	[AppliesToElement(typeof(EmailInput), "http://www.w3schools.com/tags/att_input_multiple.asp")]
-	[AppliesToElement(typeof(FileInput), "http://www.w3schools.com/tags/att_input_multiple.asp")]
-	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_multiple.asp")]
-	internal class MultipleAttribute : AttributeDefinition
-	{
-		internal MultipleAttribute() : base("multiple", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [IntegerValidator]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_max.asp")]
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_max.asp")]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_max.asp")]
+    [AppliesToElement(typeof(Progress), "http://www.w3schools.com/tags/att_progress_max.asp")]
+    internal class MaxIntegerAttribute : MaxNumberAttribute
+    {
+    }
 
-	[PatternValidator]
+    [DateTimeValidator]
+    [AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_max.asp")]
+    internal class MaxDateAttribute : AttributeDefinition
+    {
+        public MaxDateAttribute() : base("max")
+        {
+        }
+    }
+
+    internal abstract class MinNumberAttribute : AttributeDefinition
+    {
+        protected MinNumberAttribute()
+            : base("min")
+        {
+        }
+    }
+
+    [DecimalValidator]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_min.asp")]
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_min.asp")]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_min.asp")]
+    internal class MinDecimalAttribute : MinNumberAttribute
+    {
+    }
+
+    [IntegerValidator]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_min.asp")]
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_min.asp")]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_min.asp")]
+    internal class MinIntegerAttribute : MinNumberAttribute
+    {
+    }
+
+    [DateTimeValidator]
+    [AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_min.asp")]
+    internal class MinDateAttribute : AttributeDefinition
+    {
+        public MinDateAttribute() : base("min")
+        {
+        }
+    }
+
+    internal abstract class MaxLengthAttribute : AttributeDefinition
+    {
+        protected MaxLengthAttribute()
+            : base("maxlength")
+        {
+        }
+    }
+
+    [DecimalValidator]
+    [AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_maxlength.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_maxlength.asp")]
+    internal class MaxDecimalLengthAttribute : MaxLengthAttribute
+    {
+    }
+
+    [IntegerValidator]
+    [AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_maxlength.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_maxlength.asp")]
+    internal class MaxIntegerLengthAttribute : MaxLengthAttribute
+    {
+    }
+
+    [AppliesToElement(typeof(EmailInput), "http://www.w3schools.com/tags/att_input_multiple.asp")]
+    [AppliesToElement(typeof(FileInput), "http://www.w3schools.com/tags/att_input_multiple.asp")]
+    [AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_multiple.asp")]
+    internal class MultipleAttribute : AttributeDefinition
+    {
+        public MultipleAttribute() : base("multiple", AttributeValueType.Forbidden)
+        {
+        }
+    }
+
+    [PatternValidator]
     [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_pattern.asp")]
-	internal class PatternAttribute : AttributeDefinition
-	{
-		internal PatternAttribute() : base("pattern")
-		{
-		}
-	}
+    internal class PatternAttribute : AttributeDefinition
+    {
+        public PatternAttribute() : base("pattern")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_placeholder.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_placeholder.asp")]
-	internal class PlaceHolderAttribute : AttributeDefinition
-	{
-		internal PlaceHolderAttribute() : base("placeholder")
-		{
-		}
-	}
+    [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_placeholder.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_placeholder.asp")]
+    internal class PlaceHolderAttribute : AttributeDefinition
+    {
+        public PlaceHolderAttribute() : base("placeholder")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_readonly.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_readonly.asp")]
-	internal class ReadonlyAttribute : AttributeDefinition
-	{
-		internal ReadonlyAttribute() : base("readonly", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [AppliesToElement(typeof(VisibleInput), "http://www.w3schools.com/tags/att_input_readonly.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_readonly.asp")]
+    internal class ReadonlyAttribute : AttributeDefinition
+    {
+        public ReadonlyAttribute() : base("readonly", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_required.asp")]
-	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_required.asp")]
-	[AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_required.asp")]
-	[AppliesToElement(typeof(CheckboxInput), "http://www.w3schools.com/tags/att_input_required.asp")]
-	[AppliesToElement(typeof(RadioInput), "http://www.w3schools.com/tags/att_input_required.asp")]
-	[AppliesToElement(typeof(FileInput), "http://www.w3schools.com/tags/att_input_required.asp")]
-	[AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_required.asp")]
-	internal class RequiredAttribute : AttributeDefinition
-	{
-		internal RequiredAttribute() : base("required", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_required.asp")]
+    [AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_required.asp")]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_required.asp")]
+    [AppliesToElement(typeof(CheckboxInput), "http://www.w3schools.com/tags/att_input_required.asp")]
+    [AppliesToElement(typeof(RadioInput), "http://www.w3schools.com/tags/att_input_required.asp")]
+    [AppliesToElement(typeof(FileInput), "http://www.w3schools.com/tags/att_input_required.asp")]
+    [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_required.asp")]
+    internal class RequiredAttribute : AttributeDefinition
+    {
+        public RequiredAttribute() : base("required", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[MimimumOneIntegerValidator]
+    [MimimumOneIntegerValidator]
     [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_size.asp")]
-	[AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_size.asp")]
-	internal class SizeAttribute : AttributeDefinition
-	{
-		internal SizeAttribute() : base("size")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Select), "http://www.w3schools.com/tags/att_select_size.asp")]
+    internal class SizeAttribute : AttributeDefinition
+    {
+        public SizeAttribute() : base("size")
+        {
+        }
+    }
 
-	[MimimumOneIntegerValidator]
+    [MimimumOneIntegerValidator]
     [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_step.asp")]
-	[AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
-	[AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
-	internal class StepAttribute : AttributeDefinition
-	{
-		internal StepAttribute() : base("step")
-		{
-		}
-	}
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
+    [AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_step.asp")]
+    internal class StepAttribute : AttributeDefinition
+    {
+        public StepAttribute() : base("step")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(HiddenInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(CheckboxInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(RadioInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(ButtonTypeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_value.asp")]
-	[AppliesToElement(typeof(Param), "http://www.w3schools.com/tags/att_param_value.asp")]
-	[AttributeName("Value")]
-	internal class TextValueAttribute : AttributeDefinition
-	{
-		internal TextValueAttribute() : base("value")
-		{
-		}
-	}
+    [AppliesToElement(typeof(TextTypeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(HiddenInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(CheckboxInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(RadioInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(ImageInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(ButtonTypeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_value.asp")]
+    [AppliesToElement(typeof(Param), "http://www.w3schools.com/tags/att_param_value.asp")]
+    internal class TextValueAttribute : AttributeDefinition
+    {
+        public TextValueAttribute() : base("value")
+        {
+        }
+    }
 
-	[DateTimeValidator]
+    [DateTimeValidator]
     [AppliesToElement(typeof(DateTypeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AttributeName("Value")]
-	internal class DateValueAttribute : AttributeDefinition
-	{
-		internal DateValueAttribute() : base("value")
-		{
-		}
-	}
+    internal class DateValueAttribute : AttributeDefinition
+    {
+        public DateValueAttribute() : base("value")
+        {
+        }
+    }
 
-	[ColorValidator]
+    [ColorValidator]
     [AppliesToElement(typeof(ColorInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AttributeName("Value")]
-	internal class ColorValueAttribute : AttributeDefinition
-	{
-		internal ColorValueAttribute() : base("value")
-		{
-		}
-	}
+    internal class ColorValueAttribute : AttributeDefinition
+    {
+        public ColorValueAttribute() : base("value")
+        {
+        }
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
-	[AppliesToElement(typeof(Li), "http://www.w3schools.com/tags/att_li_value.asp")]
-	[AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_value.asp")]
-	[AppliesToElement(typeof(Progress), "http://www.w3schools.com/tags/att_progress_value.asp")]
-	[AttributeName("Value")]
-	internal class NumberValueAttribute : AttributeDefinition
-	{
-		internal NumberValueAttribute() : base("value")
-		{
-		}
-	}
+    internal abstract class NumberValueAttribute : AttributeDefinition
+    {
+        protected NumberValueAttribute()
+            : base("value")
+        {
+        }
+    }
 
-	[KeyTypeEnumValidator]
+    [DecimalValidator]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(Li), "http://www.w3schools.com/tags/att_li_value.asp")]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_value.asp")]
+    [AppliesToElement(typeof(Progress), "http://www.w3schools.com/tags/att_progress_value.asp")]
+    internal class DecimalValueAttribute : NumberValueAttribute
+    {
+    }
+
+    [IntegerValidator]
+    [AppliesToElement(typeof(NumberInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(RangeInput), "http://www.w3schools.com/tags/att_input_value.asp")]
+    [AppliesToElement(typeof(Li), "http://www.w3schools.com/tags/att_li_value.asp")]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_value.asp")]
+    [AppliesToElement(typeof(Progress), "http://www.w3schools.com/tags/att_progress_value.asp")]
+    internal class IntegerValueAttribute : NumberValueAttribute
+    {
+    }
+
+    [KeyTypeEnumValidator]
     [AppliesToElement(typeof(KeyGen), "http://www.w3schools.com/tags/att_keygen_keytype.asp")]
-	internal class KeyTypeAttribute : AttributeDefinition
-	{
-		internal KeyTypeAttribute() : base("keytype")
-		{
-		}
-	}
+    internal class KeyTypeAttribute : AttributeDefinition
+    {
+        public KeyTypeAttribute() : base("keytype")
+        {
+        }
+    }
 
-	[IdValidator]
+    [IdValidator]
     [AppliesToElement(typeof(Label), "http://www.w3schools.com/tags/att_label_for.asp")]
-	[AttributeName("For")]
-	internal class ForOneAttribute : AttributeDefinition
-	{
-		internal ForOneAttribute() : base("for")
-		{
-		}
-	}
+    internal class ForOneAttribute : AttributeDefinition
+    {
+        public ForOneAttribute() : base("for")
+        {
+        }
+    }
 
     [IdListValidatorAttribute]
     [AppliesToElement(typeof(Output), "http://www.w3schools.com/tags/att_label_for.asp")]
-	[AttributeName("For")]
-	internal class ForManyAttribute : AttributeDefinition
-	{
-		internal ForManyAttribute() : base("for")
-		{
-		}
-	}
+    internal class ForManyAttribute : AttributeDefinition
+    {
+        public ForManyAttribute() : base("for")
+        {
+        }
+    }
 
-	[CharSetValidator]
+    [CharSetValidator]
     [AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_charset.asp")]
-	internal class CharSetAttribute : AttributeDefinition
-	{
-		internal CharSetAttribute() : base("charset")
-		{
-		}
-	}
+    internal class CharSetAttribute : AttributeDefinition
+    {
+        public CharSetAttribute() : base("charset")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_content.asp")]
-	internal class ContentAttribute : AttributeDefinition
-	{
-		internal ContentAttribute() : base("content")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_content.asp")]
+    internal class ContentAttribute : AttributeDefinition
+    {
+        public ContentAttribute() : base("content")
+        {
+        }
+    }
 
-	[HttpEquivEnumValidator]
+    [HttpEquivEnumValidator]
     [AppliesToElement(typeof(Meta), "http://www.w3schools.com/tags/att_meta_http_equiv.asp")]
-	internal class HttpEquivAttribute : AttributeDefinition
-	{
-		internal HttpEquivAttribute() : base("http-equiv")
-		{
-		}
-	}
+    internal class HttpEquivAttribute : AttributeDefinition
+    {
+        public HttpEquivAttribute() : base("http-equiv")
+        {
+        }
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_high.asp")]
-	internal class HighAttribute : AttributeDefinition
-	{
-		internal HighAttribute() : base("high")
-		{
-		}
-	}
+    internal abstract class HighAttribute : AttributeDefinition
+    {
+        protected HighAttribute()
+            : base("high")
+        {
+        }
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_low.asp")]
-	internal class LowAttribute : AttributeDefinition
-	{
-		internal LowAttribute() : base("low")
-		{
-		}
-	}
+    [DecimalValidator]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_high.asp")]
+    internal class HighIntegerAttribute : HighAttribute
+    {
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_optimum.asp")]
-	internal class OptimumAttribute : AttributeDefinition
-	{
-		internal OptimumAttribute() : base("optimum")
-		{
-		}
-	}
+    [DecimalValidator]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_high.asp")]
+    internal class HighDecimalAttribute : HighAttribute
+    {
+    }
 
-	[AppliesToElement(typeof(Ol), "http://www.w3schools.com/tags/att_ol_reversed.asp")]
-	internal class ReversedAttribute : AttributeDefinition
-	{
-		internal ReversedAttribute() : base("reversed", AttributeValue.Forbidden)
-		{
-		}
-	}
+    internal abstract class LowAttribute : AttributeDefinition
+    {
+        protected LowAttribute()
+            : base("low")
+        {
+        }
+    }
 
-	[DecimalValidator]
-	[IntegerValidator]
-	[AppliesToElement(typeof(Ol), "http://www.w3schools.com/tags/att_ol_start.asp")]
-	internal class StartAttribute : AttributeDefinition
-	{
-		internal StartAttribute() : base("start")
-		{
-		}
-	}
+    [DecimalValidator]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_low.asp")]
+    internal class LowDecimalAttribute : LowAttribute
+    {
+    }
 
-	[AppliesToElement(typeof(OptGroup), "http://www.w3schools.com/tags/att_optgroup_label.asp")]
-	[AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_label.asp")]
-	[AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_label.asp")]
-	internal class LabelAttribute : AttributeDefinition
-	{
-		internal LabelAttribute() : base("label")
-		{
-		}
-	}
+    [IntegerValidator]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_low.asp")]
+    internal class LowIntegerAttribute : LowAttribute
+    {
+    }
 
-	[AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_selected.asp")]
-	internal class SelectedAttribute : AttributeDefinition
-	{
-		internal SelectedAttribute() : base("selected", AttributeValue.Forbidden)
-		{
-		}
-	}
+    internal abstract class OptimumAttribute : AttributeDefinition
+    {
+        protected OptimumAttribute()
+            : base("optimum")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_async.asp")]
-	internal class AsyncAttribute : AttributeDefinition
-	{
-		internal AsyncAttribute() : base("async", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [DecimalValidator]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_optimum.asp")]
+    internal class OptimumDecimalAttribute : OptimumAttribute
+    {
+    }
 
-	[AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_defer.asp")]
-	internal class DeferAttribute : AttributeDefinition
-	{
-		internal DeferAttribute() : base("defer", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [IntegerValidator]
+    [AppliesToElement(typeof(Meter), "http://www.w3schools.com/tags/att_meter_optimum.asp")]
+    internal class OptimumIntegerAttribute : OptimumAttribute
+    {
+    }
 
-	[MimimumZeroIntegerValidator]
+    [AppliesToElement(typeof(Ol), "http://www.w3schools.com/tags/att_ol_reversed.asp")]
+    internal class ReversedAttribute : AttributeDefinition
+    {
+        public ReversedAttribute() : base("reversed", AttributeValueType.Forbidden)
+        {
+        }
+    }
+
+    internal abstract class StartAttribute : AttributeDefinition
+    {
+        protected StartAttribute()
+            : base("start")
+        {
+        }
+    }
+
+    [DecimalValidator]
+    [AppliesToElement(typeof(Ol), "http://www.w3schools.com/tags/att_ol_start.asp")]
+    internal class StartDecimalAttribute : StartAttribute
+    {
+    }
+
+    [IntegerValidator]
+    [AppliesToElement(typeof(Ol), "http://www.w3schools.com/tags/att_ol_start.asp")]
+    internal class StartIntegerAttribute : StartAttribute
+    {
+    }
+
+    [AppliesToElement(typeof(OptGroup), "http://www.w3schools.com/tags/att_optgroup_label.asp")]
+    [AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_label.asp")]
+    [AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_label.asp")]
+    internal class LabelAttribute : AttributeDefinition
+    {
+        public LabelAttribute() : base("label")
+        {
+        }
+    }
+
+    [AppliesToElement(typeof(Option), "http://www.w3schools.com/tags/att_option_selected.asp")]
+    internal class SelectedAttribute : AttributeDefinition
+    {
+        public SelectedAttribute() : base("selected", AttributeValueType.Forbidden)
+        {
+        }
+    }
+
+    [AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_async.asp")]
+    internal class AsyncAttribute : AttributeDefinition
+    {
+        public AsyncAttribute() : base("async", AttributeValueType.Forbidden)
+        {
+        }
+    }
+
+    [AppliesToElement(typeof(Script), "http://www.w3schools.com/tags/att_script_defer.asp")]
+    internal class DeferAttribute : AttributeDefinition
+    {
+        public DeferAttribute() : base("defer", AttributeValueType.Forbidden)
+        {
+        }
+    }
+
+    [MimimumZeroIntegerValidator]
     [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_colspan.asp")]
-	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_colspan.asp")]
-	internal class ColSpanAttribute : AttributeDefinition
-	{
-		internal ColSpanAttribute() : base("colspan")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_colspan.asp")]
+    internal class ColSpanAttribute : AttributeDefinition
+    {
+        public ColSpanAttribute() : base("colspan")
+        {
+        }
+    }
 
-	[IdListValidator]
+    [IdListValidator]
     [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_headers.asp")]
-	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_headers.asp")]
-	internal class HeadersAttribute : AttributeDefinition
-	{
-		internal HeadersAttribute() : base("headers")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_headers.asp")]
+    internal class HeadersAttribute : AttributeDefinition
+    {
+        public HeadersAttribute() : base("headers")
+        {
+        }
+    }
 
-	[MimimumZeroIntegerValidator]
+    [MimimumZeroIntegerValidator]
     [AppliesToElement(typeof(Td), "http://www.w3schools.com/tags/att_td_rowspan.asp")]
-	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_rowspan.asp")]
-	internal class RowSpanAttribute : AttributeDefinition
-	{
-		internal RowSpanAttribute() : base("rowspan")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_rowspan.asp")]
+    internal class RowSpanAttribute : AttributeDefinition
+    {
+        public RowSpanAttribute() : base("rowspan")
+        {
+        }
+    }
 
-	[MimimumOneIntegerValidator]
+    [MimimumOneIntegerValidator]
     [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_cols.asp")]
-	internal class ColsAttribute : AttributeDefinition
-	{
-		internal ColsAttribute() : base("cols")
-		{
-		}
-	}
+    internal class ColsAttribute : AttributeDefinition
+    {
+        public ColsAttribute() : base("cols")
+        {
+        }
+    }
 
-	[MimimumOneIntegerValidator]
+    [MimimumOneIntegerValidator]
     [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_rows.asp")]
-	internal class RowsAttribute : AttributeDefinition
-	{
-		internal RowsAttribute() : base("rows")
-		{
-		}
-	}
+    internal class RowsAttribute : AttributeDefinition
+    {
+        public RowsAttribute() : base("rows")
+        {
+        }
+    }
 
-	[SoftHardEnumValidator]
+    [SoftHardEnumValidator]
     [AppliesToElement(typeof(TextArea), "http://www.w3schools.com/tags/att_textarea_wrap.asp")]
-	internal class WrapAttribute : AttributeDefinition
-	{
-		internal WrapAttribute() : base("wrap")
-		{
-		}
-	}
+    internal class WrapAttribute : AttributeDefinition
+    {
+        public WrapAttribute() : base("wrap")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_abbr.asp")]
-	internal class AbbrAttribute : AttributeDefinition
-	{
-		internal AbbrAttribute() : base("abbr")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_abbr.asp")]
+    internal class AbbrAttribute : AttributeDefinition
+    {
+        public AbbrAttribute() : base("abbr")
+        {
+        }
+    }
 
-	[ScopeEnumValidator]
+    [ScopeEnumValidator]
     [AppliesToElement(typeof(Th), "http://www.w3schools.com/tags/att_th_scope.asp")]
-	internal class ScopeAttribute : AttributeDefinition
-	{
-		internal ScopeAttribute() : base("scope")
-		{
-		}
-	}
+    internal class ScopeAttribute : AttributeDefinition
+    {
+        public ScopeAttribute() : base("scope")
+        {
+        }
+    }
 
-	[AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_default.asp")]
-	internal class DefaultAttribute : AttributeDefinition
-	{
-		internal DefaultAttribute() : base("default", AttributeValue.Forbidden)
-		{
-		}
-	}
+    [AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_default.asp")]
+    internal class DefaultAttribute : AttributeDefinition
+    {
+        public DefaultAttribute() : base("default", AttributeValueType.Forbidden)
+        {
+        }
+    }
 
-	[TrackKindEnumValidator]
+    [TrackKindEnumValidator]
     [AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_kind.asp")]
-	internal class KindAttribute : AttributeDefinition
-	{
-		internal KindAttribute() : base("kind")
-		{
-		}
-	}
+    internal class KindAttribute : AttributeDefinition
+    {
+        public KindAttribute() : base("kind")
+        {
+        }
+    }
 
-	[LanguageCodeValidator]
+    [LanguageCodeValidator]
     [AppliesToElement(typeof(Track), "http://www.w3schools.com/tags/att_track_srclang.asp")]
-	internal class SrcLangAttribute : AttributeDefinition
-	{
-		internal SrcLangAttribute() : base("srclang")
-		{
-		}
-	}
+    internal class SrcLangAttribute : AttributeDefinition
+    {
+        public SrcLangAttribute() : base("srclang")
+        {
+        }
+    }
 
     [UrlValidator]
-	[AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_poster.asp")]
-	internal class PosterAttribute : AttributeDefinition
-	{
-		internal PosterAttribute() : base("poster")
-		{
-		}
-	}
+    [AppliesToElement(typeof(Video), "http://www.w3schools.com/tags/att_video_poster.asp")]
+    internal class PosterAttribute : AttributeDefinition
+    {
+        public PosterAttribute() : base("poster")
+        {
+        }
+    }
 }
  

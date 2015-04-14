@@ -3,11 +3,11 @@
 namespace Definition
 {
 	[AttributeUsage(AttributeTargets.Class)]
-	internal class RestrictToChildAttribute : Attribute
+	internal class RestrictChildrenToAttribute : Attribute
 	{
 		public readonly Type ChildType;
 
-		public RestrictToChildAttribute(Type type)
+		public RestrictChildrenToAttribute(Type type)
 		{
 			ChildType = type;
 		}

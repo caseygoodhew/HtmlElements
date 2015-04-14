@@ -2,7 +2,7 @@
 
 namespace Definition.Validation
 {
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 	internal abstract class ValidatorAttribute : Attribute
 	{
 		internal readonly object WhenValueIs;

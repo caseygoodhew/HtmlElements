@@ -2,14 +2,14 @@
 
 namespace Definition
 {
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-	internal class ReferenceAttribute : Attribute
-	{
-		public readonly string _url;
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    internal class ReferenceAttribute : Attribute
+    {
+        public readonly string Url;
 
-		public ReferenceAttribute(string url)
-		{
-			_url = url;
-		}
-	}
+        public ReferenceAttribute(string url)
+        {
+            Url = url;
+        }
+    }
 }
